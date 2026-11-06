@@ -1,0 +1,1916 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laser Design Studio — Phase 2 · Right Zoom Box</title><style>
+:root{font-family:Segoe UI,Arial,sans-serif;background:#111827;color:#edf2fa}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{background:#293950;color:#eaf0f8;border:1px solid #465976;border-radius:6px;padding:8px 10px;cursor:pointer}button:hover{background:#375477}button:disabled{opacity:.4;cursor:default}button.active{background:#23619c;border-color:#89c5ff}input,select{background:#142339;color:#fff;border:1px solid #50617c;border-radius:5px;padding:6px;min-width:0;width:100%}input[type=checkbox]{width:auto}header{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#1b2b40;flex-wrap:wrap;border-bottom:1px solid #44536b}h1{font-size:17px;margin:0 15px 0 0}small,.muted{color:#a7bcd4;font-size:12px}.app{display:grid;grid-template-columns:190px minmax(350px,1fr) 290px;min-height:calc(100vh - 150px)}aside{background:#1b293b;padding:13px;border-right:1px solid #41506a}aside.right{border-right:0;border-left:1px solid #41506a}h2{font-size:13px;margin:5px 0 11px;color:#bfdbf6}section{padding-bottom:14px;border-bottom:1px solid #3d4d63;margin-bottom:15px}label{display:block;color:#bacde4;font-size:12px;margin:9px 0 4px}.tool{width:100%;display:block;text-align:left;margin:5px 0}.row{display:flex;gap:6px}.row>*{flex:1;min-width:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:7px}.workspace{background:#101b2c;padding:22px;display:flex;justify-content:center;align-items:flex-start;overflow:auto;min-height:480px}.page{background:#fff;box-shadow:0 6px 30px #0009;flex:none}svg{display:block;touch-action:none;cursor:crosshair}.hit-area{cursor:grab}.hit-area:active{cursor:grabbing}#grabRange{accent-color:#69aefa} .obj{pointer-events:none}.status{background:#19283d;color:#c9d7e9;padding:9px 12px;font-size:12px;min-height:38px}.obj{cursor:move}.marquee{fill:#1682ed;fill-opacity:.13;stroke:#1174ce;stroke-width:.55;stroke-dasharray:2 1;pointer-events:none}.selbox{fill:none;stroke:#157be9;stroke-width:.75;stroke-dasharray:4 2;pointer-events:none}.handle{fill:#fff;stroke:#0878f9;stroke-width:1;cursor:nwse-resize}.rotate{fill:#f59e0b;stroke:#73500b;stroke-width:.8;cursor:crosshair}.layer{padding:5px;display:flex;gap:4px;align-items:center;border:1px solid #41516a;border-radius:6px;margin:4px 0}.layer.selected{background:#284a70}.layer button{padding:5px;font-size:12px}.layer .name{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.palette{display:flex;align-items:center;gap:7px;width:100%;margin:5px 0}.dot{width:13px;height:13px;border:1px solid #fff9;display:inline-block}#file{display:none}.fine{font-size:11px;line-height:1.5;color:#aebed2}.full{width:100%}@media(max-width:1000px){.app{grid-template-columns:145px minmax(300px,1fr)}aside.right{grid-column:1/-1;border-left:0;border-top:1px solid #41506a}.workspace{padding:10px}}@media(max-width:570px){.app{display:block}.workspace{min-height:360px}aside{border-bottom:1px solid #41506a}}
+.shape-picker{position:relative;margin:5px 0 8px}.shape-main-row{display:flex;position:relative;align-items:stretch}.shape-main-row .shape-primary{flex:1;margin:0;padding-right:11px;border-radius:6px 0 0 6px;min-width:0;text-align:center}.shape-current{display:block;font-size:10px;color:#bdd3eb;margin-top:3px}.shape-arrow{position:relative;flex:none;width:34px;margin:0;padding:0;border-radius:0 6px 6px 0;border-left:1px solid #526782;font-size:17px}.shape-arrow:after{content:"";position:absolute;right:3px;bottom:3px;border-right:5px solid #9fcaf9;border-top:5px solid transparent;width:0;height:0;pointer-events:none}.shape-main-row .shape-primary.active,.shape-arrow.active{background:#23619c;border-color:#89c5ff}.shape-submenu{position:absolute;left:0;top:calc(100% + 3px);width:100%;min-width:176px;background:#1d3049;border:1px solid #718cab;box-shadow:0 8px 22px #0008;padding:5px;border-radius:7px;z-index:30}.shape-main-row .shapes-dropdown-only{flex:0 0 44px;width:44px;min-width:44px;min-height:38px;height:38px;border-radius:6px;padding:5px 9px 5px 5px;position:relative;display:flex;align-items:center;justify-content:center;font-size:23px}.shapes-dropdown-only:after{content:"";position:absolute;right:5px;bottom:5px;border-right:6px solid #9fcaf9;border-top:6px solid transparent;width:0;height:0;pointer-events:none}.shape-submenu[hidden]{display:none}.shape-submenu button{display:block;width:100%;text-align:left;margin:2px 0;padding:9px 10px}.shape-submenu button.chosen{background:#235f96;border-color:#89c5ff}
+
+/* Workspace quick-access toolbar */
+.topbar{display:flex;align-items:center;flex-wrap:wrap;gap:7px;background:#202f44;border-bottom:1px solid #465977;padding:9px 12px;position:relative;z-index:2}
+.topbar .tb-group{display:flex;align-items:center;gap:4px;border-right:1px solid #4e617c;padding-right:9px;margin-right:2px;flex-wrap:wrap}
+.topbar .tb-group:last-child{border:0}.topbar button{font-size:12px;padding:7px 9px;white-space:nowrap}.topbar button:focus-visible{outline:2px solid #8ac4ff;outline-offset:2px}.topbar .tb-field{display:flex;align-items:center;gap:4px;font-size:12px;color:#bcd0e7}.topbar .tb-field input{width:64px;padding:6px 5px;font-size:12px}.topbar .tb-field input:disabled{opacity:.45}.topbar .tb-small{color:#b7c9df;font-size:11px}.topbar .tb-zoom{min-width:55px;text-align:center}
+
+/* Full-width editing bar: spans the entire window above both side panels and canvas. */
+.topbar{width:100%;max-width:none;min-width:0;display:flex;justify-content:flex-start;align-items:center;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;gap:10px;padding:10px 14px;position:relative;z-index:3}
+.topbar .tb-group{flex:0 0 auto;flex-wrap:nowrap}
+.topbar .tb-group:last-child{margin-left:0}
+@media(max-width:1400px){.topbar{justify-content:flex-start}}
+@media(max-width:700px){.topbar{padding:8px}.topbar button{padding:6px 7px}}
+
+/* Zoom box sits at the workspace's upper-right, not in the full-width editing bar. */
+main{min-width:0;display:flex;flex-direction:column}
+.workspace-zoom-row{flex:none;background:#101b2c;padding:10px 16px 0;display:flex;justify-content:flex-end;align-items:center}
+.zoom-control-box{display:inline-flex;align-items:center;gap:7px;padding:7px 9px;background:#24354c;border:1px solid #5d7492;border-radius:9px;box-shadow:0 2px 8px #0004}
+.zoom-control-title{font-size:12px;font-weight:600;color:#b9d5f3;margin-right:5px}
+.zoom-control-box button{height:30px;min-width:32px;padding:3px 8px;font-size:18px;line-height:1}
+.zoom-control-box output{min-width:52px;text-align:center;font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;color:#f2f7ff}
+.workspace{flex:1;padding-top:12px}
+.topbar .alignment-group{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;flex-wrap:nowrap}
+.topbar .alignment-heading{display:block;color:#cce2fa;font-size:11px;font-weight:700;letter-spacing:.3px;line-height:1.2}
+.topbar .alignment-buttons{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
+.topbar .tb-xy-stack{display:flex;flex-direction:column;gap:5px;align-items:flex-end;justify-content:center}.topbar .tb-xy-stack .tb-field{width:100%;justify-content:flex-end}
+.topbar .tb-unit-rotation{display:flex;flex-direction:column;gap:5px;align-items:center}.topbar .unit-switch{display:flex;border:1px solid #566b86;border-radius:6px;overflow:hidden}.topbar .unit-switch button{border:0;border-radius:0;padding:3px 9px;font-weight:600}.topbar .unit-switch button.active{background:#2374b7;color:white}.topbar .unit-switch button:not(.active){background:#293950;color:#c2d3e5}
+.select-icon-only{width:44px!important;min-width:44px;min-height:38px;text-align:center;font-size:23px!important;padding:5px!important;display:flex;align-items:center;justify-content:center;}
+.header-icon-button{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:7px;flex:none}.secondary-toolbar .header-icon-button{font-size:22px;line-height:1}.secondary-toolbar [data-action]{min-width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;font-size:19px;padding:6px}.secondary-toolbar .tb-project-buttons{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.header-icon-button svg{display:block;width:20px;height:20px;pointer-events:none}.header-icon-button:focus-visible{outline:2px solid #8ac4ff;outline-offset:2px}.topbar .tb-project-history{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}.topbar .tb-project-buttons,.topbar .tb-history-buttons{display:flex;align-items:center;gap:5px}.topbar .tb-project-buttons .header-icon-button{width:34px;height:30px;padding:5px}.topbar .tb-project-buttons .header-icon-button svg{width:18px;height:18px}.topbar .tb-history-buttons button{min-width:34px;height:30px;padding:5px}
+/* Header settings popover */
+.settings-wrap{position:relative;display:inline-flex}
+#settingsBtn{display:inline-flex;align-items:center;gap:6px;min-height:36px}
+#settingsBtn svg{width:17px;height:17px;pointer-events:none}
+#settingsPanel{position:absolute;left:0;top:calc(100% + 8px);z-index:90;width:254px;padding:14px;background:#203249;border:1px solid #637d9b;border-radius:9px;box-shadow:0 14px 32px #0009}
+#settingsPanel[hidden]{display:none}
+#settingsPanel h2{margin:0 0 12px;font-size:15px}
+#settingsPanel label{display:flex;align-items:center;gap:9px;margin:10px 0;font-size:12px;color:#e5effb}
+#settingsPanel label input[type=checkbox]{margin:0;flex:none}
+#settingsPanel label.stacked{display:block}
+#settingsPanel label.stacked select{display:block;margin-top:6px}
+#settingsPanel select,#settingsPanel input[type=range]{width:100%;margin:5px 0 10px}
+#settingsPanel{max-height:min(70vh,560px);overflow-y:auto}
+#settingsPanel label{display:block;margin:9px 0 5px}
+#settingsPanel label:has(input[type=checkbox]){display:flex;align-items:center}
+#settingsBtn:focus-visible{outline:2px solid #8ac4ff;outline-offset:2px}
+
+/* Tabbed pop-out settings panel */
+#settingsPanel{width:min(440px,calc(100vw - 24px));max-height:min(78vh,680px);padding:0;overflow:auto;z-index:100}
+.settings-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
+#settingsPanel .settings-head h2{margin:0;font-size:18px}
+#settingsClose{padding:4px 10px;font-size:18px}
+.settings-tabs{display:flex;gap:4px;padding:0 12px;border-bottom:1px solid #59708d}
+.settings-tabs button{border-radius:7px 7px 0 0;border-bottom:0;background:transparent;padding:10px 12px;font-size:13px}
+.settings-tabs button[aria-selected="true"]{background:#2e527d;border-color:#89c5ff;color:#fff}
+#workspaceTabPanel,#canvasTabPanel,#aboutTabPanel{padding:14px 18px 18px}
+#settingsPanel [role="tabpanel"][hidden]{display:none}
+#settingsPanel h3{margin:0 0 12px;font-size:14px;color:#e8f3ff}
+#settingsPanel p{font-size:13px;line-height:1.5;color:#d1dfee}
+@media(max-width:480px){#settingsPanel{left:-70px}}
+
+.work-area-group{border:1px solid #526c88;border-radius:8px;padding:12px;margin-bottom:14px;background:#1b3049}
+.work-area-heading{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;margin:0 0 9px;color:#e6f0fc}
+.work-area-group select{display:block;width:100%;margin:6px 0 10px}
+.work-area-group #commonSizesWrap[hidden]{display:none}
+.work-area-group .work-area-hint{font-size:11px;margin:6px 0 0;color:#bacce0}
+.topbar .tb-copy-font-stack{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px}.topbar .tb-edit-buttons{display:flex;gap:4px}.topbar .tb-font-row{display:flex;gap:6px;align-items:center;color:#dbe9fa;font-size:12px;font-weight:600}.topbar .tb-font-row select{width:161px;max-width:161px;padding:5px;border-radius:5px;background:#f7faff;color:#172333;border:1px solid #8999af;font-size:12px}.topbar .tb-font-size{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#dbe9fa;white-space:nowrap}.topbar .tb-font-size input{width:64px;min-width:64px;padding:5px;border-radius:5px;border:1px solid #8999af;background:#f7faff;color:#172333;font-size:12px}.topbar .tb-font-row{flex-wrap:nowrap}
+.tb-icon-only{min-width:35px;display:inline-flex;align-items:center;justify-content:center;padding:6px 8px}.tb-icon-only svg{pointer-events:none;display:block}
+/* Organized, responsive workspace controls — preserve all original button IDs. */
+.secondary-toolbar{display:flex;align-items:stretch;gap:10px;padding:9px 13px;background:#15263b;border-bottom:1px solid #405878;flex-wrap:wrap;overflow:visible}
+.secondary-toolbar-label{display:flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:.12em;color:#9bb7d6;padding-right:5px}
+.secondary-toolbar .tb-project-buttons{display:contents}
+.quick-group{display:flex;flex-direction:column;gap:6px;padding:7px 10px 9px;background:#20344e;border:1px solid #45617f;border-radius:9px;min-width:0}
+.quick-title,.topbar .tb-card-title{font-size:10px;letter-spacing:.07em;text-transform:uppercase;font-weight:750;color:#a9c7e5;white-space:nowrap}
+.quick-actions{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.secondary-toolbar .quick-actions button{min-width:34px;height:34px;padding:6px;border-radius:6px}
+.secondary-toolbar .quick-actions button:hover,.topbar button:hover{border-color:#8fc5f6}
+.secondary-toolbar-space{flex:1}
+.topbar{display:flex;align-items:stretch;gap:10px;padding:10px 13px;flex-wrap:wrap;overflow:visible;background:#1b2b41}
+.topbar .tb-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:0 1 auto;padding:9px 12px;border:1px solid #45617f;border-radius:9px;background:#243852;position:relative;margin:0}
+.topbar .tb-size-card,.topbar .tb-text-card{padding-top:23px}
+.topbar .tb-card-title{position:absolute;top:7px;left:12px;line-height:1}
+.topbar .tb-group:last-child{border:1px solid #45617f}
+.topbar .tb-size-card .tb-xy-stack{align-items:stretch}
+.topbar .tb-size-card .tb-field input{width:74px}
+.topbar .tb-unit-rotation{gap:6px}
+
+.topbar .tb-copy-font-stack{flex:1 1 560px;min-width:0}
+.topbar .tb-font-controls{max-width:100%;min-width:0}
+.topbar .tb-font-size-row{flex-wrap:wrap;gap:8px}
+.topbar .tb-font-column{min-width:0;max-width:100%}
+.topbar .tb-font-row select{width:155px;max-width:100%}
+@media(max-width:800px){.topbar .tb-group{width:100%}.topbar .tb-copy-font-stack{flex-basis:100%}.secondary-toolbar-label{width:100%}.secondary-toolbar{gap:7px}.quick-group{padding:6px 8px}}
+</style><style>
+.right-tabbed-box{display:flex;flex-direction:column;min-height:340px;height:min(65vh,650px);border:1px solid #51647e;border-radius:8px;background:#17263a;overflow:hidden}
+.right-tab-content{flex:1;min-height:0;overflow:auto;padding:12px}
+.right-tab-panel{margin:0;padding:0;border:0;background:transparent}
+.right-tab-panel[hidden]{display:none!important}
+.right-tab-bar{display:flex;flex-direction:row;justify-content:flex-start;align-items:stretch;gap:0;border-top:1px solid #51647e;background:#101f32;flex-shrink:0;overflow-x:auto}
+.right-tab{flex:0 0 auto;border:0;border-right:1px solid #42536a;border-radius:0;padding:11px 13px;font-size:12px;background:transparent;color:#bbcee3}
+.right-tab.active{background:#23619c;color:white;font-weight:600}
+.right-tab:focus-visible{outline:2px solid #a4d8ff;outline-offset:-3px}
+</style><style>.topbar .tb-font-controls{display:flex;flex-direction:row;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap}.topbar .tb-font-row,.topbar .tb-font-size{flex-shrink:0}.topbar .tb-copy-font-stack{flex-shrink:0}.secondary-toolbar{display:flex;align-items:center;width:100%;min-height:48px;padding:7px 14px;background:#223650;border-bottom:1px solid #526a86;gap:12px;overflow-x:auto}.secondary-toolbar .secondary-toolbar-label{font-size:12px;font-weight:600;letter-spacing:.3px;color:#dce9fa;white-space:nowrap}.secondary-toolbar .secondary-toolbar-space{flex:1;min-width:120px;min-height:32px;border:1px dashed #57718f;border-radius:5px;background:#1c2e45} </style><style>.secondary-toolbar .tb-project-buttons{display:flex;align-items:center;gap:7px}.secondary-toolbar .tb-project-buttons .header-icon-button{width:38px;height:36px;padding:7px}.secondary-toolbar .tb-project-buttons .header-icon-button svg{width:20px;height:20px}.topbar .tb-project-history{flex-direction:row}</style><style>.workspace{overflow:auto;max-height:calc(100vh - 260px);min-height:260px;scroll-behavior:smooth}.secondary-toolbar #zoomSelection{min-width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}.secondary-toolbar #zoomSelection svg{pointer-events:none}.secondary-toolbar #zoomSelection:focus-visible{outline:2px solid #a5dcff}</style><style>.topbar .tb-font-column{display:flex;flex-direction:column;gap:5px;align-items:flex-start}.topbar .tb-style-toggles{display:flex;gap:4px;margin-left:29px}.topbar .tb-style-toggles button{min-width:31px;height:27px;padding:2px 7px;font-size:13px}.topbar .tb-style-toggles button[aria-pressed="true"]{background:#2568a8;border-color:#a9d5ff;color:#fff}.topbar .tb-style-toggles button:disabled{opacity:.5}</style><style>/* Align the Size input with the Font dropdown, not the two-row font column. */
+.topbar .tb-font-controls{align-items:flex-start!important}
+.topbar .tb-font-size{align-self:flex-start;margin-top:0!important;min-height:31px}
+.topbar .tb-font-row{min-height:31px}
+</style><style>
+.black-color-row{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap}
+.black-color-row .palette{flex:1 1 130px;width:auto;margin:0}
+.black-mode-label{font-size:12px;color:#bfd2e5}
+#blackMode{width:85px;min-width:85px;padding:8px 5px}
+</style><style>
+.bottom-color-toolbar{width:100%;display:flex;align-items:center;gap:8px;background:#1b2b40;border-top:1px solid #52637d;padding:8px 14px;min-height:61px;overflow-x:auto}
+.bottom-color-toolbar .bottom-palette-label{font-size:12px;font-weight:600;white-space:nowrap;color:#c7d9ef;margin-right:5px}
+.bottom-color-toolbar .bottom-swatch{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-width:58px;min-height:45px;padding:5px 11px;border:2px solid #52647f;background:#273950;border-radius:6px;flex:none}
+.bottom-color-toolbar .bottom-swatch:hover{background:#385575}
+.bottom-color-toolbar .bottom-swatch.active{border-color:#7bc5ff;background:#285783;box-shadow:0 0 0 1px #7bc5ff inset}
+.bottom-color-toolbar .swatch-square{height:28px;width:36px;border:1px solid #aabbd0;border-radius:3px;display:flex;align-items:center;justify-content:center;position:relative}
+.bottom-color-toolbar .swatch-number{position:absolute;font-size:13px;line-height:1;font-weight:800;color:#fff;text-shadow:0 1px 3px #000,1px 0 2px #000,-1px 0 2px #000;pointer-events:none}
+</style><style>.topbar .tb-spacing{display:inline-flex;align-items:center;gap:5px;color:#dbe9fa;font-size:12px;font-weight:600;white-space:nowrap;min-height:31px}.topbar .tb-spacing input{width:66px;min-width:66px;padding:5px;border-radius:5px;border:1px solid #8999af;background:#f7faff;color:#172333}</style><style>.tb-hspace-stack{display:flex;flex-direction:column;align-items:flex-start;gap:5px}.topbar .tb-text-weld{font-size:12px;font-weight:650;min-width:68px;padding:6px 10px;border:1px solid #7892b2;border-radius:5px}.topbar .tb-text-weld[aria-pressed="true"]{background:#23619c;color:white;border-color:#9bcfff;box-shadow:0 0 0 1px #7dc3ff inset}</style><style>.draw-lines-icon-only{width:44px;min-width:44px;height:38px;display:flex;align-items:center;justify-content:center;padding:6px}</style><style>.topbar .tb-font-size-row{display:flex;align-items:center;gap:12px;white-space:nowrap}.topbar .tb-font-size-row .tb-font-row,.topbar .tb-font-size-row .tb-font-size{min-height:32px;margin:0!important;align-self:center}.topbar .tb-font-column{align-items:flex-start}.topbar .tb-font-size-row #fontSize{width:64px}</style><style>.topbar .tb-font-size-row{align-items:flex-start!important;gap:12px}.topbar .tb-font-size-row .tb-hspace-stack{flex:none;align-items:flex-start;gap:5px}.topbar .tb-font-size-row .tb-hspace-stack .tb-spacing{min-height:32px}.topbar .tb-font-size-row .tb-hspace-stack .tb-text-weld{margin-left:0}</style><style>
+.offset-icon-button{width:44px;height:40px;display:flex;align-items:center;justify-content:center;padding:6px}
+.offset-modal-backdrop[hidden]{display:none!important}
+.offset-modal-backdrop{position:fixed;inset:0;z-index:10000;background:#0009;display:grid;place-items:center;padding:20px}
+.offset-dialog{width:min(380px,95vw);background:#1c2c43;border:1px solid #7891b2;border-radius:12px;box-shadow:0 22px 55px #0009;padding:17px;color:#edf2fa}
+.offset-dialog-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.offset-dialog-header strong{font-size:18px}
+.offset-dialog-header button{min-width:36px;padding:5px}
+.offset-dialog p{font-size:13px;line-height:1.45;color:#b8cde3;margin:14px 0}
+.offset-dialog-actions{display:flex;gap:9px}
+.offset-dialog-actions button{flex:1}
+</style><style>
+/* Compact five-tool container at top of the left sidebar. */
+.tools-section{margin:0 0 14px;padding:0 0 14px}
+.tools-box{border:1px solid #566b87;border-radius:9px;background:#17263a;padding:9px 8px 10px;min-width:0}
+.tools-box h2{margin:0 0 9px;text-align:left;font-size:13px;color:#d7eaff}
+.tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;align-items:center}
+.tools-grid>.tool,.tools-grid>.shape-picker{width:100%;height:42px;min-width:0;margin:0!important;display:flex;align-items:stretch;justify-content:center}
+.tools-grid>.tool{padding:0;align-items:center;text-align:center;justify-content:center}
+.tools-grid>.tool svg{margin:auto;max-width:24px;max-height:24px}
+.tools-grid>.shape-picker .shape-main-row{width:100%;height:100%}
+.tools-grid>.shape-picker .shape-primary{height:100%;width:100%;min-width:0;border-radius:6px;padding:0;text-align:center;font-size:20px}
+.tools-grid>.shape-picker .shape-submenu{min-width:164px;width:max-content;max-width:220px;z-index:100}
+</style><style>
+#booleanPicker .shape-main-row{justify-content:flex-start}
+#booleanMain.boolean-icon-main{width:46px;height:43px;min-width:46px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;position:relative;padding:5px;border-radius:6px}
+#booleanMain .boolean-corner{position:absolute;right:2px;bottom:0;font-size:11px;line-height:1;color:#bfdbf6}
+#booleanMenu{display:grid;grid-template-columns:repeat(3,44px);width:max-content;min-width:unset;gap:5px;padding:7px}
+#booleanMenu[hidden]{display:none}
+#booleanMenu button{width:44px;height:43px;margin:0;display:flex;align-items:center;justify-content:center;padding:7px;text-align:center}
+#booleanMenu svg,#booleanMain svg{display:block;touch-action:auto;cursor:inherit}
+</style><style>
+.color-mode-table{display:grid;grid-template-columns:minmax(0,1fr) 94px;gap:7px 9px;align-items:center}
+.color-mode-heading{font-weight:700;font-size:12px;color:#dbe9fc;padding:2px 3px 6px;border-bottom:1px solid #556c86}
+.color-mode-table .palette{width:100%;margin:0;min-width:0;text-align:left;white-space:nowrap;font-size:11px;padding:8px 5px;gap:4px}.color-mode-table .palette .dot{flex:0 0 11px;width:11px;height:11px}
+.color-mode-table select{width:100%;min-width:0;margin:0;padding:8px 4px}
+.color-mode-empty{font-size:13px;color:#92a4bd;text-align:center}
+</style><style>
+/* Auto-fit the right panel to its color labels, mode inputs, and tabs. */
+@media (min-width:1001px){.app{grid-template-columns:190px minmax(350px,1fr) minmax(335px,365px)}}
+aside.right{min-width:0}
+.right-tabbed-box{height:auto;min-height:0;max-height:calc(100vh - 205px);overflow:hidden}
+.right-tab-content{flex:0 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:12px 11px}
+.color-mode-table{grid-template-columns:minmax(0,1fr) minmax(85px,100px);gap:9px 7px;width:100%;align-items:center}
+.color-mode-table .palette{display:flex;width:100%;min-width:0;padding:9px 6px;font-size:11px;white-space:nowrap;justify-content:flex-start;overflow:visible}
+.color-mode-table .palette .dot{flex:0 0 11px}
+.color-mode-table select{width:100%;min-width:0;max-width:100%;padding:8px 5px}
+.right-tab-bar{flex-shrink:0}
+@media(max-width:1000px){.right-tabbed-box{max-height:none}.right-tab-content{overflow:visible}.color-mode-table{grid-template-columns:minmax(0,1fr) minmax(85px,120px)}}
+</style><style id="workspace-canvas-fit">
+.workspace{padding:0!important;background:#fff!important;justify-content:center;align-items:flex-start;scrollbar-gutter:stable;}
+.workspace .page{margin:0;box-shadow:none;background:#fff;flex:none;}
+.workspace #art{max-width:none;display:block;}
+</style><style id="text-formatting-two-rows">
+.topbar .tb-text-card{align-content:flex-start;align-items:flex-start;gap:9px;padding-top:30px!important}
+.topbar .tb-text-card .tb-font-controls{width:100%;flex:0 1 auto}
+.topbar .tb-text-card .tb-font-column{width:100%;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.topbar .tb-text-card .tb-text-row{display:grid;gap:10px;align-items:start;width:100%}
+.topbar .tb-text-card .tb-text-fields-row{grid-template-columns:minmax(135px,2fr) minmax(72px,.95fr) minmax(88px,1fr) minmax(88px,1fr)}
+.topbar .tb-text-card .tb-text-buttons-row{grid-template-columns:repeat(4,max-content);justify-content:start;align-items:center;gap:8px}
+.topbar .tb-text-card .tb-font-row,
+.topbar .tb-text-card .tb-font-size,
+.topbar .tb-text-card .tb-spacing{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0;height:auto;margin:0!important;white-space:nowrap}
+.topbar .tb-text-card .tb-font-row select,
+.topbar .tb-text-card #fontSize,
+.topbar .tb-text-card #tbHSpace,
+.topbar .tb-text-card #tbVSpace{box-sizing:border-box;width:100%;max-width:100%;height:32px}
+.topbar .tb-text-card .tb-text-buttons-row button{height:32px}
+.topbar .tb-text-card .tb-text-buttons-row .tb-text-weld{padding-inline:12px}
+@media(max-width:740px){
+  .topbar .tb-text-card .tb-text-fields-row{grid-template-columns:minmax(120px,2fr) repeat(3,minmax(70px,1fr));gap:7px}
+}
+@media(max-width:560px){
+  .topbar .tb-text-card .tb-text-fields-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .topbar .tb-text-card .tb-text-buttons-row{grid-template-columns:repeat(2,max-content)}
+}
+</style><style id="size-position-two-row-layout">
+/* Size & Position: measurements on row one, unit toggle on row two. */
+.topbar .tb-size-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;flex-wrap:nowrap;padding-top:28px;min-width:300px}
+.topbar .tb-size-card .tb-size-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:8px;width:100%}
+.topbar .tb-size-card .tb-size-row .tb-field{display:flex;flex-direction:column;align-items:stretch;gap:4px;white-space:nowrap;font-size:12px;min-width:0}
+.topbar .tb-size-card .tb-size-row input{box-sizing:border-box;width:100%;min-width:0;height:32px}
+.topbar .tb-size-card .tb-units-row{display:flex;align-items:center;justify-content:flex-start;width:100%}
+.topbar .tb-size-card .unit-switch{display:inline-flex}
+@media(max-width:420px){.topbar .tb-size-card{min-width:0;width:100%}.topbar .tb-size-card .tb-size-row{gap:5px}}
+</style><style id="phase3-box-style">
+.box-gen-overlay[hidden]{display:none!important}.box-gen-overlay{position:fixed;inset:0;z-index:9000;background:#111b2bbe;display:flex;align-items:center;justify-content:center;padding:16px}
+.box-gen-dialog{width:min(580px,100%);max-height:92vh;overflow:auto;box-sizing:border-box;background:#213148;color:#edf3fb;border:1px solid #56708b;border-radius:12px;padding:20px;box-shadow:0 18px 55px #0007}
+.box-gen-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.box-gen-head h2{font-size:19px;margin:0}.box-gen-head button{font-size:18px}.box-gen-dialog p{font-size:13px;line-height:1.5;color:#d6e1ef}
+.box-gen-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.box-gen-fields label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:12px}
+.box-gen-fields input{box-sizing:border-box;width:100%;min-width:0;padding:9px;border-radius:5px;border:1px solid #8da0b4;background:#fafcff;color:#1d293b;font-size:14px}
+.box-gen-check{display:flex;gap:8px;align-items:center;margin:14px 0;font-size:13px}.box-gen-actions{display:flex;justify-content:flex-end;gap:10px}
+.box-gen-actions #boxGenMake{background:#147454}.box-gen-hint{font-size:11px!important;color:#e8c992!important}
+@media(max-width:500px){.box-gen-fields{grid-template-columns:1fr}}
+</style><style id="box-3d-controls-css">
+.workspace{position:relative;isolation:isolate}
+.box-view-controls{position:sticky;top:8px;right:8px;z-index:30;display:flex;gap:5px;align-self:flex-start;margin:8px 10px -45px auto;background:#1c3046e8;border:1px solid #56718a;border-radius:8px;padding:4px;box-shadow:0 3px 12px #0004}
+.box-view-controls button{font-size:12px;padding:6px 13px;min-width:46px}
+.box-view-controls button.selected,.box-unit-control button.selected{background:#2278bd;border-color:#8ed4ff;color:white}
+#box3DStage[hidden]{display:none!important}
+#box3DStage{display:flex;position:absolute;inset:0;z-index:18;background:linear-gradient(160deg,#f6f9fc,#dfebf5);align-items:stretch;justify-content:center;overflow:hidden}
+#box3DCanvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
+#box3DCanvas:active{cursor:grabbing}
+.box-3d-tip{position:absolute;left:12px;bottom:12px;font-size:12px;color:#334b61;pointer-events:none;background:#ffffffbf;padding:5px 8px;border-radius:5px}
+.box-unit-control{display:flex;gap:7px;align-items:center;margin:12px 0 15px;font-weight:600;font-size:13px}
+.box-unit-control button{padding:5px 13px}
+.box-unit-label{font-weight:400;color:#b9cfe2}
+.workspace.box-3d-active .page{visibility:hidden}
+</style><style id="combined-zoom-view-style">
+.zoom-control-box{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.zoom-control-box .zoom-view-divider{width:1px;height:25px;background:#60758d;margin:0 5px}
+.zoom-control-box .box-view-controls{position:static;inset:auto;z-index:auto;margin:0;align-self:center;box-shadow:none;background:transparent;border:0;border-radius:0;padding:0;display:flex;gap:5px}
+.zoom-control-box .box-view-controls button{font-size:12px;padding:6px 11px;min-width:46px}
+</style><style id="box-lid-css">.zoom-control-box .box-lid-controls{display:inline-flex;gap:4px}.zoom-control-box .box-lid-controls[hidden]{display:none!important}.zoom-control-box .box-lid-controls button{font-size:12px;padding:6px 9px}.zoom-control-box .box-lid-controls button.selected{background:#2278bd;color:white;border-color:#8ed4ff}</style><style id="solid-3d-preview-style">
+#box3DStage{background:radial-gradient(ellipse at 52% 36%,#fbfdff 0%,#e9f0f7 70%,#d9e4ef 100%)}
+#box3DCanvas{display:block}
+</style><style id="box-edit-control-style">#boxEditSettings{margin-left:8px;background:#2a526e;color:white;border:1px solid #5e93ba;padding:6px 10px;border-radius:5px}#boxGenCount{width:100%}</style><style id="box-edit-tab-style">#rightTabEditBox h2{margin:0 0 8px}#rightTabEditBox #boxEditSettings{display:block;width:100%;margin:12px 0 0;background:#23619c;border:1px solid #4d91ca;border-radius:5px;padding:11px;color:white;font-weight:600}#rightTabEditBox #boxEditSettings[hidden]{display:none!important}#rightTabEditBox .fine{line-height:1.5}</style><style id="box-wizard-styles">
+.box-wizard-sidebar{margin-top:10px}
+.box-wizard-trigger{display:flex;align-items:center;gap:10px;width:100%;border-radius:7px;padding:10px 11px;border:1px solid #537da4;background:#254d70;color:#f5faff;font-weight:650;text-align:left;cursor:pointer}
+.box-wizard-trigger:hover{background:#346c99}.box-wizard-trigger svg{flex-shrink:0}
+.box-wizard-progress{margin:10px 0 14px}.box-wizard-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:12px}
+.box-wizard-steps span{padding:7px 2px;background:#263b50;color:#becfdf;border-radius:5px;text-align:center;font-size:11px}
+.box-wizard-steps span.current{background:#1c659a;color:white;outline:1px solid #66b6e9}
+.box-wizard-steps span.completed{background:#2e6656;color:#effff8}
+#boxWizardStepHelp{font-size:12px;margin:6px 0;color:#c2d1dd}
+.box-wizard-review{background:#14293b;border:1px solid #516c83;padding:13px;border-radius:8px;line-height:1.8}
+.box-wizard-navigation{display:flex;justify-content:space-between;margin-top:12px;gap:10px}
+.box-wizard-navigation button{padding:9px 14px}
+#boxGenOverlay[data-wizard="true"] .box-gen-fields label[hidden],
+#boxGenOverlay[data-wizard="true"] .box-gen-check[hidden],
+#boxGenOverlay[data-wizard="true"] .box-unit-control[hidden]{display:none!important}
+#boxGenOverlay[data-wizard="true"] #boxGenMake[hidden]{display:none!important}
+@media(max-width:560px){.box-wizard-steps{grid-template-columns:repeat(2,1fr)}}
+</style><style id="right-docked-box-wizard-css">
+aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:auto;align-items:stretch}
+.right-box-wizard-panel{flex:none;min-width:0;background:#17263a;border:1px solid #51647e;border-radius:8px;overflow:hidden}
+.right-box-wizard-heading{display:flex;flex-direction:column;gap:3px;background:#22364d;padding:11px 13px;border-bottom:1px solid #51647e}
+.right-box-wizard-heading strong{font-size:14px}
+#wizardDockState{font-size:11px;color:#b7c9db}
+.right-box-wizard-content{padding:10px;min-width:0}
+.right-box-wizard-content .box-gen-overlay{position:static;inset:auto;background:transparent;display:block;padding:0;z-index:auto}
+.right-box-wizard-content .box-gen-dialog{width:100%;max-height:none;overflow:visible;padding:9px;background:transparent;box-shadow:none;border:0;border-radius:0}
+.right-box-wizard-content .box-gen-head{gap:6px}.right-box-wizard-content .box-gen-head h2{font-size:15px}
+.right-box-wizard-content .box-gen-fields{grid-template-columns:1fr}
+.right-box-wizard-content .box-gen-fields label{min-width:0}
+.right-box-wizard-content .box-gen-fields input{max-width:100%;width:100%;box-sizing:border-box}
+.right-box-wizard-content .box-wizard-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+.right-box-wizard-content .box-gen-actions{flex-wrap:wrap}
+.right-box-wizard-content .box-gen-actions button{flex:1 1 110px}
+.right-box-wizard-content .box-wizard-navigation button{flex:1}
+.right-box-wizard-content .box-gen-dialog>p:first-of-type{display:none}
+@media(min-width:1001px){.right-tabbed-box{flex-shrink:0;max-height:min(50vh,430px)}}
+</style><style id="laser-canvas-rulers">
+.workspace .ruler-page{display:grid!important;grid-template-columns:34px max-content;grid-template-rows:27px max-content;align-items:start;justify-items:start;width:max-content;height:max-content;margin:0;background:transparent!important;box-shadow:none!important}
+.ruler-page .ruler-corner{grid-column:1;grid-row:1;width:34px;height:27px;display:flex;justify-content:center;align-items:center;background:#dfc49b;color:#4e3923;font:10px Segoe UI,Arial,sans-serif;border-right:1px solid #b08d62;border-bottom:1px solid #b08d62;box-sizing:border-box;user-select:none}
+.ruler-page .ruler-top{grid-column:2;grid-row:1;display:block;background:#dfc49b;pointer-events:none;border-bottom:1px solid #b08d62;box-sizing:border-box}
+.ruler-page .ruler-left{grid-column:1;grid-row:2;display:block;background:#dfc49b;pointer-events:none;border-right:1px solid #b08d62;box-sizing:border-box}
+.ruler-page #art{grid-column:2;grid-row:2;display:block;margin:0!important;max-width:none!important}
+</style><style id="wizard-nine-steps-css">
+#boxWizardNineSteps[hidden],#boxWizardNineSteps section[hidden]{display:none!important}
+#wizard9Step{font-size:13px}.wizard9-progress{margin-bottom:15px}
+.wizard9-track{background:#304960;height:6px;border-radius:6px;margin-top:9px;overflow:hidden}
+#wizard9TrackFill{display:block;height:100%;background:#53a9e2;width:11.11%}
+#boxWizardNineSteps h3{font-size:16px;line-height:1.4;margin:5px 0 12px;color:#f3f8ff}
+.wizard9-choices{display:grid;gap:10px}
+.wizard9-choice{width:100%;white-space:normal;text-align:left;padding:13px 12px;border:1px solid #6594be;background:#274a6d;border-radius:8px;color:white;cursor:pointer}
+.wizard9-choice:hover{background:#346c99}
+.wizard9-help{font-size:12px;line-height:1.5;color:#c6d7e7;margin:0 0 14px}
+.wizard9-inputs{display:grid;gap:13px}
+.wizard9-inputs label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;min-width:0}
+.wizard9-inputs input{width:100%;box-sizing:border-box;min-width:0;font:inherit;font-weight:400;font-size:14px;border-radius:5px;padding:9px;background:#f6faff;color:#162538;border:1px solid #829bb3}
+.wizard9-inputs small{font-weight:400;color:#a8e8c8;min-height:15px;font-size:11px}
+.wizard9-inputs small.invalid{color:#ffb8a7}
+.wizard9-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.wizard9-actions button{flex:1 1 105px;font-size:12px;padding:8px 7px}
+.wizard9-validation{font-size:12px;color:#ffb8a7}
+#wizard9Summary{white-space:pre-line;font-size:12px;line-height:1.8;padding:10px;background:#223a50;border-radius:5px;margin:12px 0}
+</style><style id="wizard-pocket-steps-css">
+.wizard9-layouts{display:grid;gap:7px;margin:12px 0}
+.wizard9-layouts button{white-space:normal;text-align:left;line-height:1.35;background:#274a6d;border:1px solid #5a84a7;color:#f4f9ff;padding:10px 11px;border-radius:7px;cursor:pointer}
+.wizard9-layouts button:hover,.wizard9-layouts button.selected{background:#326c9d;border-color:#8ac9ff}
+</style><style id="wizard9-divider-style">
+.wizard9-divider-choices{display:grid;gap:11px}
+.wizard9-divider-choices button{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;white-space:normal;line-height:1.45;padding:14px;border-radius:8px;background:#274a6d;color:#f4f9ff;border:1px solid #5a84a7;cursor:pointer}
+.wizard9-divider-choices button strong{font-size:14px}.wizard9-divider-choices button span{font-size:12px;color:#d2e2f1}
+.wizard9-divider-choices button:hover,.wizard9-divider-choices button.selected{background:#326c9d;border-color:#8ac9ff}
+</style><style id="wizard-notch-step6">#wizard9Notches .wizard9-divider-choices{display:grid;gap:8px}#wizard9Notches .wizard9-divider-choices button{display:flex;flex-direction:column;text-align:left;gap:6px;white-space:normal;padding:12px;background:#284865;border:1px solid #597b99;border-radius:7px;color:#f8fbff}#wizard9Notches .wizard9-divider-choices button.selected{border-color:#9dd8ff;background:#256b99}#wizard9Notches .wizard9-divider-choices span{font-size:12px;color:#d5e3ec}</style><style id="wizard-clearance-style">.wizard-clearance-field{display:flex;flex-direction:column;gap:6px;font-size:13px;margin:12px 0}.wizard-clearance-field input{width:100%;max-width:180px;box-sizing:border-box;padding:8px;background:#f6faff;color:#152639;border:1px solid #839ab1;border-radius:5px}.wizard-clearance-field small{color:#c9d6e5;font-size:11px;line-height:1.4}</style><style id="pasteboard-edge-rulers">
+/* Tan rulers and alignment grid are confined to the pasteboard; artwork area stays solid white. */
+.workspace{display:block!important;position:relative!important;background:#d9dee5!important;padding:34px 0 0!important;overflow:auto!important;}
+.workspace .ruler-page{display:block!important;width:max-content;height:max-content;margin:46px auto 64px!important;box-shadow:0 3px 18px #0003!important;background:#fff!important;}
+.workspace .ruler-page #art{display:block!important;margin:0!important;}
+.workspace .pasteboard-ruler-layer{position:sticky;top:34px;left:0;width:100%;height:0;z-index:30;pointer-events:none;display:block;background:transparent;}
+.pasteboard-ruler-layer .ruler-corner{position:absolute;top:0;left:0;width:34px;height:27px;display:flex;justify-content:center;align-items:center;background:#dfc49b;color:#4e3923;font:10px Segoe UI,Arial,sans-serif;border-right:1px solid #b08d62;border-bottom:1px solid #b08d62;box-sizing:border-box;}
+.pasteboard-ruler-layer .ruler-top{position:absolute;top:0;left:34px;display:block;background:#dfc49b;border-bottom:1px solid #b08d62;box-sizing:border-box;}
+.pasteboard-ruler-layer .ruler-left{position:absolute;top:27px;left:0;display:block;background:#dfc49b;border-right:1px solid #b08d62;box-sizing:border-box;}
+
+/* The project tab lives in a separate 34px header above the ruler strips. */
+.pasteboard-ruler-layer::before{content:"";position:absolute;top:-34px;left:0;width:100%;height:34px;background:#25354a;border-bottom:1px solid #53657a;pointer-events:none;}
+.pasteboard-ruler-layer .pasteboard-name-tab{position:absolute;top:-32px;left:5px;z-index:5;pointer-events:auto;display:flex;align-items:center;max-width:min(260px,calc(100vw - 115px));height:30px;background:#e1c69b;border:1px solid #93714e;border-bottom:2px solid #906c47;border-radius:5px 5px 3px 3px;box-shadow:0 1px 4px #0003;color:#372b1c;}
+.pasteboard-name-tab .pasteboard-name-button{background:transparent;border:0;border-radius:5px;color:inherit;font-weight:650;font-size:12px;padding:6px 11px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;min-width:0;cursor:text;}
+.pasteboard-name-tab .pasteboard-name-button:hover{background:#f7e3c1;color:#2d2419;}
+.pasteboard-name-tab .pasteboard-name-input{width:100%;min-width:105px;max-width:230px;height:23px;margin:0;padding:2px 8px;background:#fffaf0;color:#30281c;border:1px solid #775b3e;border-radius:4px;font-size:12px;}
+.pasteboard-name-tab [hidden]{display:none!important;}
+</style><style id="toolbar-tools-relocation">
+/* Match the Tools group to the other Toolbar 2 cards. */
+.secondary-toolbar .toolbar-tools-group{
+ flex:0 0 auto;display:flex;flex-direction:column;align-items:stretch;
+ gap:6px;padding:7px 10px 9px;background:#20344e;
+ border:1px solid #45617f;border-radius:9px;min-width:0;
+}
+.secondary-toolbar .toolbar-tools-group .tools-box{
+ display:flex;flex-direction:column;align-items:flex-start;
+ gap:6px;border:0;background:transparent;padding:0;min-width:0;
+}
+.secondary-toolbar .toolbar-tools-group .tools-box h2{
+ font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+ line-height:normal;color:#a9c7e5;margin:0;font-weight:750;white-space:nowrap;
+}
+.secondary-toolbar .toolbar-tools-group .tools-grid{
+ display:flex;gap:5px;align-items:center;flex-wrap:nowrap;
+}
+.secondary-toolbar .toolbar-tools-group .tools-grid>.tool,
+.secondary-toolbar .toolbar-tools-group .tools-grid>.shape-picker{
+ flex:0 0 34px;width:34px;height:34px;min-width:34px;
+ margin:0!important;padding:0;
+}
+.secondary-toolbar .toolbar-tools-group .tools-grid>.shape-picker .shape-main-row,
+.secondary-toolbar .toolbar-tools-group .tools-grid>.shape-picker .shapes-dropdown-only{
+ height:34px;width:34px;min-width:34px;padding:0;
+}
+.secondary-toolbar .toolbar-tools-group .tools-grid>.tool{
+ height:34px;min-height:34px;width:34px;min-width:34px;
+ border-radius:6px;
+}
+.secondary-toolbar{overflow:visible!important;flex-wrap:wrap!important}
+.secondary-toolbar .toolbar-tools-group .shape-submenu{z-index:200;min-width:165px}
+.secondary-toolbar .secondary-toolbar-space{display:none}
+@media(max-width:800px){.secondary-toolbar .toolbar-tools-group{padding:6px 8px}}
+</style><style id="toolbar-boolean-placement">
+.secondary-toolbar .toolbar-tools-group #booleanPicker{flex:0 0 34px;width:34px;height:34px;min-width:34px;margin:0!important;position:relative;display:flex;align-items:stretch;justify-content:center;}
+.secondary-toolbar .toolbar-tools-group #booleanPicker .shape-main-row{width:34px;height:34px;}
+.secondary-toolbar .toolbar-tools-group #booleanMain.boolean-icon-main{width:34px;min-width:34px;height:34px;min-height:34px;flex:0 0 34px;border-radius:6px;padding:3px;}
+.secondary-toolbar .toolbar-tools-group #booleanMain svg{width:21px;height:21px;}
+.secondary-toolbar .toolbar-tools-group #booleanMain .boolean-corner{right:1px;bottom:0;font-size:9px;}
+.secondary-toolbar .toolbar-tools-group #booleanMenu{position:absolute;left:0;top:calc(100% + 5px);width:max-content;min-width:0;grid-template-columns:repeat(3,38px);gap:5px;padding:6px;z-index:1000;}
+.secondary-toolbar .toolbar-tools-group #booleanMenu button{width:38px;height:38px;padding:6px;}
+</style></head><body><header><h1>◈ Laser Design Studio <small>Phase 2 · Hybrid Editor</small></h1><button id="new">New</button><div class="settings-wrap" id="settingsWrap"><button type="button" id="settingsBtn" title="Settings" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06-1.95 1.95-.06-.06A1.6 1.6 0 0 0 16 18.4a1.6 1.6 0 0 0-.96 1.46V20h-2.76v-.14A1.6 1.6 0 0 0 11.3 18.4a1.6 1.6 0 0 0-1.77.32l-.06.06-1.95-1.95.06-.06A1.6 1.6 0 0 0 7.9 15a1.6 1.6 0 0 0-1.46-.96H6.3v-2.76h.14A1.6 1.6 0 0 0 7.9 10.3a1.6 1.6 0 0 0-.32-1.77l-.06-.06 1.95-1.95.06.06A1.6 1.6 0 0 0 11.3 6.9a1.6 1.6 0 0 0 .96-1.46V5.3h2.76v.14A1.6 1.6 0 0 0 16 6.9a1.6 1.6 0 0 0 1.77-.32l.06-.06 1.95 1.95-.06.06A1.6 1.6 0 0 0 19.4 10.3a1.6 1.6 0 0 0 1.46.96H21v2.76h-.14A1.6 1.6 0 0 0 19.4 15Z" transform="translate(-1 -0.65)"/></svg><span>Settings</span></button><div id="settingsPanel" hidden role="dialog" aria-modal="false" aria-label="Settings" aria-labelledby="settingsHeading"><div class="settings-head"><h2 id="settingsHeading">Settings</h2><button id="settingsClose" type="button" title="Close Settings" aria-label="Close Settings">✕</button></div><div class="settings-tabs" role="tablist" aria-label="Settings categories"><button type="button" id="workspaceTab" role="tab" aria-controls="workspaceTabPanel" aria-selected="true" tabindex="0">Workspace Settings</button><button type="button" id="canvasTab" role="tab" aria-controls="canvasTabPanel" aria-selected="false" tabindex="-1">Canvas</button><button type="button" id="aboutTab" role="tab" aria-controls="aboutTabPanel" aria-selected="false" tabindex="-1">About</button></div><div id="workspaceTabPanel" role="tabpanel" aria-labelledby="workspaceTab"><h3>Workspace Settings</h3><label><input type="checkbox" id="grid" checked> Show pasteboard grid only</label><label>Major grid spacing (mm)</label><select id="gridSize"><option value="5">5 mm</option><option value="10" selected>10 mm</option><option value="20">20 mm</option><option value="25">25 mm</option><option value="50">50 mm</option></select><label><input type="checkbox" id="fineGrid" checked> Show fine grid (1/10 spacing)</label><label><input type="checkbox" id="snap"> Snap objects to grid</label><label>Snap spacing (mm)</label><select id="snapSize"><option value="0.5">0.5 mm</option><option value="1" selected>1 mm</option><option value="2">2 mm</option><option value="5">5 mm</option><option value="10">10 mm</option></select><label><input type="checkbox" id="easyGrab" checked> Easy grab (click inside shapes)</label><label>Grab tolerance <span id="grabLabel">14 px</span></label><input id="grabRange" type="range" min="6" max="30" value="14" step="2"></div><div id="canvasTabPanel" role="tabpanel" aria-labelledby="canvasTab" hidden><h3>Canvas</h3><div class="work-area-group"><label for="workAreaCategory" class="work-area-heading">WORK AREA (YOUR LASER'S BED)</label><select id="workAreaCategory" aria-label="Work area selection"><option value="" selected>Select work area</option><option value="common">Common Sizes</option></select><div id="commonSizesWrap" hidden><label for="commonSizes">Common Sizes</label><select id="commonSizes"><option value="">Choose a size</option><option value="100x100">100 × 100 mm</option><option value="200x200">200 × 200 mm</option><option value="300x200">300 × 200 mm</option><option value="400x400">400 × 400 mm</option><option value="600x400">600 × 400 mm</option></select></div><p class="work-area-hint">Choose a preset to fill in the dimensions below, then click Apply canvas size.</p></div><p>Set the physical size of your design workspace in millimeters. Default: 400 × 400 mm (15.748 × 15.748 in).</p><div class="fields"><div><label for="canvasW">Width (mm)</label><input id="canvasW" type="number" value="400" min="1" max="3000"></div><div><label for="canvasH">Height (mm)</label><input id="canvasH" type="number" value="400" min="1" max="3000"></div></div><button id="canvasApply" type="button" style="margin-top:10px">Apply canvas size</button></div><div id="aboutTabPanel" role="tabpanel" aria-labelledby="aboutTab" hidden><h3>About Laser Design Studio</h3><p>Create vector artwork and export SVG files for LightBurn.</p><p>This editor does not control laser hardware.</p></div></div></div><button type="button" id="boxGenOpen" title="Create a finger-joint box design">Box Generator</button><div class="header-file-actions" style="display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap"><button id="export" style="background:#14654e">Export SVG for LightBurn</button></div><input id="file" type="file" accept=".json,application/json"></header>
+<div class="secondary-toolbar" role="toolbar" aria-label="Additional design toolbar"><span class="secondary-toolbar-label">QUICK ACTIONS</span><div class="tb-project-buttons"><div class="quick-group"><span class="quick-title">Project</span><div class="quick-actions"><button id="open" class="header-icon-button" type="button" title="Open Project" aria-label="Open Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v2"/><path d="M3 10h18l-2 10H5L3 10z"/></svg></button><button id="save" class="header-icon-button" type="button" title="Save Project" aria-label="Save Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h14l3 3v15H3V3z"/><path d="M7 3v6h10V3"/><path d="M7 21v-9h10v9"/><path d="M14 3v5"/></svg></button></div></div><div class="quick-group"><span class="quick-title">History</span><div class="quick-actions"><button type="button" id="undo" title="Undo (Ctrl+Z)" aria-label="Undo" class="header-icon-button">↶</button><button type="button" id="redo" title="Redo (Ctrl+Y)" aria-label="Redo" class="header-icon-button">↷</button></div></div><div class="quick-group"><span class="quick-title">Edit</span><div class="quick-actions"><button type="button" data-action="copy" title="Copy (Ctrl+C)" aria-label="Copy">⧉</button><button type="button" data-action="paste" title="Paste (Ctrl+V)" aria-label="Paste">▣</button><button type="button" data-action="duplicate" title="Duplicate" aria-label="Duplicate">⧉+</button><button type="button" data-action="remove" title="Delete" aria-label="Delete">✕</button><button type="button" id="zoomSelection" class="tb-icon-only" title="Zoom to Selection" aria-label="Zoom to Selection" disabled><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="11" height="11" rx="1" stroke-dasharray="2 2"/><circle cx="15" cy="15" r="5"/><path d="m19 19 3 3"/><path d="M15 12v6M12 15h6"/></svg></button><button type="button" class="tb-icon-only" data-action="group" title="Group" aria-label="Group"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="10" height="10" rx="1"/><rect x="11" y="10" width="10" height="10" rx="1"/><path d="M16 3v5M13.5 5.5h5"/></svg></button><button type="button" class="tb-icon-only" data-action="ungroup" title="Ungroup" aria-label="Ungroup"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="9" height="9" rx="1"/><rect x="13" y="12" width="9" height="9" rx="1"/><path d="M13 5h8M17 1v8"/></svg></button></div></div></div><div class="quick-group"><span class="quick-title">Align Objects</span><div class="quick-actions"><button type="button" class="tb-icon-only" id="alignLeft" title="Align Left" aria-label="Align Left"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 3v18M8 6h12v4H8zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignCenter" title="Align Center" aria-label="Align Center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 6h16v4H4zM7 14h10v4H7z"/></svg></button><button type="button" class="tb-icon-only" id="alignRight" title="Align Right" aria-label="Align Right"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 3v18M4 6h12v4H4zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignTop" title="Align Top" aria-label="Align Top"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 4h18M6 8h4v12H6zM14 8h4v8h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignMiddle" title="Align Middle" aria-label="Align Middle"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 12h20M6 4h4v16H6zM14 6h4v12h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignBottom" title="Align Bottom" aria-label="Align Bottom"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 20h18M6 4h4v12H6zM14 8h4v8h-4z"/></svg></button></div></div><div class="quick-group toolbar-tools-group" aria-label="Drawing tools"><div class="tools-box"><h2>Tools</h2><div class="tools-grid"><button class="tool active select-icon-only" data-tool="select" type="button" title="Select (V)" aria-label="Select" aria-keyshortcuts="V"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M5 3l14 9-7.2 1.1-3.1 7.1L5 3z"/><path d="M12 13l4 7"/></svg></button><div class="shape-picker" id="shapePicker"><div class="shape-main-row"><button class="tool shape-primary shapes-dropdown-only" id="shapesMain" type="button" title="Shapes" aria-label="Shapes menu" aria-haspopup="true" aria-expanded="false" aria-controls="shapesMenu">▭</button></div><div class="shape-submenu" id="shapesMenu" role="menu" hidden><button type="button" role="menuitem" data-shape="rect">▭ Rectangle</button><button type="button" role="menuitem" data-shape="ellipse">◯ Ellipse</button><button type="button" role="menuitem" data-shape="polygon">⬡ Hexagon</button></div></div><button class="tool draw-lines-icon-only" data-tool="line" type="button" title="Draw Lines" aria-label="Draw Lines"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 19L10 13L14 16L20 5"/><circle cx="4" cy="19" r="2"/><circle cx="10" cy="13" r="2"/><circle cx="14" cy="16" r="2"/><circle cx="20" cy="5" r="2"/></svg></button><button class="tool select-icon-only" data-tool="text" type="button" title="Create Text" aria-label="Create Text"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 6V4h16v2M12 4v16M8 20h8"/></svg></button><button id="openOffsetPanel" class="tool offset-icon-button" type="button" title="Offset" aria-label="Offset" aria-haspopup="dialog" aria-controls="offsetPanel"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="7" width="10" height="10" rx="1"/><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 2"/></svg></button><div class="shape-picker" id="booleanPicker"><div class="shape-main-row"><button class="tool shape-primary boolean-icon-main" id="booleanMain" type="button" aria-label="Boolean Tools" aria-haspopup="true" aria-controls="booleanMenu" aria-expanded="false" title="Boolean Tools"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="3" y="5" width="12" height="12" rx="2"/><circle cx="15" cy="13" r="6"/><path d="M16 3v4m-2-2h4"/></svg><span class="boolean-corner" aria-hidden="true">▾</span></button></div><div class="shape-submenu" id="booleanMenu" role="menu" hidden><button type="button" role="menuitem" aria-label="Weld" title="Weld" data-boolean="weld" class="chosen"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></button><button type="button" role="menuitem" aria-label="Subtract" title="Subtract" data-boolean="subtract"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="4" y="5" width="14" height="14" rx="1"/><path d="M12 5v7h7" stroke-dasharray="2 2"/><path d="M18 4v5"/></svg></button><button type="button" role="menuitem" aria-label="Intersect" title="Intersect" data-boolean="intersect"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/><path d="M12 7c2 2 3 3 3 5s-1 3-3 5c-2-2-3-3-3-5s1-3 3-5z" fill="currentColor" stroke="none" opacity=".65"/></svg></button></div></div></div></div></div></div><div class="secondary-toolbar-space" aria-label="Space for future tools"></div></div>
+<div class="topbar" role="toolbar" aria-label="Workspace editing toolbar">
+<div class="tb-group tb-size-card"><span class="tb-card-title">Size &amp; Position</span><div hidden aria-hidden="true"><input type="number" id="tbX" step="0.1" tabindex="-1"><input type="number" id="tbY" step="0.1" tabindex="-1"></div><div class="tb-size-row"><label class="tb-field">W <input type="number" id="tbW" step="0.1" min="0.1" aria-label="Selection width in millimeters"></label><label class="tb-field">H <input type="number" id="tbH" step="0.1" min="0.1" aria-label="Selection height in millimeters"></label><label class="tb-field">Rotation <input type="number" id="tbAngle" step="1" aria-label="Selection rotation in degrees"></label></div><div class="tb-units-row"><div class="unit-switch" role="group" aria-label="Measurement units"><button type="button" id="unitMM" class="active" aria-pressed="true" title="Use millimeters">mm</button><button type="button" id="unitIN" aria-pressed="false" title="Use inches">in</button></div></div></div>
+
+<div class="tb-group tb-copy-font-stack tb-text-card"><span class="tb-card-title">Text Formatting</span><div class="tb-font-controls" role="group" aria-label="Text formatting"><div class="tb-font-column"><div class="tb-text-row tb-text-fields-row"><label class="tb-font-row" for="tbFont">Font <select id="tbFont" title="Font for selected text"><option value="Arial">Arial</option><option value="Verdana">Verdana</option><option value="Tahoma">Tahoma</option><option value="Trebuchet MS">Trebuchet MS</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Courier New">Courier New</option><option value="Impact">Impact</option><option value="Comic Sans MS">Comic Sans MS</option></select></label><label class="tb-font-size" for="fontSize">Size <input id="fontSize" type="number" min="1" max="300" step="0.5" title="Font size (mm)" aria-label="Font size in millimeters"></label><label class="tb-spacing" for="tbHSpace">HSpace <input id="tbHSpace" type="number" min="-50" max="50" step="0.25" value="0" title="Letter spacing in mm; negative values bring letters together"></label><label class="tb-spacing" for="tbVSpace">VSpace <input id="tbVSpace" type="number" min="-50" max="100" step="0.25" value="0" title="Extra space between lines in mm"></label></div><div class="tb-text-row tb-text-buttons-row" role="group" aria-label="Text style buttons"><button type="button" id="tbBold" aria-label="Bold" title="Bold" aria-pressed="false"><b>B</b></button><button type="button" id="tbItalic" aria-label="Italic" title="Italic" aria-pressed="false"><i>I</i></button><button type="button" id="tbUppercase" aria-label="Uppercase" title="Uppercase" aria-pressed="false">AA</button><button type="button" id="tbTextWeld" class="tb-text-weld" aria-pressed="false" title="Welded: automatically join touching or overlapping text characters">Welded</button></div></div></div></div>
+
+
+</div>
+<div class="app"><aside><div hidden aria-hidden="true"><button id="front">To front</button><button id="back">To back</button><button id="weld">Weld</button><button id="subtract">Subtract</button><button id="intersect">Intersect</button></div><section class="box-wizard-sidebar"><h2>Box Wizard</h2><button id="boxWizardOpen" class="box-wizard-trigger" type="button" title="Step-by-step 3D box wizard"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 7 12 3l9 4v10l-9 4-9-4z"/><path d="m3 7 9 4 9-4M12 11v10"/><path d="m7 14 2 2 4-5"/></svg><span>Box Wizard</span></button><p class="fine">Create and review your box one step at a time.</p></section><div hidden aria-hidden="true"><button id="copy">Copy</button><button id="paste">Paste</button><button id="duplicate">Duplicate</button><button id="remove">Delete</button><button id="group">Group</button><button id="ungroup">Ungroup</button></div></aside>
+<main><div class="workspace-zoom-row"><div class="zoom-control-box" role="group" aria-label="Workspace zoom controls"><span class="zoom-control-title">Zoom</span><button id="minus" type="button" title="Zoom out" aria-label="Zoom out">−</button><output id="tbZoom" aria-live="polite">100%</output><button id="plus" type="button" title="Zoom in" aria-label="Zoom in">+</button><span class="zoom-view-divider" aria-hidden="true"></span><div class="box-view-controls" role="group" aria-label="Box view"><button type="button" id="boxFlatView" class="selected" aria-pressed="true">Flat</button><button type="button" id="box3DView" aria-pressed="false">3D</button><span class="zoom-view-divider" aria-hidden="true"></span><span class="box-lid-controls" id="boxLidControls" hidden><button type="button" id="boxLidClosed" class="selected" aria-pressed="true" title="Show assembled box with the lid closed">Lid closed</button><button type="button" id="boxLidOpen" aria-pressed="false" title="Show assembled box with the lid open">Lid open</button></span></div></div></div><div class="workspace"><div class="pasteboard-ruler-layer" aria-label="Pasteboard rulers"><div class="ruler-corner" aria-label="Ruler origin marker">0</div><div class="pasteboard-name-tab" id="pasteboardNameTab" aria-label="Pasteboard name"><button type="button" id="pasteboardNameButton" class="pasteboard-name-button" title="Click to rename pasteboard">Pasteboard 1</button><input id="pasteboardNameInput" class="pasteboard-name-input" type="text" maxlength="60" aria-label="Rename pasteboard" hidden></div><canvas id="rulerTop" class="ruler-top" aria-label="Horizontal pasteboard ruler"></canvas><canvas id="rulerLeft" class="ruler-left" aria-label="Vertical pasteboard ruler"></canvas></div><div id="box3DStage" hidden><canvas id="box3DCanvas" aria-label="Interactive assembled box preview; drag to rotate"></canvas><span class="box-3d-tip">Drag to rotate · Preview only</span></div><div class="page ruler-page"><svg id="art" viewBox="0 0 400 400" width="850" height="850" xmlns="http://www.w3.org/2000/svg" aria-label="Vector design workspace"><defs><pattern id="minorGridPattern" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#b7c9df" stroke-width=".32"/></pattern><pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse"><rect id="minorGridFill" width="10" height="10" fill="url(#minorGridPattern)"/><path id="majorGridPath" d="M10 0H0V10" fill="none" stroke="#7d99b8" stroke-width=".68"/></pattern></defs><rect id="paper" x="0" y="0" width="400" height="400" fill="white"/><g id="artObjects"></g><g id="overlays"></g><rect id="outline" x="0" y="0" width="400" height="400" fill="none" stroke="#94a3b8" stroke-width=".6" pointer-events="none"/></svg></div></div><div id="status" class="status">Ready. Draw a shape, or select one to edit it.</div></main>
+<aside class="right"><div class="right-tabbed-box" aria-label="Right sidebar panel">
+<div class="right-tab-content">
+<section id="rightTabObjects" class="right-tab-panel" hidden aria-hidden="true" style="display:none"><h2>Objects</h2><div id="layers"></div></section>
+<section id="rightTabInspector" class="right-tab-panel" hidden aria-hidden="true" style="display:none"><h2>Object Inspector</h2><p id="selectionLabel" class="fine">Nothing selected</p><div hidden aria-hidden="true"><input id="x" type="number" step=".1" tabindex="-1"><input id="y" type="number" step=".1" tabindex="-1"><input id="w" type="number" step=".1" min=".1" tabindex="-1"><input id="h" type="number" step=".1" min=".1" tabindex="-1"></div><div hidden aria-hidden="true"><input id="angle" type="number" step="1" tabindex="-1"><input id="textValue" type="text" maxlength="200" tabindex="-1"></div><button id="apply" class="full" style="margin-top:8px">Apply changes</button><p class="fine">Positions and sizes refer to local unrotated object bounds. Multi-selection supports shared move and resize.</p></section>
+<section id="rightTabColors" class="right-tab-panel" role="tabpanel" aria-labelledby="rightTabButtonColors">
+<div class="color-mode-table" role="group" aria-label="Colors and modes">
+  <div class="color-mode-heading">Colors</div><div class="color-mode-heading">Mode</div>
+  <button class="palette active" data-color="#000000"><span class="dot" style="background:#000"></span>Black · Engrave</button>
+  <select id="blackMode" title="Black mode: Line traces outlines; Fill produces filled shapes" aria-label="Black engraving mode"><option value="line">Line</option><option value="fill">Fill</option></select>
+  <button class="palette" data-color="#0000ff"><span class="dot" style="background:blue"></span>Blue · Score</button><select id="blueMode" title="Blue mode: Line or Fill" aria-label="Blue design mode"><option value="line">Line</option><option value="fill">Fill</option></select>
+  <button class="palette" data-color="#ff0000"><span class="dot" style="background:red"></span>Red · Cut</button><select id="redMode" title="Red mode: Line or Fill" aria-label="Red design mode"><option value="line">Line</option><option value="fill">Fill</option></select>
+</div><p class="fine">Colors organize artwork. Set machine operations in LightBurn.</p></section>
+<section id="rightTabEditBox" class="right-tab-panel" style="display:none!important" role="tabpanel" aria-labelledby="rightTabButtonEditBox" hidden><h2>Box Generator</h2><p class="fine">Reopen your generated box settings to adjust dimensions, units, and finger joints.</p><button type="button" id="boxEditSettings" class="full" title="Reopen box measurements and update the generated box" hidden>Edit Box</button><p id="boxEditHint" class="fine">Generate a box first to enable editing.</p></section>
+<section id="rightTabInfo" class="right-tab-panel" role="tabpanel" aria-labelledby="rightTabButtonInfo" hidden><h2>Project Info</h2><p class="fine">Save your editable design as JSON. Export SVG for LightBurn, then verify dimensions, fonts, and color layers after importing.</p></section>
+</div>
+<div class="right-tab-bar" role="tablist" aria-label="Right sidebar tabs">
+
+
+<button type="button" id="rightTabButtonColors" class="right-tab active" role="tab" aria-selected="true" aria-controls="rightTabColors" tabindex="0" data-right-tab="Colors">Colors</button>
+
+<button type="button" id="rightTabButtonInfo" class="right-tab" role="tab" aria-selected="false" aria-controls="rightTabInfo" tabindex="-1" data-right-tab="Info">Info</button>
+</div></div><section id="rightBoxWizardPanel" class="right-box-wizard-panel" aria-label="Box Wizard" aria-live="off">
+ <div class="right-box-wizard-heading"><strong>Box Wizard</strong><span id="wizardDockState">Select Box Wizard on the left to get started</span></div>
+ <div id="rightBoxWizardContent" class="right-box-wizard-content">
+   <p id="wizardDockPlaceholder" class="fine">Choose <strong>Box Wizard</strong> on the left sidebar to create or update a box, step by step.</p>
+ </div>
+</section></aside></div>
+<nav class="bottom-color-toolbar" role="toolbar" aria-label="Color palette">
+<span class="bottom-palette-label">Color Palette</span>
+<button type="button" class="bottom-swatch active" data-bottom-color="#000000" title="00 · Black" aria-label="00 Black" aria-pressed="true"><span class="swatch-square" style="background:#000000"><span class="swatch-number">00</span></span></button>
+<button type="button" class="bottom-swatch" data-bottom-color="#0000ff" title="01 · Blue" aria-label="01 Blue" aria-pressed="false"><span class="swatch-square" style="background:#0000ff"><span class="swatch-number">01</span></span></button>
+<button type="button" class="bottom-swatch" data-bottom-color="#ff0000" title="02 · Red" aria-label="02 Red" aria-pressed="false"><span class="swatch-square" style="background:#ff0000"><span class="swatch-number">02</span></span></button>
+</nav>
+<div id="offsetPanel" class="offset-modal-backdrop" hidden>
+ <div class="offset-dialog" role="dialog" aria-modal="true" aria-labelledby="offsetPanelTitle">
+  <div class="offset-dialog-header"><strong id="offsetPanelTitle">Offset</strong><button id="closeOffsetPanel" type="button" aria-label="Close Offset window" title="Close">✕</button></div>
+  <p>Select an unrotated rectangle or ellipse, choose a distance, then select Inward or Outward. The original is preserved.</p>
+  <label for="offsetDistance" style="display:block;margin:12px 0 6px;font-weight:600">Offset Distance (mm)</label>
+  <input id="offsetDistance" type="number" min="0.1" max="1000" step="0.1" value="2" inputmode="decimal" style="width:100%;box-sizing:border-box;padding:9px 10px" aria-describedby="offsetDistanceHint">
+  <small id="offsetDistanceHint" style="display:block;margin:6px 0 12px;opacity:.8">Enter a positive distance in millimeters. Inward reduces the size; Outward increases it.</small>
+  <div class="offset-dialog-actions"><button id="offsetOut" title="Create an outward offset using the distance above">Offset Outward</button><button id="offsetIn" title="Create an inward offset using the distance above">Offset Inward</button></div>
+ </div>
+</div><script>
+(()=>{'use strict';const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',clone=o=>JSON.parse(JSON.stringify(o)),round=n=>Math.round(n*1000)/1000,valid=n=>Number.isFinite(n),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));let W=400,H=400,zoom=1,objects=[],ids=[],nextId=1,nextGroup=1,tool='select',color='#000000',drag=null,undos=[],redos=[],clipboard=[];const colorModes={'#000000':'line','#0000ff':'line','#ff0000':'line'};let blackDefaultMode='line';
+function notice(s){$('status').textContent=s}function history(){undos.push(clone({W,H,objects,nextId,nextGroup}));if(undos.length>100)undos.shift();redos=[];buttons()}function snapshot(){return clone({W,H,objects,nextId,nextGroup})}function restore(s){W=s.W;H=s.H;objects=s.objects;nextId=s.nextId;nextGroup=s.nextGroup;ids=[];syncCanvas();render();buttons()}function step(a,b){if(!a.length)return;b.push(snapshot());restore(a.pop())}function buttons(){$('undo').disabled=!undos.length;$('redo').disabled=!redos.length;syncToolbarButtons()}function pick(){return objects.filter(o=>ids.includes(o.id)&&!o.locked&&!o.hidden)}function norm(o){return {x:o.x,y:o.y,w:o.w,h:o.h}}function bounds(arr){if(!arr.length)return null;const x=Math.min(...arr.map(o=>o.x)),y=Math.min(...arr.map(o=>o.y)),xx=Math.max(...arr.map(o=>o.x+o.w)),yy=Math.max(...arr.map(o=>o.y+o.h));return{x,y,w:xx-x,h:yy-y}}function snap(n){let step=Number($('snapSize').value)||1;return $('snap').checked?Math.round(n/step)*step:n}function refreshGrid(){let step=Number($('gridSize').value)||10,minor=step/10;$('gridPattern').setAttribute('width',step);$('gridPattern').setAttribute('height',step);$('majorGridPath').setAttribute('d',`M${step} 0H0V${step}`);$('minorGridPattern').setAttribute('width',minor);$('minorGridPattern').setAttribute('height',minor);$('minorGridPattern').firstElementChild.setAttribute('d',`M${minor} 0H0V${minor}`);$('minorGridFill').setAttribute('width',step);$('minorGridFill').setAttribute('height',step);$('minorGridFill').setAttribute('fill',$('fineGrid').checked?'url(#minorGridPattern)':'white');$('paper').setAttribute('fill','white');updatePasteboardGrid()}function svg(tag,attrs={}){let e=document.createElementNS(NS,tag);for(let [k,v]of Object.entries(attrs))e.setAttribute(k,v);return e}function syncCanvas(){let a=$('art');a.setAttribute('viewBox',`0 0 ${W} ${H}`);$('paper').setAttribute('width',W);$('paper').setAttribute('height',H);$('outline').setAttribute('width',W);$('outline').setAttribute('height',H);$('canvasW').value=W;$('canvasH').value=H;updateZoom()}
+const textMeasure=document.createElement('canvas').getContext('2d');
+function fittedText(o, value=o.text||''){
+  const content=String(value), hs=Number(o.hspace)||0, vs=Number(o.vspace)||0;
+  const boxWidth=Math.max(1,o.w-3),boxHeight=Math.max(1,o.h-3);
+  const widthOf=(line)=>Math.max(0,textMeasure.measureText(line).width+Math.max(0,line.length-1)*hs);
+  function atSize(size){
+    textMeasure.font=(o.italic?'italic ':'')+(o.bold?'bold ':'')+size+'px '+JSON.stringify(o.font||'Arial');
+    const lines=[];
+    for(const paragraph of content.split('\n')){
+      if(!paragraph){lines.push('');continue}
+      let line='';
+      for(const word of paragraph.split(/(\s+)/).filter(Boolean)){
+        const candidate=line+word;
+        if(line && widthOf(candidate)>boxWidth){lines.push(line.trimEnd());line=word.trimStart()}
+        else line=candidate;
+        while(line.length>1 && widthOf(line)>boxWidth){
+          let cut=1;
+          while(cut<line.length && widthOf(line.slice(0,cut+1))<=boxWidth)cut++;
+          lines.push(line.slice(0,cut));line=line.slice(cut);
+        }
+      }
+      lines.push(line);
+    }
+    return lines;
+  }
+  let low=.5,high=Math.max(20,Math.min(350,Math.max(boxWidth,boxHeight)*2));
+  for(let i=0;i<20;i++){
+    const mid=(low+high)/2,lines=atSize(mid);
+    const totalHeight=lines.length*mid*1.2+Math.max(0,lines.length-1)*vs;
+    if(totalHeight<=boxHeight && lines.every(l=>widthOf(l)<=boxWidth+.001))low=mid;
+    else high=mid;
+  }
+  return {size:Math.max(.5,low),lines:atSize(low),hspace:hs,vspace:vs};
+}
+
+// True offline contour union: paint all letters into ONE alpha mask, then trace the
+// outside and inside pixel boundaries as compound SVG paths (even-odd holes).
+// This creates paths rather than relying on SVG font text or visual overlaps.
+const weldedTextCache=new Map();
+function weldedTextPath(o,fit){
+ const value=o.uppercase?String(o.text||'').toUpperCase():String(o.text||'');
+ const key=JSON.stringify([value,o.w,o.h,o.font,o.bold,o.italic,o.hspace,o.vspace,o.x,o.y]);
+ if(weldedTextCache.has(key))return weldedTextCache.get(key);
+ const scale=Math.min(9,Math.sqrt(2000000/Math.max(1,o.w*o.h)));
+ const pw=Math.max(1,Math.ceil(o.w*scale)),ph=Math.max(1,Math.ceil(o.h*scale));
+ const canvas=document.createElement('canvas');canvas.width=pw;canvas.height=ph;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ ctx.scale(scale,scale);
+ ctx.font=(o.italic?'italic ':'')+(o.bold?'bold ':'')+fit.size+'px '+JSON.stringify(o.font||'Arial');
+ ctx.textBaseline='alphabetic';ctx.fillStyle='#000';
+ for(let i=0;i<fit.lines.length;i++){
+   const line=fit.lines[i],y=1.5+fit.size+i*(fit.size*1.2+fit.vspace);
+   let x=1.5;
+   for(const ch of Array.from(line)){
+     ctx.fillText(ch,x,y);
+     x+=ctx.measureText(ch).width+fit.hspace;
+   }
+ }
+ const a=ctx.getImageData(0,0,pw,ph).data;
+ const occupied=(x,y)=>x>=0&&y>=0&&x<pw&&y<ph&&a[(y*pw+x)*4+3]>110;
+ const edges=new Map();
+ const add=(x,y,xx,yy)=>{let k=x+','+y;if(!edges.has(k))edges.set(k,[]);edges.get(k).push([xx,yy])};
+ for(let y=0;y<ph;y++)for(let x=0;x<pw;x++)if(occupied(x,y)){
+   if(!occupied(x,y-1))add(x,y,x+1,y);
+   if(!occupied(x+1,y))add(x+1,y,x+1,y+1);
+   if(!occupied(x,y+1))add(x+1,y+1,x,y+1);
+   if(!occupied(x-1,y))add(x,y+1,x,y);
+ }
+ let d='',count=0;
+ for(const [key] of edges){
+  while((edges.get(key)||[]).length){
+   const [sx,sy]=key.split(',').map(Number),points=[[sx,sy]];
+   let x=sx,y=sy,guard=0;
+   do{
+    const list=edges.get(x+','+y);
+    if(!list||!list.length)break;
+    const next=list.pop();x=next[0];y=next[1];
+    points.push([x,y]);
+   }while((x!==sx||y!==sy)&&++guard<250000);
+   if(points.length<4||x!==sx||y!==sy)continue;
+   // Retain corner vertices; straight edge pixels need not become individual SVG points.
+   const corners=[];
+   for(let i=0;i<points.length-1;i++){
+     const prev=points[(i-1+points.length-1)%(points.length-1)],cur=points[i],next=points[(i+1)%(points.length-1)];
+     if((cur[0]-prev[0])*(next[1]-cur[1])!==(cur[1]-prev[1])*(next[0]-cur[0]))corners.push(cur);
+   }
+   if(corners.length<3)continue;
+   d+='M'+corners.map(p=>round(o.x+p[0]/scale)+' '+round(o.y+p[1]/scale)).join('L')+'Z ';
+   count++;
+  }
+ }
+ weldedTextCache.set(key,d.trim());
+ if(weldedTextCache.size>50)weldedTextCache.delete(weldedTextCache.keys().next().value);
+ return d.trim();
+}
+// Paths contain connected anchor points, optional quadratic curve controls,
+// and can remain open or be closed. Coordinates are normalized so resizing works.
+function vectorPathD(o){
+ const pts=o.nodes||[];if(!pts.length)return '';
+ let d=`M${round(o.x+pts[0].x*o.w)} ${round(o.y+pts[0].y*o.h)}`;
+ for(let i=1;i<pts.length;i++){
+   const p=pts[i];
+   if(p.c)d+=` Q${round(o.x+p.c.x*o.w)} ${round(o.y+p.c.y*o.h)} ${round(o.x+p.x*o.w)} ${round(o.y+p.y*o.h)}`;
+   else d+=` L${round(o.x+p.x*o.w)} ${round(o.y+p.y*o.h)}`;
+ }
+ if(o.closed)d+=' Z';
+ return d;
+}
+let draftPath=null;
+function finalizeVectorPath(closed=false){
+ if(!draftPath)return;
+ let nodes=draftPath.nodes;
+ if(nodes.length<2){draftPath=null;render();return}
+ let x=Math.min(...nodes.flatMap(p=>[p.x,...(p.c?[p.c.x]:[])])),y=Math.min(...nodes.flatMap(p=>[p.y,...(p.c?[p.c.y]:[])]));
+ let xx=Math.max(...nodes.flatMap(p=>[p.x,...(p.c?[p.c.x]:[])])),yy=Math.max(...nodes.flatMap(p=>[p.y,...(p.c?[p.c.y]:[])]));
+ let w=Math.max(.1,xx-x),h=Math.max(.1,yy-y);
+ let o={id:nextId++,type:'vectorPath',color,mode:colorModes[color]||'line',
+ x:round(x),y:round(y),w:round(w),h:round(h),angle:0,group:null,hidden:false,locked:false,closed,
+ nodes:nodes.map(p=>({x:(p.x-x)/w,y:(p.y-y)/h,...(p.c?{c:{x:(p.c.x-x)/w,y:(p.c.y-y)/h}}:{})}))};
+ history();objects.push(o);ids=[o.id];draftPath=null;setTool('select');render();notice('Vector path created. Select and drag to move or resize it.');
+}
+function renderDraftPath(over){
+ if(!draftPath||!draftPath.nodes.length)return;
+ const ns=draftPath.nodes;
+ let d=`M${ns[0].x} ${ns[0].y}`;
+ for(let i=1;i<ns.length;i++){let p=ns[i];d+=p.c?` Q${p.c.x} ${p.c.y} ${p.x} ${p.y}`:` L${p.x} ${p.y}`}
+ if(draftPath.hover)d+=` L${draftPath.hover.x} ${draftPath.hover.y}`;
+ over.appendChild(svg('path',{d,fill:'none',stroke:'#35b7f5','stroke-width':'.7','stroke-dasharray':'2 1','pointer-events':'none'}));
+ ns.forEach((p,i)=>over.appendChild(svg('circle',{cx:p.x,cy:p.y,r:i===0?2:1.3,fill:i===0?'#fdbb4d':'#35b7f5','pointer-events':'none'})));
+}
+function shapeNode(o){let n;if(o.type==='rect')n=svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h});else if(o.type==='ellipse')n=svg('ellipse',{cx:o.x+o.w/2,cy:o.y+o.h/2,rx:o.w/2,ry:o.h/2});else if(o.type==='line')n=svg('line',{x1:o.x,y1:o.y,x2:o.x+o.w,y2:o.y+o.h});else if(o.type==='vectorPath')n=svg('path',{d:vectorPathD(o)});else if(o.type==='polygon'){const p=Array.from({length:6},(_,i)=>{let a=i*Math.PI/3;return `${round(o.x+o.w*(.5+.5*Math.cos(a)))},${round(o.y+o.h*(.5+.5*Math.sin(a)))}`}).join(' ');n=svg('polygon',{points:p})}else if(o.type==='text'&&o.weld){
+ const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));
+ n=svg('path',{d:weldedTextPath(o,fit),'fill-rule':'evenodd',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:'.25','vector-effect':'non-scaling-stroke'});
+ }else if(o.type==='text'){const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));n=svg('text',{x:o.x+1.5,y:o.y+1.5+fit.size,'font-size':fit.size,'font-family':o.font||'Arial','font-weight':o.bold?'bold':'normal','font-style':o.italic?'italic':'normal',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:Math.max(.15,fit.size*.022),'paint-order':'stroke fill','letter-spacing':fit.hspace,'data-text-weld-preview':o.weld?'true':'false'});fit.lines.forEach((line,i)=>{let t=svg('tspan',{x:o.x+1.5,y:o.y+1.5+fit.size+i*(fit.size*1.2+fit.vspace)});t.textContent=line||' ';n.appendChild(t)})}else if(o.type==='path')n=svg('path',{d:pathString(o), 'fill-rule':'evenodd'});if(o.type!=='text'){
+  const isFill=(o.mode==='fill'&&o.type!=='line'&&(o.type!=='vectorPath'||o.closed));
+  Object.entries({fill:isFill?o.color:'none',stroke:isFill?'none':o.color,'stroke-width':'.25','vector-effect':'non-scaling-stroke'}).forEach(([k,v])=>n.setAttribute(k,v));
+}if(o.angle)n.setAttribute('transform',`rotate(${o.angle} ${round(o.x+o.w/2)} ${round(o.y+o.h/2)})`);n.setAttribute('data-id',o.id);n.classList.add('obj');if(o.hidden)n.setAttribute('display','none');return n}
+function pathString(o){return(o.loops||[]).map(loop=>loop.map((p,i)=>`${i?'L':'M'}${round(o.x+p[0]*o.w)} ${round(o.y+p[1]*o.h)}`).join(' ')+' Z').join(' ')}
+function hitNode(o){let n=o.type==='text'?svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h}):shapeNode(o);n.removeAttribute('id');n.removeAttribute('class');n.setAttribute('class','hit-area');n.setAttribute('fill',o.type==='line'?'none':'transparent');n.setAttribute('stroke','transparent');n.setAttribute('stroke-width',String(grabStroke()));n.setAttribute('vector-effect','non-scaling-stroke');n.setAttribute('pointer-events','all');n.setAttribute('data-id',o.id);if(o.hidden)n.setAttribute('pointer-events','none');return n}
+function grabStroke(){return $('easyGrab').checked?Number($('grabRange').value):3}
+function render(){if($('zoomSelection'))$('zoomSelection').disabled=!pick().length;let art=$('artObjects'),over=$('overlays');art.replaceChildren();over.replaceChildren();for(let o of objects){art.appendChild(hitNode(o));art.appendChild(shapeNode(o))}let chosen=pick(),b=bounds(chosen);renderDraftPath(over);if(drag?.kind==='marquee' && drag.current){let r=rectFromPoints(drag.start,drag.current);over.appendChild(svg('rect',{x:r.x,y:r.y,width:r.w,height:r.h,class:'marquee'}))}if(b){let r=svg('rect',{x:b.x,y:b.y,width:b.w,height:b.h,class:'selbox'});over.appendChild(r);for(let [name,x,y] of [['nw',b.x,b.y],['ne',b.x+b.w,b.y],['sw',b.x,b.y+b.h],['se',b.x+b.w,b.y+b.h]])over.appendChild(svg('rect',{x:x-1.7,y:y-1.7,width:3.4,height:3.4,class:'handle','data-handle':name}));if(chosen.length===1)over.appendChild(svg('circle',{cx:b.x+b.w/2,cy:b.y-10,r:2.5,class:'rotate','data-handle':'rotate'}));}renderLayers();inspector();syncToolbarFields();syncToolbarButtons()}
+function renderLayers(){let l=$('layers');l.replaceChildren();[...objects].reverse().forEach(o=>{let d=document.createElement('div');d.className='layer'+(ids.includes(o.id)?' selected':'');let b=document.createElement('button');b.className='name';b.textContent=`${o.group?'[G'+o.group+'] ':''}${o.type==='text'?'Text Object':o.type} #${o.id}`;b.style.color=o.color;b.onclick=e=>select(o.id,e.shiftKey);let eye=document.createElement('button');eye.textContent=o.hidden?'◌':'◉';eye.title='Show/hide';eye.onclick=()=>{history();o.hidden=!o.hidden;ids=ids.filter(i=>i!==o.id);render()};let lock=document.createElement('button');lock.textContent=o.locked?'🔒':'🔓';lock.title='Lock/unlock';lock.onclick=()=>{history();o.locked=!o.locked;ids=ids.filter(i=>i!==o.id);render()};d.append(b,eye,lock);l.appendChild(d)})}
+const textStyleDefaults={bold:false,italic:false,uppercase:false,weld:false};const textSpacingDefaults={hspace:0,vspace:0};
+for(const [id,key] of [['tbBold','bold'],['tbItalic','italic'],['tbUppercase','uppercase'],['tbTextWeld','weld']]){
+  $(id).addEventListener('click',()=>{
+    if(textEditor)closeTextEdit();
+    const selected=pick().filter(o=>o.type==='text'&&!o.locked);
+    if(selected.length){const newValue=!selected.every(o=>!!o[key]);history();for(const o of selected)o[key]=newValue;render();notice(key==='weld'?'Automatic text welding '+(newValue?'enabled':'disabled')+'. Actual path union is not performed in SVG export.':key+' '+(newValue?'enabled':'disabled')+' for selected text.');}
+    else {textStyleDefaults[key]=!textStyleDefaults[key];$(id).setAttribute('aria-pressed',String(textStyleDefaults[key]));notice(key==='weld'?'Automatic text welding default '+(textStyleDefaults[key]?'enabled':'disabled')+'.':'Default '+key+' '+(textStyleDefaults[key]?'enabled':'disabled')+' for new text.');}
+  });
+}
+function inspector(){let a=pick(),b=bounds(a),one=a.length===1?a[0]:null;$('selectionLabel').textContent=a.length?`${a.length} selected${one?' · '+(one.type==='text'?'Text Object':one.type)+' #'+one.id:''}`:'Nothing selected';for(let [k,v]of Object.entries({x:b?.x,y:b?.y,w:b?.w,h:b?.h,angle:one?.angle??0})){let input=$(k);input.disabled=!b||(k==='angle'&&!one);input.value=b?(valid(v)?round(v):''):''}for(let k of ['textValue','fontSize'])$(k).disabled=!one||one.type!=='text';$('textValue').value=one?.type==='text'?one.text:'';$('fontSize').value=one?.type==='text'?one.size:'';if(one?.type==='text')$('tbFont').value=one.font||'Arial';$('tbHSpace').value=one?.type==='text'?(one.hspace??0):textSpacingDefaults.hspace;$('tbVSpace').value=one?.type==='text'?(one.vspace??0):textSpacingDefaults.vspace;for(const [id,key] of [['tbBold','bold'],['tbItalic','italic'],['tbUppercase','uppercase'],['tbTextWeld','weld']]){const btn=$(id);btn.setAttribute('aria-pressed',String(one?.type==='text'?!!one[key]:!!textStyleDefaults[key]));}for(let k of ['apply','copy','duplicate','remove','front','back','alignLeft','alignRight','alignCenter','alignTop','alignBottom','alignMiddle','offsetOut','offsetIn'])$(k).disabled=!a.length;$('group').disabled=a.length<2;$('ungroup').disabled=!a.some(o=>o.group);$('weld').disabled=$('subtract').disabled=$('intersect').disabled=a.length!==2;$('booleanMain').disabled=false}
+for(const [id,key,min,max] of [['tbHSpace','hspace',-50,50],['tbVSpace','vspace',-50,100]]){
+  $(id).addEventListener('change',()=>{
+    const val=Number($(id).value);
+    if(!Number.isFinite(val)||val<min||val>max){alert('Enter a spacing value between '+min+' and '+max+' mm.');return;}
+    const selected=pick().filter(o=>o.type==='text'&&!o.locked);
+    if(selected.length){if(selected.every(o=>(o[key]||0)===val))return;history();selected.forEach(o=>o[key]=val);render();notice((key==='hspace'?'Horizontal':'Vertical')+' text spacing updated.');}
+    else{textSpacingDefaults[key]=val;notice('Default '+(key==='hspace'?'horizontal':'vertical')+' spacing set for new text.');}
+  });
+}
+$('fontSize').addEventListener('change',()=>{const a=pick().filter(o=>o.type==='text'&&!o.locked);const v=Number($('fontSize').value);if(!a.length||!Number.isFinite(v)||v<1||v>300)return;if(a.every(o=>o.size===v))return;history();for(const o of a)o.size=v;render();notice('Text font size updated. Auto-fit adjusts displayed size to the text box.');});
+$('tbFont').addEventListener('change',()=>{const font=$('tbFont').value;const selected=pick().filter(o=>o.type==='text'&&!o.locked);if(!selected.length){notice('Font selected for new text. Select a text box to change its font.');return;}if(selected.every(o=>(o.font||'Arial')===font))return;history();for(const o of selected)o.font=font;render();notice('Font updated for '+selected.length+' text object(s).');});
+function select(id,multi=false){let obj=objects.find(o=>o.id===id&&!o.locked&&!o.hidden);if(!obj){if(!multi)ids=[];render();return}let members=obj.group?objects.filter(o=>o.group===obj.group&&!o.hidden&&!o.locked).map(o=>o.id):[id];if(multi){if(members.every(i=>ids.includes(i)))ids=ids.filter(i=>!members.includes(i));else ids=[...new Set([...ids,...members])]}else ids=members;render()}
+function rectFromPoints(a,b){return{x:Math.min(a.x,b.x),y:Math.min(a.y,b.y),w:Math.abs(b.x-a.x),h:Math.abs(b.y-a.y)}}function marqueePick(r){let hits=objects.filter(o=>!o.hidden&&!o.locked&&o.x<r.x+r.w&&o.x+o.w>r.x&&o.y<r.y+r.h&&o.y+o.h>r.y);let groups=new Set(hits.filter(o=>o.group).map(o=>o.group));return objects.filter(o=>!o.hidden&&!o.locked&&(hits.includes(o)||(o.group&&groups.has(o.group)))).map(o=>o.id)}function point(e){let a=$('art'),p=a.createSVGPoint();p.x=e.clientX;p.y=e.clientY;let m=a.getScreenCTM();return m?p.matrixTransform(m.inverse()):{x:0,y:0}}function move(o,dx,dy){o.x=round(o.x+dx);o.y=round(o.y+dy)}function rescale(o,b,nb){let sx=b.w?nb.w/b.w:1,sy=b.h?nb.h/b.h:1;o.x=round(nb.x+(o.x-b.x)*sx);o.y=round(nb.y+(o.y-b.y)*sy);o.w=round(Math.max(.1,o.w*sx));o.h=round(Math.max(.1,o.h*sy));if(o.type==='text')o.size=round(Math.max(1,o.size*sy))}
+$('art').addEventListener('pointerdown',e=>{
+ if(e.button!==0)return;
+ if(tool==='line'){
+   const p=point(e);
+   if(e.detail>=2){finalizeVectorPath(false);e.preventDefault();return}
+   if(!draftPath)draftPath={nodes:[{x:round(snap(p.x)),y:round(snap(p.y))}],hover:null};
+   else{
+     const first=draftPath.nodes[0],near=Math.hypot(p.x-first.x,p.y-first.y)<5;
+     if(near&&draftPath.nodes.length>=3){finalizeVectorPath(true);return}
+     const node={x:round(snap(p.x)),y:round(snap(p.y))};
+     draftPath.nodes.push(node);
+     if(e.shiftKey){draftPath.curving=node;try{$('art').setPointerCapture(e.pointerId)}catch{}}
+   }
+   render();e.preventDefault();return;
+ }
+ if(textEditor)closeTextEdit();if(textEditor)closeTextEdit();let p=point(e),h=e.target.dataset.handle,target=e.target.closest('[data-id]');if(tool==='select'){if(h&&pick().length){drag={kind:h,start:p,original:clone(pick()),bounds:bounds(pick()),ids:[...ids]}}else if(target){let id=Number(target.dataset.id);if(!ids.includes(id)||e.shiftKey)select(id,e.shiftKey);if(pick().length&&!e.shiftKey)drag={kind:'move',start:p,original:clone(pick()),ids:[...ids]}}else{drag={kind:'marquee',start:p,current:p,baseIds:e.shiftKey?[...ids]:[]};if(!e.shiftKey)ids=[];render()}if(drag)$('art').setPointerCapture(e.pointerId);return}let o={id:nextId++,type:tool,color,mode:colorModes[color]||'line',x:round(snap(p.x)),y:round(snap(p.y)),w:.1,h:.1,angle:0,group:null,hidden:false,locked:false};if(tool==='text'){o.objectKind='Text Object';o.text='';o.size=10;o.font=$('tbFont').value;o.bold=textStyleDefaults.bold;o.italic=textStyleDefaults.italic;o.uppercase=textStyleDefaults.uppercase;o.weld=textStyleDefaults.weld;o.hspace=textSpacingDefaults.hspace;o.vspace=textSpacingDefaults.vspace;o.w=60;o.h=25;history();objects.push(o);ids=[o.id];drag={kind:'drawText',start:p,id:o.id};$('art').setPointerCapture(e.pointerId);render();return}history();objects.push(o);ids=[o.id];drag={kind:'draw',start:p,id:o.id};$('art').setPointerCapture(e.pointerId);render()});
+$('art').addEventListener('pointermove',e=>{
+ if(tool==='line'&&draftPath){
+  const p=point(e),node=draftPath.curving;
+  if(node){let previous=draftPath.nodes[draftPath.nodes.length-2];node.c={x:round((previous.x+node.x)/2+(p.x-node.x)),y:round((previous.y+node.y)/2+(p.y-node.y))};}
+  else draftPath.hover={x:round(p.x),y:round(p.y)};
+  render();return;
+ }
+ if(!drag)return;let p=point(e),dx=snap(p.x-drag.start.x),dy=snap(p.y-drag.start.y);if(drag.kind==='marquee'){drag.current=p;let r=rectFromPoints(drag.start,p);ids=[...new Set([...drag.baseIds,...(r.w>.5&&r.h>.5?marqueePick(r):[])])];render();notice(ids.length+' object(s) selected. Release to finish selection.');return}if(drag.kind==='draw'||drag.kind==='drawText'){let o=objects.find(o=>o.id===drag.id);if(!o)return;o.x=round(Math.min(drag.start.x,p.x));o.y=round(Math.min(drag.start.y,p.y));o.w=round(Math.max(.1,Math.abs(dx)));o.h=round(Math.max(.1,Math.abs(dy)));}else{for(let orig of drag.original){let o=objects.find(o=>o.id===orig.id);if(o)Object.assign(o,clone(orig))}if(drag.kind==='move'){for(let o of pick())move(o,dx,dy)}else if(drag.kind==='rotate'){let o=pick()[0],b=drag.bounds,cx=b.x+b.w/2,cy=b.y+b.h/2;if(o)o.angle=round(drag.original[0].angle+(Math.atan2(p.y-cy,p.x-cx)-Math.atan2(drag.start.y-cy,drag.start.x-cx))*180/Math.PI)}else{let b=drag.bounds,nb={...b};if(drag.kind.includes('w')){nb.x=Math.min(b.x+b.w-.1,b.x+dx);nb.w=b.x+b.w-nb.x}else{nb.w=Math.max(.1,b.w+dx)}if(drag.kind.includes('n')){nb.y=Math.min(b.y+b.h-.1,b.y+dy);nb.h=b.y+b.h-nb.y}else{nb.h=Math.max(.1,b.h+dy)}for(let o of pick())rescale(o,b,nb)}}render()});
+function finish(){if(tool==='line'&&draftPath?.curving){draftPath.curving=null;render();return}if(!drag)return;if(drag.kind==='marquee'){drag=null;render();notice(ids.length?ids.length+' object(s) selected. Drag a selected object to move them together.':'No objects selected. Drag a selection box around shapes.');return}if(drag.kind==='draw'||drag.kind==='drawText'){let o=objects.find(o=>o.id===drag.id);if(o&&(o.w<1||o.h<1)){o.w=Math.max(o.w,o.type==='text'?70:20);o.h=Math.max(o.h,o.type==='text'?24:15)}}else{let now=clone(pick());for(let orig of drag.original){let o=objects.find(o=>o.id===orig.id);if(o)Object.assign(o,orig)}if(JSON.stringify(now)!==JSON.stringify(pick())){history();for(let changed of now){let o=objects.find(o=>o.id===changed.id);if(o)Object.assign(o,changed)}}}let completedText=drag.kind==='drawText'?drag.id:null;drag=null;render();if(completedText){let target=objects.find(o=>o.id===completedText);if(target){setTool('select');requestAnimationFrame(()=>startTextEdit(target));}}}$('art').addEventListener('pointerup',finish);$('art').addEventListener('pointercancel',finish);
+
+let textEditor=null;
+function closeTextEdit(save=true){if(!textEditor)return;let {node,id,original}=textEditor;const value=node.value.slice(0,2000);node.remove();textEditor=null;let o=objects.find(o=>o.id===id);if(o){if(save){if(value!==original){history();o.text=value} }else o.text=original;}render()}
+function startTextEdit(o){if(textEditor)closeTextEdit();if(!o||o.type!=='text')return;
+ const svgEl=$('art'),m=svgEl.getScreenCTM();if(!m)return;
+ let pt=svgEl.createSVGPoint();pt.x=o.x;pt.y=o.y;let tl=pt.matrixTransform(m);pt.x=o.x+o.w;pt.y=o.y+o.h;let br=pt.matrixTransform(m);
+ const editor=document.createElement('textarea');editor.setAttribute('aria-label','Edit text on canvas');editor.title='Type text. Ctrl+Enter to finish, Esc to cancel.';editor.value=o.text||'';
+ Object.assign(editor.style,{position:'fixed',left:tl.x+'px',top:tl.y+'px',width:Math.max(80,br.x-tl.x)+'px',height:Math.max(40,br.y-tl.y)+'px',boxSizing:'border-box',background:'rgba(255,255,255,.06)',color:o.color,border:'1px dashed #2d8cff',borderRadius:'3px',padding:'3px',resize:'none',zIndex:'1000',fontFamily:o.font||'Arial',fontWeight:o.bold?'bold':'normal',fontStyle:o.italic?'italic':'normal',textTransform:o.uppercase?'uppercase':'none',fontSize:Math.max(1,fittedText(o).size*(br.x-tl.x)/Math.max(o.w,1))+'px',letterSpacing:((o.hspace||0)*(br.x-tl.x)/Math.max(o.w,1))+'px',lineHeight:'1.22',overflow:'auto'});
+ document.body.appendChild(editor);textEditor={node:editor,id:o.id,original:o.text||''};const updateTextFit=()=>{const current={...o,text:editor.value};const fit=fittedText(current,o.uppercase?editor.value.toUpperCase():editor.value);const scale=(br.x-tl.x)/Math.max(o.w,1);editor.style.fontFamily=o.font||'Arial';editor.style.fontWeight=o.bold?'bold':'normal';editor.style.fontStyle=o.italic?'italic':'normal';editor.style.textTransform=o.uppercase?'uppercase':'none';editor.style.fontSize=Math.max(1,fit.size*scale)+'px';editor.style.lineHeight='1.2';editor.style.letterSpacing=(fit.hspace*scale)+'px';};
+ editor.addEventListener('input',updateTextFit);updateTextFit();editor.addEventListener('blur',()=>{if(textEditor?.node===editor)closeTextEdit()});editor.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Escape'){e.preventDefault();closeTextEdit(false)}else if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();closeTextEdit()}});editor.focus();notice('Type inside the text box. Click outside or Ctrl+Enter to finish. Resize with selection handles.');
+}
+$('art').addEventListener('dblclick',e=>{const target=e.target.closest('[data-id]');if(!target)return;const o=objects.find(o=>o.id===Number(target.dataset.id));if(o?.type==='text'){select(o.id);startTextEdit(o)}});
+document.addEventListener('keydown',e=>{if(!draftPath||tool!=='line'||['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+ if(e.key==='Enter'){e.preventDefault();finalizeVectorPath(false)}
+ if(e.key==='Escape'){draftPath=null;render();notice('Path drawing canceled.')}
+});
+let selectedShape='rect';const shapeNames={rect:'Rectangle',ellipse:'Ellipse',polygon:'Hexagon'},shapeIcons={rect:'▭',ellipse:'◯',polygon:'⬡'};function closeShapes(){ $('shapesMenu').hidden=true;$('shapesMain').setAttribute('aria-expanded','false') }function chooseShape(t){selectedShape=t;$('shapesMain').textContent=shapeIcons[t];$('shapesMain').title='Shapes';document.querySelectorAll('[data-shape]').forEach(b=>b.classList.toggle('chosen',b.dataset.shape===t));closeShapes();setTool(t)}function setTool(t){if(t!=='line')draftPath=null;tool=t;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===t));let isShape=Object.hasOwn(shapeNames,t);$('shapesMain').classList.toggle('active',isShape);if(!isShape)closeShapes();notice(t==='select'?'Drag a box on empty space to select multiple shapes; Shift-click to add more.':t==='text'?'Create Text: click to place a Text Object or drag to size its invisible box.':`Drag to draw a ${t==='polygon'?'hexagon':t}.`)}document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));$('shapesMain').onclick=e=>{e.stopPropagation();let menu=$('shapesMenu'),open=menu.hidden;menu.hidden=!open;$('shapesMain').setAttribute('aria-expanded',String(open))};document.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>chooseShape(b.dataset.shape));document.addEventListener('pointerdown',e=>{if(!$('shapePicker').contains(e.target))closeShapes()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeShapes()});chooseShape('rect');setTool('select');// Every palette color has its own independent Line / Fill preference.
+for(const [id,hex,name] of [['blackMode','#000000','Black'],['blueMode','#0000ff','Blue'],['redMode','#ff0000','Red']]){
+ $(id).addEventListener('change',e=>{
+   const selectedMode=e.target.value;
+   colorModes[hex]=selectedMode;
+   if(hex==='#000000')blackDefaultMode=selectedMode;
+   const chosen=pick().filter(o=>o.color===hex);
+   if(chosen.length){history();for(const o of chosen)o.mode=selectedMode;render()}
+   notice(name+' mode: '+(selectedMode==='line'?'Line (vector outlines)':'Fill (solid shapes and text)')+'.');
+ });
+}
+function setDesignColor(next){
+ color=next;
+ document.querySelectorAll('[data-color]').forEach(b=>b.classList.toggle('active',b.dataset.color===next));
+ document.querySelectorAll('[data-bottom-color]').forEach(b=>{let active=b.dataset.bottomColor===next;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+ if(pick().length){history();for(const o of pick()){o.color=next;o.mode=colorModes[next]||'line'}render()}
+ notice('Design color selected: '+({'#000000':'00 Black','#0000ff':'01 Blue','#ff0000':'02 Red'}[next]||next));
+}
+document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>setDesignColor(b.dataset.color));
+document.querySelectorAll('[data-bottom-color]').forEach(b=>b.onclick=()=>setDesignColor(b.dataset.bottomColor));
+// Fit the physical canvas inside the whole visible editor area at 100%, preserving mm proportions.
+function fittedCanvasWidth(){const v=document.querySelector('.workspace');if(!v)return 850;const availW=Math.max(160,v.clientWidth-105),availH=Math.max(160,v.clientHeight-114);return Math.max(160,Math.min(availW,availH*W/H));}
+
+// Pasteboard grid: a display-only CSS grid aligned to the SVG origin.
+// It never becomes a cutting path or an object in exported SVGs.
+function updatePasteboardGrid(){
+ const area=document.querySelector('.workspace'),art=document.getElementById('art');
+ if(!area||!art||!W||!H)return;
+ if(!document.getElementById('grid').checked){
+  area.style.backgroundImage='none';
+  return;
+ }
+ const canvasRect=art.getBoundingClientRect(),areaRect=area.getBoundingClientRect();
+ const scale=canvasRect.width/W;
+ const majorMM=Math.max(.1,Number(document.getElementById('gridSize').value)||10);
+ const major=majorMM*scale,minor=major/10;
+ const fine=document.getElementById('fineGrid').checked;
+ const lines=[];const sizes=[];
+ const addPair=(step,color)=>{
+  // The 1px strokes are display-only; zoom changes physical spacing, not artwork.
+  lines.push(`linear-gradient(to right, ${color} 1px, transparent 1px)`);
+  lines.push(`linear-gradient(to bottom, ${color} 1px, transparent 1px)`);
+  sizes.push(`${step}px ${step}px`,`${step}px ${step}px`);
+ };
+ if(fine&&minor>=3)addPair(minor,'rgba(106,88,60,.26)');
+ addPair(major,'rgba(92,70,38,.52)');
+ const x=canvasRect.left-areaRect.left,y=canvasRect.top-areaRect.top;
+ area.style.backgroundImage=lines.join(',');
+ area.style.backgroundSize=sizes.join(',');
+ area.style.backgroundPosition=lines.map(()=>`${x}px ${y}px`).join(',');
+ area.style.backgroundRepeat='repeat';
+ area.style.backgroundColor='#d8d0c1';
+}
+// Ruler ticks are drawn outside the SVG, so they never enter saved artwork or LightBurn exports.
+function updateCanvasRulers(){
+ const workspace=document.querySelector('.workspace'),svgNode=document.getElementById('art');
+ const top=document.getElementById('rulerTop'),left=document.getElementById('rulerLeft');
+ if(!workspace||!svgNode||!top||!left||!W||!H)return;
+ const w=Math.max(1,workspace.clientWidth-34),h=Math.max(1,workspace.clientHeight-27);
+ const wsRect=workspace.getBoundingClientRect(),svgRect=svgNode.getBoundingClientRect();
+ // Origin follows the *actual* work area within the scrollable pasteboard.
+ const originX=svgRect.left-wsRect.left-34,originY=svgRect.top-wsRect.top-27;
+ const isIn=typeof toolbarUnit!=='undefined'&&toolbarUnit==='in',factor=isIn?25.4:1;
+ const pxPerUnit=svgRect.width/(W/factor);
+ const intervals=isIn?[.01,.02,.05,.1,.2,.25,.5,1,2,5,10,20,50]:[.1,.2,.5,1,2,5,10,20,25,50,100,200,500];
+ const major=intervals.find(v=>v*pxPerUnit>=65)||intervals[intervals.length-1],minor=major/5;
+ function setup(canvas,width,height){
+  const ratio=Math.min(2,window.devicePixelRatio||1);
+  canvas.style.width=width+'px';canvas.style.height=height+'px';
+  canvas.width=Math.ceil(width*ratio);canvas.height=Math.ceil(height*ratio);
+  const ctx=canvas.getContext('2d');ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.clearRect(0,0,width,height);ctx.strokeStyle='#806344';ctx.fillStyle='#4e3923';ctx.lineWidth=1;ctx.font='10px Segoe UI, Arial, sans-serif';return ctx;
+ }
+ const t=setup(top,w,27),l=setup(left,34,h);
+ function drawAxis(ctx,extent,origin,vertical){
+  const start=Math.ceil((-origin)/(minor*pxPerUnit)-.00001);
+  const end=Math.floor((extent-origin)/(minor*pxPerUnit)+.00001);
+  for(let i=start;i<=end;i++){
+   const pos=origin+i*minor*pxPerUnit;
+   const big=((i%5)+5)%5===0;
+   const pixel=Math.round(pos)+.5;
+   ctx.beginPath();
+   if(vertical){ctx.moveTo(33,pixel);ctx.lineTo(big?14:26,pixel)}
+   else{ctx.moveTo(pixel,26);ctx.lineTo(pixel,big?11:20)}
+   ctx.stroke();
+   if(big){
+    const val=Number((i*minor).toFixed(4)).toString();
+    if(vertical){ctx.save();ctx.translate(10,pos+2);ctx.rotate(-Math.PI/2);ctx.fillText(val,0,0);ctx.restore()}
+    else ctx.fillText(val,pos+3,9);
+   }
+  }
+ }
+ drawAxis(t,w,originX,false);drawAxis(l,h,originY,true);
+ const suffix=isIn?'in':'mm';top.title='Pasteboard top ruler ('+suffix+')';left.title='Pasteboard left ruler ('+suffix+')';
+ updatePasteboardGrid();
+}
+// Scrolling moves the canvas within the pasteboard; keep both scales aligned.
+let pasteboardRulerFrame=0;
+document.querySelector('.workspace').addEventListener('scroll',()=>{
+ if(pasteboardRulerFrame)return;
+ pasteboardRulerFrame=requestAnimationFrame(()=>{pasteboardRulerFrame=0;updateCanvasRulers()});
+},{passive:true});
+function updateZoom(){let a=$('art'),base=fittedCanvasWidth();a.setAttribute('width',Math.round(base*zoom));a.setAttribute('height',Math.round(base*zoom*H/W));if($('tbZoom'))$('tbZoom').textContent=`${Math.round(100*zoom)}%`;updateCanvasRulers()}
+// Update the canvas dimensions when the editor pane or browser window is resized.
+const editorFitObserver=new ResizeObserver(()=>updateZoom());editorFitObserver.observe(document.querySelector('.workspace'));$('plus').onclick=()=>{zoom=Math.min(2.5,zoom+.25);updateZoom()};$('minus').onclick=()=>{zoom=Math.max(.25,zoom-.25);updateZoom()};$('zoomSelection').onclick=()=>{const selected=pick(),b=bounds(selected);if(!b){notice('Select an object first to zoom to it.');return;}const viewport=document.querySelector('.workspace');const pad=35;const fitX=Math.max(.25,(viewport.clientWidth-pad*2)*W/(fittedCanvasWidth()*Math.max(b.w,1)));const fitY=Math.max(.25,(viewport.clientHeight-pad*2)*W/(fittedCanvasWidth()*Math.max(b.h,1)));zoom=Math.max(.25,Math.min(6,fitX,fitY));updateZoom();requestAnimationFrame(()=>{const svg=$('art');const pixelsPerMM=svg.getBoundingClientRect().width/W;const centerX=(b.x+b.w/2)*pixelsPerMM;const centerY=(b.y+b.h/2)*pixelsPerMM;viewport.scrollTo({left:Math.max(0,svg.offsetLeft+centerX-viewport.clientWidth/2),top:Math.max(0,svg.offsetTop+centerY-viewport.clientHeight/2),behavior:'smooth'});notice('Zoomed to '+selected.length+' selected object'+(selected.length===1?'':'s')+'.');});};$('easyGrab').onchange=render;$('grabRange').oninput=()=>{$('grabLabel').textContent=$('grabRange').value+' px';render()};$('grid').onchange=refreshGrid;$('gridSize').onchange=refreshGrid;$('fineGrid').onchange=refreshGrid;$('workAreaCategory').addEventListener('change',()=>{const show=$('workAreaCategory').value==='common';$('commonSizesWrap').hidden=!show;if(!show)$('commonSizes').value='';});$('commonSizes').addEventListener('change',()=>{const value=$('commonSizes').value;if(!/^\d+x\d+$/.test(value))return;const [w,h]=value.split('x').map(Number);$('canvasW').value=w;$('canvasH').value=h;notice('Preset selected. Click Apply canvas size to update the workspace.');});$('canvasApply').onclick=()=>{let w=Number($('canvasW').value),h=Number($('canvasH').value);if(!valid(w)||!valid(h)||w<1||h<1||w>3000||h>3000)return alert('Canvas must be between 1 and 3000 mm.');history();W=w;H=h;syncCanvas();render()};
+$('apply').onclick=()=>{let a=pick(),b=bounds(a);if(!b)return;let x=Number($('x').value),y=Number($('y').value),w=Number($('w').value),h=Number($('h').value);if(![x,y,w,h].every(valid)||w<=0||h<=0)return alert('Enter valid positions and positive dimensions.');history();for(let o of a)rescale(o,b,{x,y,w,h});if(a.length===1){a[0].angle=Number($('angle').value)||0;if(a[0].type==='text'){a[0].text=$('textValue').value.slice(0,200)||'Text';a[0].size=Math.max(1,Number($('fontSize').value)||10);/* preserve text box dimensions; text automatically fits */}}render()};
+function del(){if(!pick().length)return;history();objects=objects.filter(o=>!ids.includes(o.id));ids=[];render()}$('remove').onclick=del;function copy(){clipboard=clone(pick());notice(`${clipboard.length} object(s) copied.`)}function paste(){if(!clipboard.length)return;history();let groupMap=new Map();ids=[];for(let src of clipboard){let o=clone(src);o.id=nextId++;o.x+=5;o.y+=5;if(o.group){if(!groupMap.has(o.group))groupMap.set(o.group,nextGroup++);o.group=groupMap.get(o.group)}o.locked=false;o.hidden=false;objects.push(o);ids.push(o.id)}render()}$('copy').onclick=copy;$('paste').onclick=paste;$('duplicate').onclick=()=>{
+ const selected=pick();if(!selected.length)return;
+ history();const groupMap=new Map();const newIds=[];
+ for(const source of selected){
+  const o=clone(source);o.id=nextId++;
+  // Exact in-place copy: no X or Y offset. Do not modify the source.
+  if(o.group){if(!groupMap.has(o.group))groupMap.set(o.group,nextGroup++);o.group=groupMap.get(o.group)}
+  o.locked=false;o.hidden=false;objects.push(o);newIds.push(o.id);
+ }
+ ids=newIds;render();notice(newIds.length+' object(s) duplicated in place. Drag the selected copies to move them.');
+};$('group').onclick=()=>{if(pick().length<2)return;history();let g=nextGroup++;for(let o of pick())o.group=g;render()};$('ungroup').onclick=()=>{if(!pick().length)return;history();for(let o of pick())o.group=null;render()};function order(top){let sel=pick();if(!sel.length)return;history();objects=top?[...objects.filter(o=>!ids.includes(o.id)),...sel]:[...sel,...objects.filter(o=>!ids.includes(o.id))];render()}$('front').onclick=()=>order(true);$('back').onclick=()=>order(false);
+for(let [id,axis,side] of [['alignLeft','x','min'],['alignCenter','x','mid'],['alignRight','x','max'],['alignTop','y','min'],['alignMiddle','y','mid'],['alignBottom','y','max']])$(id).onclick=()=>{let a=pick();if(!a.length)return;let b=bounds(a),target=a.length===1?(axis==='x'?{x:0,w:W}:{y:0,h:H}):b;history();for(let o of a){let size=axis==='x'?'w':'h';let t=side==='min'?target[axis]:side==='mid'?target[axis]+(target[size]-o[size])/2:target[axis]+target[size]-o[size];o[axis]=round(t)}render()};
+// Boolean operations produce normalized loops from a rectangular cell tessellation.
+function rectsOf(o){if(o.type==='rect')return[{x:o.x,y:o.y,w:o.w,h:o.h}];if(o.type==='path'&&o.rects)return clone(o.rects);return null}
+function mergeGrid(a,b,mode){let xs=[...new Set([...a,...b].flatMap(r=>[r.x,r.x+r.w]))].sort((x,y)=>x-y),ys=[...new Set([...a,...b].flatMap(r=>[r.y,r.y+r.h]))].sort((x,y)=>x-y);if(xs.length*ys.length>25000)throw Error('Shape too complex.');let rectContains=(rs,x,y)=>rs.some(r=>x>=r.x-1e-7&&x<r.x+r.w-1e-7&&y>=r.y-1e-7&&y<r.y+r.h-1e-7),cells=[],occupied=new Set(),key=(i,j)=>i+','+j;for(let j=0;j<ys.length-1;j++)for(let i=0;i<xs.length-1;i++){let x=(xs[i]+xs[i+1])/2,y=(ys[j]+ys[j+1])/2,A=rectContains(a,x,y),B=rectContains(b,x,y),on=mode==='weld'?A||B:mode==='subtract'?A&&!B:A&&B;if(on)occupied.add(key(i,j))}let edges=[],put=(x1,y1,x2,y2)=>edges.push([[x1,y1],[x2,y2]]);for(let cell of occupied){let [i,j]=cell.split(',').map(Number);if(!occupied.has(key(i,j-1)))put(xs[i],ys[j],xs[i+1],ys[j]);if(!occupied.has(key(i+1,j)))put(xs[i+1],ys[j],xs[i+1],ys[j+1]);if(!occupied.has(key(i,j+1)))put(xs[i+1],ys[j+1],xs[i],ys[j+1]);if(!occupied.has(key(i-1,j)))put(xs[i],ys[j+1],xs[i],ys[j]);cells.push({x:xs[i],y:ys[j],w:xs[i+1]-xs[i],h:ys[j+1]-ys[j]})}let loops=[],start=new Map(),pk=p=>p.join(',');edges.forEach((e,i)=>{let k=pk(e[0]);if(!start.has(k))start.set(k,[]);start.get(k).push(i)});let visited=new Set();for(let i=0;i<edges.length;i++){if(visited.has(i))continue;let loop=[],n=i,guard=0;while(!visited.has(n)&&guard++<edges.length+2){visited.add(n);loop.push(edges[n][0]);let list=start.get(pk(edges[n][1]))||[];n=list.find(z=>!visited.has(z));if(n===undefined)break}if(loop.length>=3)loops.push(loop)}return{cells,loops}}
+
+// Weld rectangles, ellipses and hexagons into a single SVG vector shape.
+// Raster-union contours are approximated at adaptive sub-millimeter resolution;
+// rectangle-only welding keeps the original exact coordinate-grid implementation.
+function weldRoundShapes(a){
+ const supported=new Set(['rect','ellipse','polygon','path']);
+ if(a.some(o=>!supported.has(o.type)||o.angle||o.type==='path'&&!o.loops))
+   throw Error('Select two unrotated rectangles, ellipses, hexagons, or previous Weld results.');
+ const minx=Math.min(...a.map(o=>o.x)),miny=Math.min(...a.map(o=>o.y));
+ const maxx=Math.max(...a.map(o=>o.x+o.w)),maxy=Math.max(...a.map(o=>o.y+o.h));
+ const width=maxx-minx,height=maxy-miny;
+ if(width<=0||height<=0)throw Error('The selected shapes must have positive dimensions.');
+ const scale=Math.min(10,Math.max(.7,1800/Math.max(width,height)));
+ const pw=Math.ceil(width*scale)+4,ph=Math.ceil(height*scale)+4;
+ if(pw*ph>6000000)throw Error('Too large to weld; resize the objects first.');
+ const canvas=document.createElement('canvas');canvas.width=pw;canvas.height=ph;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ ctx.translate(2-minx*scale,2-miny*scale);ctx.scale(scale,scale);
+ ctx.fillStyle='#000';
+ for(const o of a){
+   ctx.beginPath();
+   if(o.type==='rect')ctx.rect(o.x,o.y,o.w,o.h);
+   else if(o.type==='ellipse')ctx.ellipse(o.x+o.w/2,o.y+o.h/2,o.w/2,o.h/2,0,0,Math.PI*2);
+   else if(o.type==='polygon'){for(let i=0;i<6;i++){let t=i*Math.PI/3,x=o.x+o.w*(.5+.5*Math.cos(t)),y=o.y+o.h*(.5+.5*Math.sin(t));if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.closePath()}
+   else {for(const loop of o.loops){loop.forEach((p,i)=>{const x=o.x+p[0]*o.w,y=o.y+p[1]*o.h;if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.closePath()}}
+   ctx.fill('evenodd');
+ }
+ const rgba=ctx.getImageData(0,0,pw,ph).data,mask=new Uint8Array(pw*ph);
+ for(let i=0;i<mask.length;i++)mask[i]=rgba[i*4+3]>127?1:0;
+ const has=(x,y)=>x>=0&&y>=0&&x<pw&&y<ph&&mask[y*pw+x];
+ const edges=new Map();
+ function add(x,y,xx,yy){const k=x+','+y;if(!edges.has(k))edges.set(k,[]);edges.get(k).push([xx,yy])}
+ for(let y=0;y<ph;y++)for(let x=0;x<pw;x++)if(has(x,y)){
+   if(!has(x,y-1))add(x,y,x+1,y);
+   if(!has(x+1,y))add(x+1,y,x+1,y+1);
+   if(!has(x,y+1))add(x+1,y+1,x,y+1);
+   if(!has(x-1,y))add(x,y+1,x,y);
+ }
+ const raw=[];
+ for(const [key] of edges){
+   while(edges.get(key)?.length){
+     const [sx,sy]=key.split(',').map(Number),points=[[sx,sy]];let x=sx,y=sy,guard=0;
+     do{const options=edges.get(x+','+y);if(!options?.length)break;
+       const next=options.pop();x=next[0];y=next[1];points.push([x,y]);
+     }while((x!==sx||y!==sy)&&++guard<600000);
+     if(x!==sx||y!==sy||points.length<4)continue;
+     const corners=[];
+     const n=points.length-1;
+     for(let i=0;i<n;i++){const previous=points[(i+n-1)%n],p=points[i],next=points[(i+1)%n];
+       if((p[0]-previous[0])*(next[1]-p[1])!==(p[1]-previous[1])*(next[0]-p[0]))
+         corners.push([minx+(p[0]-2)/scale,miny+(p[1]-2)/scale]);
+     }
+     if(corners.length>=3)raw.push(corners);
+   }
+ }
+ if(!raw.length)throw Error('The weld result is empty.');
+ const all=raw.flat(),x=Math.min(...all.map(p=>p[0])),y=Math.min(...all.map(p=>p[1]));
+ const xx=Math.max(...all.map(p=>p[0])),yy=Math.max(...all.map(p=>p[1]));
+ const w=xx-x,h=yy-y;
+ if(w<=0||h<=0)throw Error('The weld result is empty.');
+ return {id:nextId++,type:'path',x:round(x),y:round(y),w:round(w),h:round(h),
+   angle:0,color:a[0].color,mode:a[0].mode||'line',
+   loops:raw.map(loop=>loop.map(p=>[(p[0]-x)/w,(p[1]-y)/h])),
+   hidden:false,locked:false,group:null};
+}
+function boolean(mode){let a=pick();if(a.length!==2)return alert('Select exactly two shapes.');let A=rectsOf(a[0]),B=rectsOf(a[1]);
+ if(mode==='weld'&&(!A||!B)){
+   let merged;try{merged=weldRoundShapes(a)}catch(e){return alert(e.message)}
+   history();objects=objects.filter(t=>!a.some(sh=>sh.id===t.id));objects.push(merged);
+   ids=[merged.id];render();notice('Welded shapes into one vector outline.');return;
+ }if(!A||!B||a.some(o=>o.angle))return alert('Subtract and Intersect currently require two unrotated rectangles or rectangle boolean results.');let data;try{data=mergeGrid(A,B,mode)}catch(e){return alert(e.message)}if(!data.loops.length)return alert('Result is empty.');let all=data.loops.flat(),minx=Math.min(...all.map(p=>p[0])),miny=Math.min(...all.map(p=>p[1])),maxx=Math.max(...all.map(p=>p[0])),maxy=Math.max(...all.map(p=>p[1])),w=maxx-minx,h=maxy-miny;if(w<=0||h<=0)return;let o={id:nextId++,type:'path',x:minx,y:miny,w,h,angle:0,color:a[0].color,rects:data.cells,loops:data.loops.map(l=>l.map(p=>[(p[0]-minx)/w,(p[1]-miny)/h])),hidden:false,locked:false,group:null};history();objects=objects.filter(t=>!a.some(s=>s.id===t.id));objects.push(o);ids=[o.id];render();notice('Boolean result created as editable vector artwork.')}for(let op of ['weld','subtract','intersect'])$(op).onclick=()=>boolean(op);
+function closeBooleanMenu(){let menu=$('booleanMenu');menu.hidden=true;$('booleanMain').setAttribute('aria-expanded','false');$('booleanMain').classList.remove('active')}
+$('booleanMain').onclick=e=>{e.stopPropagation();let menu=$('booleanMenu'),show=menu.hidden;menu.hidden=!show;$('booleanMain').setAttribute('aria-expanded',String(show));$('booleanMain').classList.toggle('active',show)};
+document.querySelectorAll('[data-boolean]').forEach(b=>b.onclick=()=>{const op=b.dataset.boolean;document.querySelectorAll('[data-boolean]').forEach(item=>item.classList.toggle('chosen',item===b));closeBooleanMenu();boolean(op)});
+document.addEventListener('pointerdown',e=>{if(!$('booleanPicker').contains(e.target))closeBooleanMenu()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooleanMenu()});
+function offset(sign){
+ let a=pick();if(!a.length)return;
+ const distance=Number($('offsetDistance').value);
+ if(!$('offsetDistance').value.trim()||!Number.isFinite(distance)||distance<=0||distance>1000){alert('Enter a positive offset distance between 0.1 and 1000 mm.');$('offsetDistance').focus();return;}
+ const ok=a.filter(o=>['rect','ellipse'].includes(o.type)&&!o.angle);
+ if(ok.length!==a.length){alert('Offset currently supports unrotated rectangles and ellipses.');return;}
+ if(sign<0&&ok.some(o=>o.w<=distance*2||o.h<=distance*2)){alert('Inward offset is too large for one or more selected objects. Choose a smaller distance.');return;}
+ history();ids=[];
+ for(let o of ok){let n=clone(o);n.id=nextId++;n.group=null;n.x-=sign*distance;n.y-=sign*distance;n.w+=sign*distance*2;n.h+=sign*distance*2;objects.push(n);ids.push(n.id);}
+ render();notice((sign>0?'Outward':'Inward')+' offset copy created: '+distance+' mm (original preserved).');
+ return true;
+}
+$('offsetOut').onclick=()=>offset(1);$('offsetIn').onclick=()=>offset(-1);
+
+// Phase 3: six-panel finger-joint box generator. Coordinates remain millimeters.
+function boxFingerOutline(width,height,t,finger,edgeKinds,fingerCount){
+ // A panel outline with alternating outward fingers and inward notches.
+ // Clockwise edge: +1 = outward tabs on even pitch, -1 = inward sockets on odd pitch.
+ // Both genders share the same start/end grid; the offset profiles are complementary.
+ const points=[];const corners=[[0,0],[width,0],[width,height],[0,height]];
+ const edges=[[1,0,width],[0,1,height],[-1,0,width],[0,-1,height]];
+ const push=(x,y)=>{const last=points[points.length-1];if(!last||Math.abs(last[0]-x)>1e-7||Math.abs(last[1]-y)>1e-7)points.push([x,y])};
+ for(let e=0;e<4;e++){
+   const [dx,dy,len]=edges[e],[sx,sy]=corners[e];
+   const count=fingerCount||Math.max(3,Math.round(len/finger)|1),step=len/count;
+   const nx=dy,ny=-dx; // outward for clockwise perimeter
+   push(sx,sy);
+   for(let j=0;j<count;j++){
+     const active=edgeKinds[e]>0?(j%2===0):(j%2===1),offset=active*edgeKinds[e]*t;
+     const x0=sx+dx*(j*step),y0=sy+dy*(j*step);
+     const x1=sx+dx*((j+1)*step),y1=sy+dy*((j+1)*step);
+     push(x0+nx*offset,y0+ny*offset);
+     push(x1+nx*offset,y1+ny*offset);
+     push(x1,y1);
+   }
+ }
+ return points;
+}
+function boxPanelShape(width,height,t,finger,kinds,ox,oy,fingerCount){
+ const poly=boxFingerOutline(width,height,t,finger,kinds,fingerCount);
+ const minx=Math.min(...poly.map(p=>p[0])),miny=Math.min(...poly.map(p=>p[1]));
+ const maxx=Math.max(...poly.map(p=>p[0])),maxy=Math.max(...poly.map(p=>p[1]));
+ return {id:nextId++,type:'path',x:round(ox),y:round(oy),w:round(maxx-minx),h:round(maxy-miny),angle:0,
+  color:'#ff0000',mode:'line',group:null,hidden:false,locked:false,
+  loops:[poly.map(p=>[(p[0]-minx)/(maxx-minx),(p[1]-miny)/(maxy-miny)])]};
+}
+function buildBoxPanels(w,d,h,t,f,gap,fingerCount){
+ // Matching opposing edge patterns; six separate outline objects.
+ // These are panel blanks with corner-compatible nominal finger profiles.
+ const definitions=[
+   {name:'Front',w,h,k:[1,1,1,1]},
+   {name:'Back',w,h,k:[1,1,1,1]},
+   {name:'Left',w:d,h,k:[-1,-1,-1,-1]},
+   {name:'Right',w:d,h,k:[-1,-1,-1,-1]},
+   {name:'Top',w,dummy:0,h:d,k:[-1,1,-1,1]},
+   {name:'Bottom',w,dummy:0,h:d,k:[-1,1,-1,1]}
+ ];
+ const rows=[[definitions[0],definitions[1]],[definitions[2],definitions[3]],[definitions[4],definitions[5]]];
+ const panelList=[];let y=gap;
+ for(const row of rows){let x=gap,rowHeight=0;
+   for(const item of row){
+     const p=boxPanelShape(item.w,item.h,t,f,item.k,0,0,fingerCount);
+     p.x=round(x);p.y=round(y);p.name=item.name;panelList.push(p);
+     x+=p.w+gap;rowHeight=Math.max(rowHeight,p.h);
+   }
+   y+=rowHeight+gap;
+ }
+ const limits=bounds(panelList);
+ return {parts:panelList,neededW:Math.ceil(limits.x+limits.w+gap),neededH:Math.ceil(limits.y+limits.h+gap)};
+}
+
+let boxMeasureUnit='mm';
+let boxPreviewDimensions=null;
+let generatedBoxGroup=null;
+let box3DMode=false,boxYaw=.65,boxPitch=.38;
+const boxUnitFieldIds=['boxGenW','boxGenD','boxGenH','boxGenT','boxGenFinger','boxGenGap'];
+function switchBoxUnits(unit){
+ if(boxMeasureUnit===unit)return;
+ const factor=unit==='in'?1/25.4:25.4;
+ for(const id of boxUnitFieldIds){const e=$(id);e.value=Number((Number(e.value)*factor).toFixed(unit==='in'?4:2));e.step=unit==='in'?'0.001':'0.1';}
+ boxMeasureUnit=unit;
+ document.querySelectorAll('.box-unit-label').forEach(el=>el.textContent='('+unit+')');
+ for(const [id,val] of [['boxUnitMM','mm'],['boxUnitIN','in']]){$(id).classList.toggle('selected',val===unit);$(id).setAttribute('aria-pressed',String(val===unit));}
+}
+function setBoxView(view){
+ if(view==='3d'&&!boxPreviewDimensions){alert('Generate a box first to display its assembled 3D preview.');return;}
+ box3DMode=view==='3d';
+ $('boxLidControls').hidden=!box3DMode;
+ $('boxEditSettings').hidden=!boxPreviewDimensions;
+ $('boxEditHint').hidden=!!boxPreviewDimensions;
+ const ws=document.querySelector('.workspace');ws.classList.toggle('box-3d-active',box3DMode);
+ $('box3DStage').hidden=!box3DMode;
+ for(const [id,mode] of [['boxFlatView','flat'],['box3DView','3d']]){$(id).classList.toggle('selected',view===mode);$(id).setAttribute('aria-pressed',String(view===mode));}
+ if(box3DMode)requestAnimationFrame(drawBox3D);
+}
+let boxLidOpen=false;
+function setBoxLid(open){
+ boxLidOpen=!!open;
+ for(const [id,state] of [['boxLidOpen',true],['boxLidClosed',false]]){
+  const b=$(id);b.classList.toggle('selected',boxLidOpen===state);b.setAttribute('aria-pressed',String(boxLidOpen===state));
+ }
+ if(box3DMode)drawBox3D();
+}
+function drawBox3D(){
+ if(!box3DMode||!boxPreviewDimensions)return;
+ const canvas=$('box3DCanvas'),stage=$('box3DStage'),rect=stage.getBoundingClientRect();
+ const width=Math.max(100,rect.width),height=Math.max(100,rect.height),dpr=Math.min(2,window.devicePixelRatio||1);
+ canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
+ const {w,d,h,t,f,fingerCount}=boxPreviewDimensions;
+ const thick=Math.min(t,w*.24,d*.24,h*.24);
+ const scale=Math.min(width*.77,height*(boxLidOpen?.58:.69))/Math.max(1,Math.hypot(w,d,h)*.83);
+ const cx=width/2,cy=height*.55;
+ // Orthographic camera: physical dimensions and material thickness share one scale.
+ function project(p){
+  const [x,y,z]=p,ay=boxYaw,ax=boxPitch;
+  const rx=x*Math.cos(ay)-y*Math.sin(ay),ry=x*Math.sin(ay)+y*Math.cos(ay);
+  return {x:cx+rx*scale,y:cy+(ry*Math.sin(ax)-z*Math.cos(ax))*scale,depth:ry*Math.cos(ax)+z*Math.sin(ax)};
+ }
+ const X=w/2,Y=d/2,Z=h/2,xi=Math.max(.01,X-thick),yi=Math.max(.01,Y-thick);
+ const faces=[];
+ function quad(name,points,fill,stroke='#735331'){
+   faces.push({name,points,fill,stroke,depth:points.reduce((v,p)=>v+project(p).depth,0)/points.length});
+ }
+ function block(name,x0,x1,y0,y1,z0,z1,outer,inner){
+   const p=(x,y,z)=>[x,y,z];
+   quad(name+' front',[p(x0,y0,z0),p(x1,y0,z0),p(x1,y0,z1),p(x0,y0,z1)],outer);
+   quad(name+' back',[p(x1,y1,z0),p(x0,y1,z0),p(x0,y1,z1),p(x1,y1,z1)],outer);
+   quad(name+' left',[p(x0,y1,z0),p(x0,y0,z0),p(x0,y0,z1),p(x0,y1,z1)],outer);
+   quad(name+' right',[p(x1,y0,z0),p(x1,y1,z0),p(x1,y1,z1),p(x1,y0,z1)],outer);
+   quad(name+' top',[p(x0,y0,z1),p(x1,y0,z1),p(x1,y1,z1),p(x0,y1,z1)],inner);
+   quad(name+' bottom',[p(x0,y1,z0),p(x1,y1,z0),p(x1,y0,z0),p(x0,y0,z0)],inner);
+ }
+ // Five panels with hollow center: real-sized wall thickness and visible inner surfaces.
+ block('Floor',-X,X,-Y,Y,-Z,-Z+thick,'#ad8351','#caa372');
+ block('Front wall',-X,X,-Y,-yi,-Z+thick,Z,'#bb8a51','#dcb485');
+ block('Back wall',-X,X,yi,Y,-Z+thick,Z,'#b88450','#d3a877');
+ block('Left wall',-X,-xi,-yi,yi,-Z+thick,Z,'#aa7a49','#c99b6a');
+ block('Right wall',xi,X,-yi,yi,-Z+thick,Z,'#c8955c','#e0b786');
+ function lidPoint(p){
+   if(!boxLidOpen)return p;
+   // Removable lid: lift straight upward without hinging or flipping.
+   // The gap is proportional to height, so it remains visible at different sizes.
+   return [p[0],p[1],p[2]+Math.max(t*4,h*.46)];
+ }
+ const L=[[-X,-Y,Z],[X,-Y,Z],[X,Y,Z],[-X,Y,Z],[-X,-Y,Z+thick],[X,-Y,Z+thick],[X,Y,Z+thick],[-X,Y,Z+thick]].map(lidPoint);
+ const lidFaces=[['Lid underside',[0,3,2,1],'#d8ad75'],['Lid top',[4,5,6,7],'#ebc895'],['Lid front edge',[0,1,5,4],'#bb8e58'],['Lid right edge',[1,2,6,5],'#d5a46c'],['Lid rear edge',[2,3,7,6],'#b78956'],['Lid left edge',[3,0,4,7],'#c99b65']];
+ for(const [name,ix,color] of lidFaces)quad(name,ix.map(i=>L[i]),color);
+ // Solid-panel renderer: hide back-facing surfaces, layer the visible faces
+ // from far to near, and shade them by their direction relative to the light.
+ // All six faces of each wall/lid block have outward-facing vertex winding.
+ const viewNormal=[-Math.sin(boxYaw)*Math.cos(boxPitch),Math.cos(boxYaw)*Math.cos(boxPitch),Math.sin(boxPitch)];
+ const light=[-.48,-.53,.70];
+ function normal(points){
+   const a=points[0],b=points[1],c=points[2];
+   const u=b.map((n,i)=>n-a[i]),v=c.map((n,i)=>n-a[i]);
+   const cross=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+   const magnitude=Math.hypot(...cross)||1;
+   return cross.map(x=>x/magnitude);
+ }
+ function shade(hex,brightness){
+   const raw=hex.replace('#','');
+   const rgb=[0,2,4].map(i=>parseInt(raw.substring(i,i+2),16));
+   return 'rgb('+rgb.map(c=>Math.max(0,Math.min(255,Math.round(c*brightness)))).join(',')+')';
+ }
+ const visible=faces.filter(face=>{
+   const n=normal(face.points);
+   face.normal=n;
+   return n.reduce((v,x,i)=>v+x*viewNormal[i],0)<-.008;
+ }).sort((a,b)=>b.depth-a.depth);
+ for(const face of visible){
+   const ps=face.points.map(project);
+   ctx.beginPath();ps.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();
+   const lightAmount=Math.max(0,face.normal.reduce((v,x,i)=>v+x*light[i],0));
+   const brightness=.79+.30*lightAmount;
+   ctx.fillStyle=shade(face.fill,brightness);
+   ctx.fill();
+   ctx.strokeStyle=shade(face.stroke,.85);ctx.lineWidth=Math.max(.9,Math.min(1.6,scale*.7));ctx.lineJoin='round';ctx.stroke();
+   // Specular edge and subtle timber grain give each physical panel an
+   // opaque, tangible face while retaining the nominal material thickness.
+   ctx.save();ctx.clip();
+   const bounds=ps.reduce((b,p)=>({minx:Math.min(b.minx,p.x),miny:Math.min(b.miny,p.y),maxx:Math.max(b.maxx,p.x),maxy:Math.max(b.maxy,p.y)}),{minx:Infinity,miny:Infinity,maxx:-Infinity,maxy:-Infinity});
+   const gl=ctx.createLinearGradient(bounds.minx,bounds.miny,bounds.maxx+1,bounds.maxy+1);
+   gl.addColorStop(0,'rgba(255,255,255,.24)');gl.addColorStop(.45,'rgba(255,255,255,.025)');gl.addColorStop(1,'rgba(48,29,10,.14)');
+   ctx.fillStyle=gl;ctx.fill();
+   const ab=ps[0],bb=ps[1];ctx.beginPath();ctx.moveTo(ab.x,ab.y);ctx.lineTo(bb.x,bb.y);
+   ctx.strokeStyle='rgba(255,238,203,.42)';ctx.lineWidth=1.2;ctx.stroke();
+   ctx.restore();
+ }
+
+ // High-contrast interlocking finger joints over the outer wall corners.
+ // Their pitch comes from the actual generated finger width. The alternating
+ // rectangles sit on perpendicular wall faces, giving visible end-grain tabs.
+ function paintQuad(world,fill,stroke='#56391f',line=1.3){
+   const p=world.map(project);
+   ctx.beginPath();p.forEach((v,i)=>i?ctx.lineTo(v.x,v.y):ctx.moveTo(v.x,v.y));ctx.closePath();
+   ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=line;ctx.stroke();
+ }
+ const cornerList=[[-X,-Y],[-X,Y],[X,-Y],[X,Y]]
+    .map(([x,y])=>({x,y,depth:project([x,y,0]).depth}))
+    .sort((a,b)=>a.depth-b.depth);
+ // Do not draw through back walls. Three camera-nearest corners are potentially visible.
+ for(const {x,y} of cornerList.slice(0,2)){
+   const count=Math.max(3,Math.min(41,(fingerCount||Math.round(h/Math.max(f,.1)))|1));
+   const bottom=-Z+thick,usable=h-thick,pitch=usable/count;
+   const band=Math.min(Math.max(thick*1.25,f*.3),Math.min(w,d)*.13);
+   const ix=x<0?1:-1,iy=y<0?1:-1;
+   for(let i=0;i<count;i++){
+     const za=bottom+i*pitch,zb=bottom+(i+1)*pitch;
+     const male=i%2===0;
+     // Color and material direction alternate on each neighboring panel.
+     // Small offset keeps both faces readable while preserving 3D dimensions.
+     paintQuad([[x,y,za],[x+ix*band,y,za],[x+ix*band,y,zb],[x,y,zb]],
+       male?'#e7be83':'#986432',male?'#80552f':'#624020',1.2);
+     paintQuad([[x,y,za],[x,y+iy*band,za],[x,y+iy*band,zb],[x,y,zb]],
+       male?'#926033':'#f1cd95',male?'#603e23':'#80552f',1.2);
+     // Draw the alternating finger end on the actual corner at material thickness scale.
+     if(i<count-1){
+       const z=zb,p0=project([x,y,z]),p1=project([x+ix*band,y,z]),p2=project([x,y+iy*band,z]);
+       ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p0.x,p0.y);ctx.lineTo(p2.x,p2.y);
+       ctx.strokeStyle='#3e2a1c';ctx.lineWidth=1.65;ctx.stroke();
+     }
+   }
+ }
+ // Visible joints along the lid edge / exposed top rim. Use the same finger pitch
+ // and material thickness, so the notches remain apparent at different sizes.
+ function rimFingers(start,end,toward){
+   const length=Math.hypot(end[0]-start[0],end[1]-start[1],end[2]-start[2]);
+   const count=Math.max(3,Math.min(45,(fingerCount||Math.round(length/Math.max(f,.1)))|1));
+   const inset=Math.min(thick,Math.max(0.2,f*.24));
+   for(let i=0;i<count;i++){
+     const u=i/count,v=(i+1)/count;
+     const a=start.map((q,k)=>q+(end[k]-q)*u);
+     const b=start.map((q,k)=>q+(end[k]-q)*v);
+     const ai=a.map((q,k)=>q+toward[k]*inset),bi=b.map((q,k)=>q+toward[k]*inset);
+     if(i%2===0)paintQuad([a,b,bi,ai],boxLidOpen?'#f2d3a3':'#8a582d','#694222',1.1);
+     else {
+       const p=project(a),q=project(b);
+       ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+       ctx.strokeStyle='#644122';ctx.lineWidth=1.6;ctx.stroke();
+     }
+   }
+ }
+ if(boxLidOpen){
+   rimFingers([-X,-Y,Z],[X,-Y,Z],[0,1,0]);
+   rimFingers([X,-Y,Z],[X,Y,Z],[-1,0,0]);
+   rimFingers([X,Y,Z],[-X,Y,Z],[0,-1,0]);
+   rimFingers([-X,Y,Z],[-X,-Y,Z],[1,0,0]);
+ }else{
+   // On a closed box, emphasize the fingered lid's edge and perimeter seam.
+   rimFingers([-X,-Y,Z+thick],[X,-Y,Z+thick],[0,1,0]);
+   rimFingers([X,-Y,Z+thick],[X,Y,Z+thick],[-1,0,0]);
+ }
+ // Box Wizard Step 6: illustrated scooped notches and removable divider grid.
+ // This is a live preview rather than cutting-ready notch geometry.
+ if(window.boxWizardLiveNotches){
+  const opt=window.boxWizardLiveNotches;
+  const innerW=w-2*thick,innerD=d-2*thick;
+  function segment(a,b,color,width=3){const p=project(a),q=project(b);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.lineWidth=width;ctx.strokeStyle=color;ctx.stroke();}
+  function scoop(a,b){
+   const aa=project(a),bb=project(b),dx=bb.x-aa.x,dy=bb.y-aa.y;
+   const sz=Math.max(4,Math.min(13,Math.hypot(dx,dy)*.21));
+   const mx=(aa.x+bb.x)/2,my=(aa.y+bb.y)/2;
+   ctx.save();ctx.beginPath();ctx.arc(mx,my,sz,Math.PI,0,false);
+   ctx.strokeStyle='#4c2c16';ctx.lineWidth=3.4;ctx.stroke();
+   ctx.beginPath();ctx.arc(mx,my,sz*.85,Math.PI,0,false);ctx.strokeStyle='#f3deb6';ctx.lineWidth=1.7;ctx.stroke();ctx.restore();
+  }
+  const cols=opt.cols||2,rows=opt.rows||2,top=Z-thick*.25;
+  if(boxLidOpen){
+   for(let i=1;i<cols;i++){
+     const x=-X+thick+innerW*i/cols;
+     segment([x,-Y+thick,top],[x,Y-thick,top],'#81502d',Math.max(3,thick*scale*.8));
+     if(opt.divider==='all'||opt.divider==='a')for(let j=0;j<rows;j++)scoop([x,-Y+thick+innerD*j/rows,top],[x,-Y+thick+innerD*(j+1)/rows,top]);
+   }
+   for(let j=1;j<rows;j++){
+     const y=-Y+thick+innerD*j/rows;
+     segment([-X+thick,y,top],[X-thick,y,top],'#936039',Math.max(3,thick*scale*.8));
+     if(opt.divider==='all'||opt.divider==='b')for(let i=0;i<cols;i++)scoop([-X+thick+innerW*i/cols,y,top],[-X+thick+innerW*(i+1)/cols,y,top]);
+   }
+   if(opt.wall==='all'||opt.wall==='ends')for(const x of [-X,X])for(let j=0;j<rows;j++)scoop([x,-Y+innerD*j/rows,top],[x,-Y+innerD*(j+1)/rows,top]);
+   if(opt.wall==='all'||opt.wall==='frontback')for(const y of [-Y,Y])for(let i=0;i<cols;i++)scoop([-X+innerW*i/cols,y,top],[-X+innerW*(i+1)/cols,y,top]);
+  }
+ }
+ // Dimension callouts use the same physical dimensions as the generated flat panels.
+ ctx.save();ctx.strokeStyle='#42617d';ctx.fillStyle='#28465d';ctx.lineWidth=1;ctx.font='12px Segoe UI, Arial, sans-serif';
+ function dimension(p1,p2,text,offX=0,offY=0){
+   const a=project(p1),b=project(p2),ax=a.x+offX,ay=a.y+offY,bx=b.x+offX,by=b.y+offY;
+   ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();
+   for(const [x,y] of [[ax,ay],[bx,by]]){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill()}
+   const mx=(ax+bx)/2,my=(ay+by)/2;const tw=ctx.measureText(text).width;
+   ctx.fillStyle='rgba(248,251,255,.91)';ctx.fillRect(mx-tw/2-5,my-14,tw+10,17);
+   ctx.fillStyle='#28465d';ctx.textAlign='center';ctx.fillText(text,mx,my-2);
+ }
+ const fmt=v=>boxMeasureUnit==='in'?(v/25.4).toFixed(2)+' in':v.toFixed(1)+' mm';
+ dimension([-X,-Y,-Z],[X,-Y,-Z],fmt(w),0,20);
+ dimension([X,-Y,-Z],[X,Y,-Z],fmt(d),19,14);
+ dimension([-X,-Y,-Z],[-X,-Y,Z],fmt(h),-22,0);
+ ctx.textAlign='center';ctx.font='600 14px Segoe UI, Arial, sans-serif';ctx.fillStyle='#24445d';
+ ctx.fillText('ASSEMBLED BOX · '+(boxPreviewDimensions.topStyle==='open'?'OPEN TOP':boxPreviewDimensions.topStyle==='shoebox'?'SHOEBOX LID':boxPreviewDimensions.topStyle==='dropin'?'DROP-IN LID':(boxLidOpen?'LID LIFTED':'LID CLOSED')),width/2,25);
+ if(boxPreviewDimensions.dividerSpecs?.length){
+   // Draw the exact divider positions and lengths from the same assembly specification
+   // used to generate the flat divider cutting paths.
+   ctx.strokeStyle='#624326';ctx.lineWidth=Math.max(2,t*scale*.8);
+   for(const div of boxPreviewDimensions.dividerSpecs){
+     const innerX=-X+t,innerY=-Y+t,low=-Z+t,high=low+Math.max(t*2,(boxPreviewDimensions.h-2*t)-t);
+     const points=div.direction==='A'
+       ? [[innerX+div.at,innerY+div.begin,low],[innerX+div.at,innerY+div.begin,high],
+          [innerX+div.at,innerY+div.begin+div.length,high],[innerX+div.at,innerY+div.begin+div.length,low]]
+       : [[innerX+div.begin,innerY+div.at,low],[innerX+div.begin,innerY+div.at,high],
+          [innerX+div.begin+div.length,innerY+div.at,high],[innerX+div.begin+div.length,innerY+div.at,low]];
+     ctx.beginPath();points.map(project).forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
+     ctx.closePath();ctx.fillStyle=div.direction==='A'?'rgba(210,166,107,.43)':'rgba(163,112,66,.42)';ctx.fill();ctx.stroke();
+   }
+ }
+ if(boxPreviewDimensions.handHoles==='yes'){
+   ctx.strokeStyle='#2c1d12';ctx.lineWidth=3;
+   const a=project([-X,-Y,Z*.55]),b=project([X,-Y,Z*.55]);
+   ctx.beginPath();ctx.moveTo(a.x+(b.x-a.x)*.3,a.y+(b.y-a.y)*.3);ctx.lineTo(a.x+(b.x-a.x)*.7,a.y+(b.y-a.y)*.7);ctx.stroke();
+ }
+
+ ctx.font='12px Segoe UI, Arial, sans-serif';ctx.fillText('Material: '+fmt(t)+'   •   Finger pitch: '+fmt(f)+'   •   Drag to rotate',width/2,height-18);
+ ctx.restore();
+}
+
+function setupBox3D(){
+ $('boxLidClosed').addEventListener('click',()=>setBoxLid(false));
+ $('boxLidOpen').addEventListener('click',()=>setBoxLid(true));
+ $('boxFlatView').addEventListener('click',()=>setBoxView('flat'));
+ $('box3DView').addEventListener('click',()=>setBoxView('3d'));
+ $('boxUnitMM').addEventListener('click',()=>switchBoxUnits('mm'));
+ $('boxUnitIN').addEventListener('click',()=>switchBoxUnits('in'));
+ const canvas=$('box3DCanvas');let dragging=false,lastX=0,lastY=0;
+ canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId)});
+ canvas.addEventListener('pointermove',e=>{if(!dragging)return;boxYaw+=(e.clientX-lastX)*.009;boxPitch=Math.max(-1.45,Math.min(1.45,boxPitch+(e.clientY-lastY)*.008));lastX=e.clientX;lastY=e.clientY;drawBox3D()});
+ canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(()=>{if(box3DMode)drawBox3D()}).observe($('box3DStage'));
+}
+
+function setupBoxGenerator(){
+ setupBox3D();
+ const overlay=$('boxGenOverlay'),open=()=>{overlay.hidden=false;$('boxGenMake').textContent=generatedBoxGroup!==null?'Update Box on Canvas':'Generate on Canvas';$('boxGenW').focus()},close=()=>overlay.hidden=true;
+ $('boxGenOpen').addEventListener('click',open);$('boxEditSettings').addEventListener('click',open);$('boxGenClose').addEventListener('click',close);$('boxGenCancel').addEventListener('click',close);
+ overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden){e.stopPropagation();close()}});
+ $('boxGenMake').addEventListener('click',()=>{
+   const get=id=>Number($(id).value)*(boxMeasureUnit==='in'?25.4:1),w=get('boxGenW'),d=get('boxGenD'),h=get('boxGenH'),t=get('boxGenT'),f=get('boxGenFinger'),gap=get('boxGenGap'),fingerCount=Number($('boxGenCount').value);
+   if(!Number.isInteger(fingerCount)||fingerCount<3||fingerCount>41||fingerCount%2!==1){alert('Finger count must be an odd number between 3 and 41.');return}
+   if(![w,d,h,t,f,gap].every(Number.isFinite)||Math.min(w,d,h)<20||t<.5||f<2||gap<1||t>=Math.min(w,d,h)/4){alert('Check dimensions: width, depth, height must be at least 20 mm; material thickness must be less than one-quarter of the smallest box dimension.');return}
+   if(f<=t*1.3){alert('Finger width should be larger than the material thickness.');return}
+   const {parts,neededW,neededH}=buildBoxPanels(w,d,h,t,f,gap,fingerCount);
+   const fit=$('boxGenResize').checked;
+   if((neededW>W||neededH>H)&&!fit){alert(`Six panels need about ${neededW} × ${neededH} mm. Enable canvas resizing or choose smaller dimensions.`);return}
+   if(Math.max(neededW,neededH)>3000){alert('The required canvas exceeds the 3000 mm limit. Use smaller dimensions.');return}
+   history();if(fit){W=Math.max(W,neededW);H=Math.max(H,neededH)}
+   if(generatedBoxGroup!==null){objects=objects.filter(o=>o.group!==generatedBoxGroup)}
+   const groupId=nextGroup++;generatedBoxGroup=groupId;
+   parts.forEach(p=>{p.group=groupId;objects.push(p)});ids=parts.map(p=>p.id);
+   syncCanvas();render();boxPreviewDimensions={w,d,h,t,f,fingerCount};setBoxLid(false);setBoxView('3d');close();notice('Box updated: six editable vector panels. Verify joint clearance and kerf before cutting.');
+ });
+}
+document.addEventListener("DOMContentLoaded", setupBoxGenerator, {once:true});
+
+function download(name,data,type){let u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}function exportShape(o){let n=shapeNode(o);n.removeAttribute('data-id');n.removeAttribute('class');n.removeAttribute('display');return new XMLSerializer().serializeToString(n).replace(/ xmlns="http:\/\/www.w3.org\/2000\/svg"/g,'')} $('export').onclick=()=>{let visible=objects.filter(o=>!o.hidden);if(!visible.length)return alert('Draw something before exporting.');let svgOut=`<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}">\n${visible.map(exportShape).join('\n')}\n</svg>`;download('laser-design-phase2.svg',svgOut,'image/svg+xml;charset=utf-8');notice('SVG exported. Import into LightBurn and verify sizes, fonts, and operations.')};$('save').onclick=()=>download('laser-design-phase2-project.json',JSON.stringify({app:'Laser Design Studio',version:3,...snapshot()},null,2),'application/json');$('open').onclick=()=>$('file').click();$('file').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(d.app!=='Laser Design Studio'||!Array.isArray(d.objects)||d.objects.length>10000||![d.W,d.H].every(x=>valid(x)&&x>=1&&x<=3000))throw Error('Invalid project format');if(!d.objects.every(o=>o&&['rect','ellipse','line','polygon','text','path'].includes(o.type)&&[o.x,o.y,o.w,o.h].every(valid)&&o.w>0&&o.h>0&&/^#[0-9a-fA-F]{6}$/.test(o.color)))throw Error('Invalid object data');history();W=d.W;H=d.H;objects=d.objects;nextId=Math.max(1,...objects.map(o=>o.id+1));nextGroup=Math.max(1,...objects.map(o=>(o.group||0)+1));ids=[];syncCanvas();render();notice('Project loaded.')}catch(err){alert('Could not open project: '+err.message)}e.target.value=''};$('new').onclick=()=>{boxPreviewDimensions=null;generatedBoxGroup=null;setBoxLid(false);setBoxView('flat');if(objects.length&&!confirm('Clear this project? Save it first if needed.'))return;history();objects=[];ids=[];render()};$('undo').onclick=()=>step(undos,redos);$('redo').onclick=()=>step(redos,undos);document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;let mod=e.ctrlKey||e.metaKey,k=e.key.toLowerCase();if(!mod&&k==='v'){setTool('select');return}if(!mod&&['arrowleft','arrowright','arrowup','arrowdown'].includes(k)&&pick().length){e.preventDefault();history();let distance=e.shiftKey?10:1;let dx=(k==='arrowright'?distance:k==='arrowleft'?-distance:0),dy=(k==='arrowdown'?distance:k==='arrowup'?-distance:0);for(let o of pick())move(o,dx,dy);render();notice('Moved selected artwork with arrow keys.');return}if(mod&&['z','y','c','v','a','g'].includes(k)){e.preventDefault();if(k==='z')step(undos,redos);if(k==='y')step(redos,undos);if(k==='c')copy();if(k==='v')paste();if(k==='a'){ids=objects.filter(o=>!o.hidden&&!o.locked).map(o=>o.id);render()}if(k==='g')e.shiftKey?$('ungroup').click():$('group').click()}else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();del()}});
+let toolbarUnit='mm';
+const measurementFields=['tbX','tbY','tbW','tbH'];
+function toDisplay(mm){return toolbarUnit==='in'?Math.round(mm/25.4*10000)/10000:round(mm)}
+function toMillimeters(value){return toolbarUnit==='in'?value*25.4:value}
+function setToolbarUnit(next){if(next===toolbarUnit)return;const previous=toolbarUnit;for(const id of measurementFields){const el=$(id);if(el.value.trim()!==''&&Number.isFinite(Number(el.value))){const mm=previous==='in'?Number(el.value)*25.4:Number(el.value);el.value=next==='in'?(Math.round(mm/25.4*10000)/10000):round(mm)}el.step=next==='in'?'0.001':'0.1';if(id==='tbW'||id==='tbH')el.min=next==='in'?'0.001':'0.1';el.setAttribute('aria-label',`Selection ${id.slice(2)} in ${next==='in'?'inches':'millimeters'}`)}toolbarUnit=next;for(const unit of ['MM','IN']){const active=unit.toLowerCase()===next;$('unit'+unit).classList.toggle('active',active);$('unit'+unit).setAttribute('aria-pressed',String(active))}updateCanvasRulers()}
+$('unitMM').addEventListener('click',()=>setToolbarUnit('mm'));
+$('unitIN').addEventListener('click',()=>setToolbarUnit('in'));
+function syncToolbarFields(){let a=pick(),b=bounds(a),one=a.length===1?a[0]:null;for(let [id,v] of Object.entries({tbX:b?.x,tbY:b?.y,tbW:b?.w,tbH:b?.h,tbAngle:one?.angle??0})){let el=$(id);if(!el)continue;el.disabled=!b||(id==='tbAngle'&&!one);if(document.activeElement!==el)el.value=b&&Number.isFinite(v)?(id==='tbAngle'?round(v):toDisplay(v)):'';}}
+function syncToolbarButtons(){document.querySelectorAll('.topbar [data-action]').forEach(b=>{const target=$(b.dataset.action);if(target)b.disabled=target.disabled})}
+document.querySelectorAll('.topbar [data-action]').forEach(b=>b.addEventListener('click',()=>{let t=$(b.dataset.action);if(t&&!t.disabled)t.click()}));
+function applyToolbarPrecision(){let fields=[['tbX','x'],['tbY','y'],['tbW','w'],['tbH','h'],['tbAngle','angle']];for(let [from,to]of fields){if($(from).disabled)continue;let raw=$(from).value;$(to).value=raw===''?'':(from==='tbAngle'?raw:toMillimeters(Number(raw)));}$('apply').click()}
+
+for(let id of ['tbX','tbY','tbW','tbH','tbAngle'])$(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();applyToolbarPrecision();$(id).blur()}});
+
+function selectSettingsTab(which){
+ for(const [name,tab,panel] of [['workspace','workspaceTab','workspaceTabPanel'],['canvas','canvasTab','canvasTabPanel'],['about','aboutTab','aboutTabPanel']]){
+  const active=name===which;
+  $(tab).setAttribute('aria-selected',String(active));$(tab).tabIndex=active?0:-1;$(panel).hidden=!active;
+ }
+}
+function syncSettings(){selectSettingsTab('workspace')}
+function closeSettings(){ $('settingsPanel').hidden=true;$('settingsBtn').setAttribute('aria-expanded','false'); }
+$('settingsBtn').addEventListener('click',()=>{const opening=$('settingsPanel').hidden;if(opening)syncSettings();$('settingsPanel').hidden=!opening;$('settingsBtn').setAttribute('aria-expanded',String(opening));if(opening)$('workspaceTab').focus();});
+$('settingsClose').addEventListener('click',()=>{closeSettings();$('settingsBtn').focus()});
+$('workspaceTab').addEventListener('click',()=>selectSettingsTab('workspace'));
+$('canvasTab').addEventListener('click',()=>selectSettingsTab('canvas'));
+$('aboutTab').addEventListener('click',()=>selectSettingsTab('about'));
+document.querySelector('.settings-tabs').addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const names=['workspace','canvas','about'];const tabs=['workspaceTab','canvasTab','aboutTab'];const i=tabs.findIndex(id=>$(id).getAttribute('aria-selected')==='true');const j=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;selectSettingsTab(names[j]);$(tabs[j]).focus()}});
+document.addEventListener('pointerdown',e=>{if(!$('settingsWrap').contains(e.target))closeSettings()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings()});
+syncSettings();
+syncCanvas();refreshGrid();render();buttons();
+// Wizard fabrication layout: every cutting piece is an independent editor path.
+// Measurements are millimeters. Slots and hand holes are real inner contours.
+
+// Nominal geometry audit before placing vector cutting parts.
+// These checks prevent undersized fingers, overlapping divider slots and bad T-junctions.
+// They are NOT a substitute for laser kerf compensation or a physical test assembly.
+function auditWizardJoints({pw,pd,ph,t,fingerCount,innerW,innerD,dividers,dividerHeight}){
+ const warnings=[];
+ if(![pw,pd,ph,t,innerW,innerD,dividerHeight].every(v=>Number.isFinite(v)&&v>0))
+   throw Error('Box dimensions must be positive, finite numbers.');
+ if(2*t>=Math.min(pw,pd))throw Error('Pockets must be wider than twice the material thickness.');
+ if(dividerHeight<=2*t)throw Error('Divider height must be greater than twice the material thickness.');
+ if(!Number.isInteger(fingerCount)||fingerCount<3||fingerCount%2!==1)
+   throw Error('Finger count must be an odd number of at least three.');
+ for(const len of [innerW,innerD,ph, pw,pd]){
+   if(len/fingerCount < t*1.25)
+     throw Error('Finger tabs are too narrow for the material thickness. Increase the box size or reduce finger count.');
+ }
+ for(const div of dividers){
+   if(div.length<=3*t)throw Error(`Divider ${div.name} is too short to fit its joinery.`);
+   if(div.begin<-.001||div.at<-.001)throw Error(`Divider ${div.name} has an invalid position.`);
+   const centers=div.crossings.map(c=>c-div.begin).sort((a,b)=>a-b);
+   for(let i=0;i<centers.length;i++){
+     if(centers[i]<t*.5-.001||centers[i]>div.length-t*.5+.001)
+       throw Error(`Divider ${div.name} crossing slot is outside the panel.`);
+     if(i>0 && centers[i]-centers[i-1]<2*t)
+       throw Error(`Divider ${div.name} has overlapping crossing slots.`);
+   }
+ }
+ // Centerline-width slots are nominal press-fit only: laser kerf should be tested.
+ warnings.push('Matching profiles are nominal only; verify corner joints and a divider fit coupon before production.');
+ return warnings;
+}
+function wizardBuildParts(pw,pd,ph,t,layout,dividerMode,dividerNotches,wallNotches,handHoles,top,slotClearance=0){
+ const map={none:[1,1],side:[4,1],grid:[2,2],depth:[1,4],right:[4,3],left:[4,3],back:[3,4],front:[3,4]};
+ const [cx,cy]=map[layout]||[2,2];
+ const special=['right','left','back','front'].includes(layout);
+ const cols=special?(layout==='right'||layout==='left'?2:3):cx;
+ const rows=special?(layout==='front'||layout==='back'?2:3):cy;
+ // Long pockets span a complete row or column, while three small pockets occupy the other side.
+ const cellWidths=Array(cols).fill(pw);
+ const cellDepths=Array(rows).fill(pd);
+ const innerW=cellWidths.reduce((a,b)=>a+b,0)+(cols-1)*t;
+ const innerD=cellDepths.reduce((a,b)=>a+b,0)+(rows-1)*t;
+ const w=innerW+2*t,d=innerD+2*t,h=ph+2*t;
+ const fingerCount=7,f=Math.max(5,t*3),gap=Math.max(8,2*t);
+ if(!Number.isFinite(slotClearance)||slotClearance<0||slotClearance>2||slotClearance>=t)
+  throw Error('Divider clearance must be from 0 to 2 mm and less than material thickness.');
+ if(t<=0 || t*2>=Math.min(pw,pd,ph))throw Error('Material thickness is too large for these pocket dimensions.');
+ if(Math.min(pw,pd)<f*2)throw Error('Pockets are too narrow for the chosen finger-joint pitch.');
+ let {parts}=buildBoxPanels(w,d,h,t,f,gap,fingerCount);
+ if(top==='open')parts=parts.filter((p,i)=>i!==4);
+ const makePath=(name,poly,holes=[])=>{
+  const points=[...poly,...holes.flat()];
+  const minx=Math.min(...points.map(q=>q[0])),miny=Math.min(...points.map(q=>q[1]));
+  const maxx=Math.max(...points.map(q=>q[0])),maxy=Math.max(...points.map(q=>q[1]));
+  const width=Math.max(.001,maxx-minx),height=Math.max(.001,maxy-miny);
+  return {id:nextId++,type:'path',name,x:minx,y:miny,w:width,h:height,angle:0,color:'#ff0000',mode:'line',group:null,hidden:false,locked:false,
+   loops:[poly,...holes].map(loop=>loop.map(q=>[(q[0]-minx)/width,(q[1]-miny)/height]))};
+ };
+ const rect=(x,y,w,h)=>[[x,y],[x+w,y],[x+w,y+h],[x,y+h]];
+ const notch=(x,y,width,depth=12)=>{
+   const radius=width/2,points=[];
+   for(let i=0;i<=16;i++){const a=Math.PI+i*Math.PI/16;points.push([x+radius+radius*Math.cos(a),y+depth*Math.sin(a)])}
+   return points;
+ };
+ // Lay out additional panels beneath the six shell panels.
+ let yy=Math.max(...parts.map(p=>p.y+p.h))+gap;
+ const dividerHeight=Math.max(t*2,ph-t);
+ const xCuts=[],yCuts=[];let pos=t;
+ for(let i=0;i<cols-1;i++){pos+=cellWidths[i];xCuts.push(pos+t/2);pos+=t;}
+ pos=t;for(let i=0;i<rows-1;i++){pos+=cellDepths[i];yCuts.push(pos+t/2);pos+=t;}
+ // Divider geometry is shared with the 3D preview. T-junctions are segmented;
+ // only genuine crossings have interlocking half-height slots.
+ let specs=[];
+ if(['right','left'].includes(layout)){
+   const ix=xCuts[0]-t;
+   specs.push({name:'A1',direction:'A',length:innerD,at:ix,begin:0,crossings:[]});
+   const section=pw;
+   const xBegin=layout==='right'?0:innerW-section;
+   let accumulated=0;
+   for(let j=0;j<2;j++){
+     accumulated+=pd;
+     specs.push({name:'B'+(j+1),direction:'B',length:section,at:accumulated+(j+.5)*t,begin:xBegin,crossings:[]});
+     accumulated+=t;
+   }
+ }else if(['front','back'].includes(layout)){
+   const iy=yCuts[0]-t;
+   specs.push({name:'B1',direction:'B',length:innerW,at:iy,begin:0,crossings:[]});
+   const section=pd;
+   const yBegin=layout==='front'?innerD-section:0;
+   let accumulated=0;
+   for(let j=0;j<2;j++){
+     accumulated+=pw;
+     specs.push({name:'A'+(j+1),direction:'A',length:section,at:accumulated+(j+.5)*t,begin:yBegin,crossings:[]});
+     accumulated+=t;
+   }
+ }else{
+   specs=[...xCuts.map((at,i)=>({name:'A'+(i+1),direction:'A',length:innerD,at:at-t,begin:0,crossings:yCuts.map(v=>v-t)})),
+    ...yCuts.map((at,i)=>({name:'B'+(i+1),direction:'B',length:innerW,at:at-t,begin:0,crossings:xCuts.map(v=>v-t)}))];
+ }
+ if(layout==='none')specs=[];
+ const dividers=specs;
+ const geometryWarnings=auditWizardJoints({pw,pd,ph,t,fingerCount,innerW,innerD,dividers,dividerHeight:Math.max(t*2,ph-t)});
+ geometryWarnings.push(`Divider crossing slots: ${(t+slotClearance).toFixed(2)} mm (${t.toFixed(2)} mm material + ${slotClearance.toFixed(2)} mm clearance).`);
+ if(dividerMode==='fixed')geometryWarnings.push('Fixed wall/bottom divider tabs are not yet generated; dividers are loose-fit cutting panels.');
+ let x=gap,rowHeight=0;
+ const cutDepth=dividerHeight/2;
+ function cutOutOutline(length,height,notches,slots,fromTop){
+   // A single closed perimeter: cut openings connect directly to their source
+   // edge, avoiding doubled toolpaths and non-cutting "slot" rectangles.
+   const slotWidth=t+slotClearance, depth=height/2;
+   const positions=slots.map(p=>Math.max(slotWidth/2,Math.min(length-slotWidth/2,p)))
+     .sort((a,b)=>a-b).filter((p,i,arr)=>i===0||p-arr[i-1]>slotWidth+0.01);
+   const poly=[[0,0]];
+   if(fromTop){
+     for(const p of positions){const a=p-slotWidth/2,b=p+slotWidth/2;
+       poly.push([a,0],[a,depth],[b,depth],[b,0]);}
+   }
+   poly.push([length,0],[length,height]);
+   // Scan the upper edge from right to left. Notch arcs and crossing slots
+   // occupy different intervals so they cannot overlap in the toolpath.
+   const features=[];
+   if(!fromTop)for(const p of positions)features.push({kind:'slot',center:p,r:slotWidth/2});
+   for(const c of notches){
+     const r=Math.min(10,length*.11);
+     if(c-r<=0||c+r>=length)continue;
+     // Prioritize slots at real crossings, so no scoop can destroy a joint.
+     if(features.some(feature=>Math.abs(feature.center-c)<feature.r+r+1))continue;
+     features.push({kind:'scoop',center:c,r});
+   }
+   features.sort((a,b)=>b.center-a.center);
+   let last=length;
+   for(const feature of features){
+     const right=feature.center+feature.r,left=feature.center-feature.r;
+     if(right>last+.001)continue;
+     poly.push([right,height]);
+     if(feature.kind==='slot'){
+       poly.push([right,height-depth],[left,height-depth],[left,height]);
+     }else{
+       for(let j=0;j<=16;j++){
+         const angle=j*Math.PI/16;
+         poly.push([feature.center+feature.r*Math.cos(angle),height-feature.r*Math.sin(angle)]);
+       }
+     }
+     last=left;
+   }
+   poly.push([0,height]);
+   return poly;
+ }
+ const notchLocations=(length)=>{
+   const locations=[];const segments=Math.max(1,Math.round(length/Math.max(25,pw,pd)));
+   for(let j=0;j<segments;j++)locations.push((j+.5)*length/segments);
+   return locations;
+ };
+ for(const div of dividers){
+  const Wd=div.length,Hd=dividerHeight;
+  const notchOn=dividerNotches==='all'||dividerNotches.toLowerCase()===div.direction.toLowerCase();
+  const fromTop=div.direction==='A';
+  const poly=cutOutOutline(Wd,Hd,notchOn?notchLocations(Wd):[],div.crossings.map(p=>p-div.begin),fromTop);
+  const part=makePath('Divider '+div.name,poly.map(([px,py])=>[x+px,yy+py]));
+  parts.push(part);
+  div.cutPartId=part.id;
+  x+=Wd+gap;rowHeight=Math.max(rowHeight,Hd);
+  if(x>Math.max(450,w*2.5)){x=gap;yy+=rowHeight+gap;rowHeight=0;}
+ }
+ yy+=rowHeight+gap;
+ // Enclosed hand grips are closed cutting loops in the two narrower wall panels.
+ if(handHoles==='yes'){
+  for(let i=0;i<4&&i<parts.length;i++){
+   const panel=parts[i];if(!panel||!panel.loops)continue;
+   const isShort=w<=d?i<2:i>=2;
+   if(!isShort)continue;
+   const gripW=Math.min(82.55,panel.w-4*t),gripH=Math.min(25.4,panel.h*.3);
+   if(gripW<=12||gripH<=6)continue;
+   const gx=panel.x+(panel.w-gripW)/2,gy=panel.y+Math.min(panel.h*.18,22);
+   const r=gripH/2, xL=gx+r,xR=gx+gripW-r,yC=gy+r;
+   const contour=[];
+   // Closed capsule-shaped hole with exact nominal width and height.
+   contour.push([xL,gy],[xR,gy]);
+   for(let j=1;j<=24;j++){const a=-Math.PI/2+j*Math.PI/24;contour.push([xR+r*Math.cos(a),yC+r*Math.sin(a)])}
+   contour.push([xL,gy+gripH]);
+   for(let j=1;j<=24;j++){const a=Math.PI/2+j*Math.PI/24;contour.push([xL+r*Math.cos(a),yC+r*Math.sin(a)])}
+   panel.loops.push(contour.map(([px,py])=>[(px-panel.x)/panel.w,(py-panel.y)/panel.h]));
+  }
+ }
+ // Different top styles are actual additional cutting parts.
+ if(top==='shoebox'){
+  const skirtH=Math.max(12,Math.min(25,ph*.24));let offset=gap;
+  for(const length of [w+2*t,w+2*t,d+2*t,d+2*t]){
+    parts.push(makePath('Shoebox lid skirt',rect(offset,yy,length,skirtH)));
+    offset+=length+gap;if(offset>Math.max(450,w*2.5)){offset=gap;yy+=skirtH+gap;}
+  }
+ }else if(top==='dropin'){
+  const topPanel=parts.find(p=>p.name==='Top')||parts[4];
+  const insertW=w-2*t,insertD=d-2*t;
+  yy+=d+gap;
+  parts.push(makePath('Drop-in lid inset',rect(gap,yy,insertW,insertD)));
+  const hx=gap+insertW+gap,hw=Math.min(45,w*.35),hh=Math.min(35,d*.35);
+  if(hw<=17||hh<=17)throw Error('Box is too small for a safe drop-in ring handle.');
+  parts.push(makePath('Ring handle',rect(hx,yy,hw,hh),[rect(hx+7,yy+7,hw-14,hh-14).reverse()]));
+ }
+ // Wall scoops are cut into the existing wall outline, not separate open
+ // toolpaths that would double-cut the top edge. Use a U-shaped inward arc
+ // on the straight nominal upper border; skip if an edge finger occupies it.
+ if(wallNotches!=='none'&&top!=='closed'){
+  for(let i=0;i<4;i++){
+   if(handHoles==='yes'&&(w<=d?i<2:i>=2))continue;
+   const chosen=wallNotches==='all'||(wallNotches==='ends'?i>=2:i<2);
+   const wall=parts[i];if(!chosen||!wall||!wall.loops?.[0])continue;
+   const poly=wall.loops[0].map(([u,v])=>[wall.x+u*wall.w,wall.y+v*wall.h]);
+   const xs=poly.map(p=>p[0]),ys=poly.map(p=>p[1]);
+   const yTop=Math.min(...ys),mid=(Math.min(...xs)+Math.max(...xs))/2;
+   const radius=Math.min(12,wall.w*.10),left=mid-radius,right=mid+radius;
+   // Find a long horizontal top-edge segment covering the scoop interval.
+   let found=-1;
+   for(let k=0;k<poly.length;k++){
+     const p=poly[k],q=poly[(k+1)%poly.length];
+     if(Math.abs(p[1]-yTop)<1e-6&&Math.abs(q[1]-yTop)<1e-6&&
+       Math.min(p[0],q[0])<=left&&Math.max(p[0],q[0])>=right){found=k;break;}
+   }
+   if(found<0)continue; // Avoid corrupting fingered edges.
+   const p=poly[found],q=poly[(found+1)%poly.length],forward=q[0]>p[0];
+   const scoop=[];
+   for(let j=0;j<=24;j++){
+     const angle=forward?Math.PI+j*Math.PI/24:2*Math.PI+j*Math.PI/24;
+     scoop.push([mid+radius*Math.cos(angle),yTop+radius*Math.abs(Math.sin(angle))]);
+   }
+   poly.splice(found+1,0,...scoop);
+   wall.loops[0]=poly.map(([px,py])=>[(px-wall.x)/wall.w,(py-wall.y)/wall.h]);
+  }
+ }
+ const limits=bounds(parts),neededW=Math.ceil(limits.x+limits.w+gap),neededH=Math.ceil(limits.y+limits.h+gap);
+ return {parts,neededW,neededH,w,d,h,t,f,fingerCount,dividers:dividers.length,cols,rows,dividerSpecs:specs.map(({direction,at,begin,length,crossings})=>({direction,at,begin,length,crossings})),geometryWarnings};
+}
+
+
+
+// Explicit bridge between the editor's private state and the docked Box Wizard.
+// Keeps editor IDs, canvas and undo history inside the original editor scope.
+window.LaserWizardEditor={
+ generate(args){
+   const {pw,pd,ph,t,layout,dividerMode,dividerNotches,wallNotches,handHoles,top,slotClearance,oneOpenSpace,choice,pocketDraft}=args;
+   const built=wizardBuildParts(pw,pd,ph,t,layout,dividerMode,dividerNotches,wallNotches,handHoles,top,slotClearance);
+   if(built.neededW>3000||built.neededH>3000)throw Error('The cutting layout exceeds the 3000 mm canvas limit. Reduce the dimensions.');
+   history();
+   if(generatedBoxGroup!==null)objects=objects.filter(o=>o.group!==generatedBoxGroup);
+   const gid=nextGroup++;generatedBoxGroup=gid;
+   built.parts.forEach(part=>{part.group=gid;objects.push(part)});
+   ids=built.parts.map(part=>part.id);
+   W=Math.max(W,built.neededW);H=Math.max(H,built.neededH);
+   window.boxWizardLiveNotches={divider:oneOpenSpace?'none':pocketDraft.dividerNotches,wall:oneOpenSpace?'none':pocketDraft.wallNotches,layout:oneOpenSpace?'none':pocketDraft.layout,cols:built.cols,rows:built.rows};
+   window.boxWizardConstruction={...pocketDraft,builtAround:choice,pockets:!oneOpenSpace,measurements:[pw,pd,ph,t],slotClearance,w:built.w,d:built.d,h:built.h,t};
+   boxPreviewDimensions={w:built.w,d:built.d,h:built.h,t,f:built.f,fingerCount:built.fingerCount,
+     dividerCount:built.dividers,cols:built.cols,rows:built.rows,dividerSpecs:built.dividerSpecs,topStyle:pocketDraft.top,handHoles:pocketDraft.handHoles};
+   syncCanvas();render();setBoxLid(pocketDraft.top==='open');setBoxView('3d');
+   notice(oneOpenSpace?'Wizard generated box panels without dividers. Check fit before cutting.':'Wizard generated box panels and divider cutting paths. Check fit before cutting.');
+   return built;
+ },
+ preview({w,d,h,t,layout,cols,rows,dividerNotches,wallNotches}){
+   window.boxWizardLiveNotches={divider:dividerNotches||'none',wall:wallNotches||'none',layout,cols,rows};
+   boxPreviewDimensions={w,d,h,t,f:Math.max(t*3,6),fingerCount:7};
+   setBoxView('3d');drawBox3D();
+ }
+};
+})();</script><script>
+(function(){
+const buttons=[...document.querySelectorAll('[data-right-tab]')];
+function activate(button,focus){
+ for(const b of buttons){const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!active;}
+ if(focus)button.focus();
+}
+buttons.forEach((b,i)=>{b.addEventListener('click',()=>activate(b,false));b.addEventListener('keydown',event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();const n=event.key==='Home'?0:event.key==='End'?buttons.length-1:(i+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;activate(buttons[n],true)}})});
+})();
+</script><script>
+(function(){
+ const panel=document.getElementById('offsetPanel'),open=document.getElementById('openOffsetPanel'),close=document.getElementById('closeOffsetPanel');
+ let previous=null;
+ function show(){previous=document.activeElement;panel.hidden=false;close.focus()}
+ function hide(){panel.hidden=true;if(previous&&typeof previous.focus==='function')previous.focus()}
+ open.addEventListener('click',show);close.addEventListener('click',hide);
+ panel.addEventListener('pointerdown',e=>{if(e.target===panel)hide()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){e.preventDefault();e.stopImmediatePropagation();hide()}});
+ // Keep the window open so users can apply multiple offsets and adjust the distance.
+})();
+</script><div id="boxGenOverlay" class="box-gen-overlay" hidden>
+ <section class="box-gen-dialog" role="dialog" aria-modal="true" aria-labelledby="boxGenTitle">
+  <div class="box-gen-head"><h2 id="boxGenTitle">Phase 3 · Box Generator</h2><button type="button" id="boxGenClose" title="Close Box Generator" aria-label="Close Box Generator">✕</button></div>
+  <p>Generate or update six editable finger-joint panels for a closed rectangular box. Dimensions below are the <strong>outside</strong> dimensions.</p>
+  <div id="boxWizardProgress" class="box-wizard-progress" hidden><div class="box-wizard-steps" aria-label="Box wizard steps"><span>1 · Dimensions</span><span>2 · Joints</span><span>3 · Layout</span><span>4 · Review</span></div><strong id="boxWizardStepTitle">Step 1: Box dimensions</strong><p id="boxWizardStepHelp">Enter the outside dimensions of your box.</p></div><div id="boxWizardReview" class="box-wizard-review" hidden aria-live="polite"></div>
+  <div class="box-unit-control"><span>Measurements</span><button type="button" id="boxUnitMM" class="selected" aria-pressed="true">mm</button><button type="button" id="boxUnitIN" aria-pressed="false">in</button></div><div class="box-gen-fields">
+   <label>Width <span class="box-unit-label">(mm)</span><input id="boxGenW" type="number" min="20" max="2000" step="1" value="120"></label>
+   <label>Depth <span class="box-unit-label">(mm)</span><input id="boxGenD" type="number" min="20" max="2000" step="1" value="90"></label>
+   <label>Height <span class="box-unit-label">(mm)</span><input id="boxGenH" type="number" min="20" max="2000" step="1" value="75"></label>
+   <label>Material thickness <span class="box-unit-label">(mm)</span><input id="boxGenT" type="number" min="0.5" max="30" step="0.1" value="3"></label>
+   <label>Nominal finger width (preview reference) <span class="box-unit-label">(mm)</span><input id="boxGenFinger" type="number" min="2" max="60" step="0.5" value="12"></label>
+   <label>Finger joints per edge <input id="boxGenCount" type="number" min="3" max="41" step="2" value="7" title="Odd number of fingers per edge: 3–41"></label>
+   <label>Panel spacing <span class="box-unit-label">(mm)</span><input id="boxGenGap" type="number" min="1" max="100" step="1" value="8"></label>
+  </div>
+  <label class="box-gen-check"><input type="checkbox" id="boxGenResize" checked> Resize canvas to fit all six panels if needed</label>
+  <div class="box-wizard-navigation" id="boxWizardNavigation" hidden><button type="button" id="boxWizardBack">Back</button><button type="button" id="boxWizardNext">Next step</button></div><div class="box-gen-actions"><button type="button" id="boxGenCancel">Cancel</button><button type="button" id="boxGenMake">Generate on Canvas</button></div>
+  <p class="box-gen-hint">Cut/fit warning: this is a first-version layout. Test on scrap and verify kerf, joint clearance, material thickness, and assembly before cutting a full project.</p>
+ </section>
+</div><script id="box-wizard-script">
+
+document.addEventListener('DOMContentLoaded',()=>{
+const $=id=>document.getElementById(id);
+const host=$('rightBoxWizardContent');
+const wizard=document.createElement('div');
+wizard.id='boxWizardNineSteps';
+wizard.hidden=true;
+wizard.innerHTML=`
+<div class="wizard9-progress"><strong id="wizard9Step">Step 1 of 8</strong><div class="wizard9-track"><span id="wizard9TrackFill"></span></div></div>
+<section id="wizard9Choice">
+ <h3>What should the box be built around?</h3>
+ <div class="wizard9-choices">
+  <button type="button" id="wizard9Pocket" class="wizard9-choice">The size of each pocket</button>
+  <button type="button" id="wizard9Overall" class="wizard9-choice">The overall box size</button>
+ </div>
+</section>
+<section id="wizard9Measurements" hidden>
+ <h3 id="wizard9Question"></h3>
+ <p class="wizard9-help">Type a number in inches, or add mm or in (for example 3 in, 76 mm or 3 1/8).</p>
+ <div class="wizard9-inputs">
+  <label>Wide (left to right)<input type="text" id="wizard9Wide" inputmode="decimal" placeholder="e.g. 3 1/8" autocomplete="off"><small id="wizard9WideResult"></small></label>
+  <label>Front to back<input type="text" id="wizard9Depth" inputmode="decimal" placeholder="e.g. 76 mm" autocomplete="off"><small id="wizard9DepthResult"></small></label>
+  <label id="wizard9HeightLabel">Tall (how deep the pocket is)<input type="text" id="wizard9Height" inputmode="decimal" placeholder="e.g. 3 in" autocomplete="off"><small id="wizard9HeightResult"></small></label>
+  <label>Material thickness<input type="text" id="wizard9Thickness" inputmode="decimal" placeholder="e.g. 1/8 in" autocomplete="off"><small id="wizard9ThicknessResult"></small></label>
+ </div>
+ <p class="wizard9-validation" id="wizard9Error" role="status" aria-live="polite"></p>
+ <div class="wizard9-actions">
+  <button type="button" id="wizard9Back">Back to Step 1</button>
+  <button type="button" id="wizard9Save">Save &amp; Continue</button>
+ </div>
+</section>
+<section id="wizardOverallPocketsChoice" hidden>
+ <h3>Do you need pockets?</h3>
+ <p class="wizard9-help">Pockets are made with dividers that slot together inside the box.</p>
+ <div class="wizard9-divider-choices">
+  <button type="button" data-overall-pockets="yes"><strong>Yes, divide it into pockets</strong><span>You'll choose how many next.</span></button>
+  <button type="button" data-overall-pockets="no"><strong>No, one open space</strong><span>Straight on to the top.</span></button>
+ </div>
+ <div class="wizard9-actions"><button type="button" id="wizardOverallPocketsBack">Back to Step 2</button></div>
+</section>
+<section id="wizard9Pockets" hidden>
+ <h3>How many pockets?</h3>
+ <div class="wizard9-inputs"><label>Pockets<input type="number" id="wizard9PocketCount" value="4" min="1" max="100" step="1"></label></div>
+ <p class="wizard9-help" style="margin-top:14px">Then pick how they're laid out. The ones with a long pocket use a divider that stops at another one.</p>
+ <div class="wizard9-layouts" role="group" aria-label="Pocket arrangement">
+  <button type="button" data-layout="side">4 in a row, side by side</button>
+  <button type="button" data-layout="grid">2 across x 2 front to back</button>
+  <button type="button" data-layout="depth">4 in a row, front to back</button>
+  <button type="button" data-layout="right">3 on the left, 1 long on the right</button>
+  <button type="button" data-layout="left">1 long on the left, 3 on the right</button>
+  <button type="button" data-layout="back">3 in front, 1 long in back</button>
+  <button type="button" data-layout="front">1 long in front, 3 in back</button>
+ </div>
+ <p id="wizard9PocketError" class="wizard9-validation" role="status" aria-live="polite"></p>
+ <div class="wizard9-actions"><button type="button" id="wizard9PocketBack">Back to Step 2</button></div>
+</section>
+<section id="wizard9Item" hidden>
+ <h3>How tall is what you're storing?</h3>
+ <p class="wizard9-help">Optional. It lets the wizard check whether a lid will close and suggest finger notches when things sit below the top. Leave it empty to skip.</p>
+ <div class="wizard9-inputs"><label>Item height<input id="wizard9ItemHeight" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3 1/8 or 76 mm"><small id="wizard9ItemHeightResult"></small></label></div>
+ <p id="wizard9ItemError" class="wizard9-validation" role="status" aria-live="polite"></p>
+ <div class="wizard9-actions"><button type="button" id="wizard9ItemBack">Back to Step 3</button><button type="button" id="wizard9ItemNext">Save &amp; Continue</button></div>
+</section>
+<section id="wizard9Dividers" hidden>
+ <h3>Should the dividers lift out or be fixed in?</h3>
+ <p class="wizard9-help">Either way, the dividers slot together where they cross.</p>
+ <div class="wizard9-divider-choices" role="group" aria-label="Divider attachment options">
+  <button type="button" data-divider="loose" aria-pressed="false"><strong>Loose (lift out)</strong><span>The dividers sit in the box and lift out as one grid.</span></button>
+  <button type="button" data-divider="fixed" aria-pressed="false"><strong>Fixed (tabbed in)</strong><span>Tabs on the dividers lock into slots in the walls and bottom.</span></button>
+ </div>
+ <div class="wizard9-actions"><button type="button" id="wizard9DividerBack">Back to Step 4</button></div>
+</section>
+<section id="wizard9Notches" hidden>
+ <h3>Do you want finger notches in the dividers?</h3>
+ <p class="wizard9-help">A rounded scoop in the top of a divider, one per pocket, so you can reach in and grab what's inside.</p>
+ <div class="wizard9-divider-choices" id="wizard9DividerNotchChoices" role="group" aria-label="Finger notches in dividers">
+  <button type="button" data-divider-notch="none"><strong>No notches</strong><span>Straight tops on every divider.</span></button>
+  <button type="button" data-divider-notch="all"><strong>Notches in all the dividers</strong><span>Front-to-back (A) and side-to-side (B).</span></button>
+  <button type="button" data-divider-notch="a"><strong>Front-to-back dividers only (A)</strong><span>The dividers that run from front to back.</span></button>
+  <button type="button" data-divider-notch="b"><strong>Side-to-side dividers only (B)</strong><span>The dividers that run from side to side.</span></button>
+ </div>
+ <h3 style="margin-top:19px">Do you want finger notches in the outer walls?</h3>
+ <p class="wizard9-help">The same shape and size as the dividers' notches, one over each pocket along the wall. Walls with hand holes don't get them, and a closed box can't have them.</p>
+ <div class="wizard9-divider-choices" id="wizard9WallNotchChoices" role="group" aria-label="Finger notches in outer walls">
+  <button type="button" data-wall-notch="none"><strong>No wall notches</strong><span>Straight tops on the outer walls.</span></button>
+  <button type="button" data-wall-notch="ends"><strong>Left and right ends</strong><span>Reach in from the sides.</span></button>
+  <button type="button" data-wall-notch="frontback"><strong>Front and back</strong><span>Reach in from the front.</span></button>
+  <button type="button" data-wall-notch="all"><strong>All four walls</strong><span>Notches all the way around.</span></button>
+ </div>
+ <p id="wizard9NotchFeedback" class="wizard9-help" aria-live="polite">Choose one option in each section to preview the notches in 3D.</p>
+ <div class="wizard9-actions"><button type="button" id="wizard9NotchBack">Back to Step 5</button><button type="button" id="wizard9NotchNext">Continue to Step 7</button></div>
+</section>
+<section id="wizard9HandHoles" hidden><h3>Do you want hand holes to carry it?</h3><p class="wizard9-help">Rounded slots near the top of the two narrower walls, big enough for four fingers. They stay clear of a lid.</p><div class="wizard9-divider-choices">
+<button type="button" data-handholes="yes"><strong>Yes, hand holes</strong><span>About 3 1/4 in wide and 1 in tall.</span></button>
+<button type="button" data-handholes="no"><strong>No hand holes</strong><span>Solid walls.</span></button></div><div class="wizard9-actions"><button type="button" id="wizard9HandBack">Back to Step 6</button></div></section>
+<section id="wizard9Top" hidden><h3>What goes on top?</h3><div class="wizard9-divider-choices">
+<button type="button" data-top="open"><strong>Open top</strong><span>No lid; everything is easy to reach.</span></button>
+<button type="button" data-top="shoebox"><strong>Shoebox lid</strong><span>A shallow lid that slips down over the box.</span></button>
+<button type="button" data-top="dropin"><strong>Drop-in lid</strong><span>Sits on top with an insert and a ring handle.</span></button>
+<button type="button" data-top="closed"><strong>Closed box</strong><span>A top fitted on with tabs, like the rest of the box.</span></button></div>
+<p class="wizard9-help" id="wizard9TopHint" aria-live="polite"></p>
+<div class="wizard9-actions"><button type="button" id="wizard9TopBack">Back to Step 7</button></div></section>
+<section id="wizard9Completed" hidden><h3>Box Wizard — Your choices</h3><div id="wizard9FinalSummary" style="white-space:pre-line;line-height:1.8"></div><p class="wizard9-help">Generate editable laser-cut panels and divider parts, then inspect the assembled preview in 3D. Prototype and check kerf and joints before production.</p><label class="wizard-clearance-field">Divider slot clearance (mm)
+ <input id="wizardDividerClearance" type="number" min="0" max="2" step="0.05" value="0.15" aria-label="Extra width added to divider crossing slots in millimeters">
+ <small>Added to slot width (material thickness + clearance). Start with a scrap fit test.</small></label>
+ <button id="wizard9Generate" type="button">Generate Box on Canvas</button><p id="wizard9GenerateStatus" class="wizard9-help" role="status" aria-live="polite"></p><div class="wizard9-actions"><button type="button" id="wizard9CompletedBack">Back to Step 8</button></div></section>
+<section id="wizard9Pending" hidden>
+ <h3 id="wizard9PendingTitle">Next steps coming soon</h3>
+ <p>Your measurements and layout choices are saved in this session. We can build the remaining steps next.</p>
+ <div id="wizard9Summary"></div>
+ <button type="button" id="wizard9Edit">Back to previous step</button>
+</section>`;
+host.appendChild(wizard);
+let step=1,choice=null;
+const pocketDraft={count:4,layout:null,itemHeight:'',divider:null,dividerNotches:null,wallNotches:null,handHoles:null,top:null};
+let overallHasPockets=null;
+const drafts={pocket:{wide:'',depth:'',height:'',thickness:''},overall:{wide:'',depth:'',height:'',thickness:''}};
+const keys=['wide','depth','height','thickness'];
+const ids=['wizard9Wide','wizard9Depth','wizard9Height','wizard9Thickness'];
+const res=['wizard9WideResult','wizard9DepthResult','wizard9HeightResult','wizard9ThicknessResult'];
+function parseDimension(input){
+ let str=String(input).trim().toLowerCase().replace(/[″"]/g,' in').replace(/[′']/g,' in').replace(/\s+/g,' ');
+ if(!str)return null;
+ const match=str.match(/^(.*?)\s*(mm|millimeters?|in|inches?|inch)?$/);
+ if(!match)return null;
+ const number=match[1].trim(),unit=match[2]||'in';
+ let n;
+ const mixed=number.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+ const fraction=number.match(/^(\d+)\/(\d+)$/);
+ if(mixed){if(+mixed[3]===0)return null;n=+mixed[1]+(+mixed[2]/+mixed[3]);}
+ else if(fraction){if(+fraction[2]===0)return null;n=+fraction[1]/+fraction[2];}
+ else if(/^\d+(?:\.\d+)?$/.test(number))n=Number(number);
+ else return null;
+ if(!Number.isFinite(n)||n<=0)return null;
+ return {mm:n*(unit.startsWith('m')?1:25.4),inch:n/(unit.startsWith('m')?25.4:1)};
+}
+function updateConversions(){
+ ids.forEach((id,i)=>{
+  const el=$(id),v=el.value.trim(),result=$(res[i]),parsed=parseDimension(v);
+  result.textContent=!v?'':parsed?`${Number(parsed.inch.toFixed(5))} in  ·  ${Number(parsed.mm.toFixed(4))} mm`:'Enter a positive value, such as 3 1/8 or 76 mm';
+  result.classList.toggle('invalid',!!v&&!parsed);
+ });
+}
+// The overall-box route has its own step numbers and forks at Step 3.
+function routeSteps(){return choice==='overall'?(overallHasPockets==='yes'?9:5):8;}
+function currentStepNumber(){return choice==='overall'&&step===10?9:choice==='overall'&&overallHasPockets==='no'&&step===6?5:choice==='pocket'&&step===9?8:step;}
+function currentProgress(){return choice==='overall'? Math.min(currentStepNumber(),routeSteps()):Math.min(step,8);}
+function handStep(){return choice==='overall'?(overallHasPockets==='no'?4:8):7;}
+function topStep(){return choice==='overall'?(overallHasPockets==='no'?5:9):8;}
+function completeStep(){return choice==='overall'?(overallHasPockets==='no'?6:10):9;}
+function layoutStep(){return choice==='overall'?4:3;}
+function itemStep(){return choice==='overall'?5:4;}
+function dividerStep(){return choice==='overall'?6:5;}
+function notchStep(){return choice==='overall'?7:6;}
+function previousHandStep(){return choice==='overall'?(overallHasPockets==='no'?3:7):6;}
+function updateFinalSummary(){
+ const topNames={open:'Open top',shoebox:'Shoebox lid',dropin:'Drop-in lid',closed:'Closed box'};
+ const measurementNames=['Width','Front to back','Height','Material thickness'];
+ const dimensionText=keys.map((k,i)=>{const d=parseDimension(drafts[choice][k]);return measurementNames[i]+': '+(d?d.mm.toFixed(2)+' mm':'Not set');}).join('\n');
+ $('wizard9FinalSummary').textContent=(choice==='overall'?'Overall box size':'Pocket size')+'\n'+dimensionText+'\nPockets: '+(choice==='overall'&&overallHasPockets==='no'?'No — one open space':pocketDraft.count+' ('+(pocketDraft.layout||'Unselected')+')')+'\nHand holes: '+(pocketDraft.handHoles==='yes'?'Yes':'No')+'\nTop: '+(topNames[pocketDraft.top]||'Not selected')+(choice==='overall'&&overallHasPockets==='no'?'':'\nDivider attachment: '+(pocketDraft.divider||'Not selected')+'\nDivider notches: '+(pocketDraft.dividerNotches||'None')+'\nWall notches: '+(pocketDraft.wallNotches||'None'));
+ $('wizardDividerClearance').closest('label').hidden=choice==='overall'&&overallHasPockets==='no';
+}
+function display(){
+ wizard.hidden=false;
+ $('wizardDockPlaceholder').hidden=true;
+ const visibleStep=currentProgress(),total=routeSteps();
+ $('wizardDockState').textContent=`Step ${visibleStep} of ${total}`;
+ $('wizard9Step').textContent=`Step ${visibleStep} of ${total}`;
+ $('wizard9TrackFill').style.width=`${Math.min(100,visibleStep/total*100)}%`;
+ const overall=choice==='overall',pocketPath=!overall||overallHasPockets==='yes';
+ $('wizard9Choice').hidden=step!==1;
+ $('wizard9Measurements').hidden=step!==2;
+ $('wizardOverallPocketsChoice').hidden=!(overall&&step===3);
+ $('wizard9Pockets').hidden=!(pocketPath&&step===layoutStep());
+ $('wizard9Item').hidden=!(pocketPath&&step===itemStep());
+ $('wizard9Dividers').hidden=!(pocketPath&&step===dividerStep());
+ $('wizard9Notches').hidden=!(pocketPath&&step===notchStep());
+ $('wizard9HandHoles').hidden=step!==handStep();
+ $('wizard9Top').hidden=step!==topStep();
+ $('wizard9Completed').hidden=step!==completeStep();
+ $('wizard9Pending').hidden=true;
+ $('wizard9PocketBack').textContent=`Back to Step ${layoutStep()-1}`;
+ $('wizard9ItemBack').textContent=`Back to Step ${itemStep()-1}`;
+ $('wizard9DividerBack').textContent=`Back to Step ${dividerStep()-1}`;
+ $('wizard9NotchBack').textContent=`Back to Step ${notchStep()-1}`;
+ $('wizard9NotchNext').textContent=`Continue to Step ${notchStep()+1}`;
+ $('wizard9HandBack').textContent=`Back to Step ${previousHandStep()}`;
+ $('wizard9TopBack').textContent=`Back to Step ${topStep()-1}`;
+ $('wizard9CompletedBack').textContent=`Back to Step ${topStep()}`;
+ document.querySelectorAll('#wizardOverallPocketsChoice [data-overall-pockets]').forEach(b=>{
+  const active=b.dataset.overallPockets===overallHasPockets;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));
+ });
+ if(!$('wizard9Pockets').hidden){
+  $('wizard9PocketCount').value=pocketDraft.count;
+  document.querySelectorAll('#wizard9Pockets [data-layout]').forEach(b=>{
+   const active=b.dataset.layout===pocketDraft.layout;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));
+  });
+ }
+ if(!$('wizard9Item').hidden){$('wizard9ItemHeight').value=pocketDraft.itemHeight;showItemConversion();}
+ document.querySelectorAll('#wizard9Dividers [data-divider]').forEach(b=>{const active=b.dataset.divider===pocketDraft.divider;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
+ if(!$('wizard9Notches').hidden){
+  for(const [attr,value] of [['data-divider-notch',pocketDraft.dividerNotches],['data-wall-notch',pocketDraft.wallNotches]]){
+   document.querySelectorAll('#wizard9Notches ['+attr+']').forEach(b=>{const active=b.getAttribute(attr)===value;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
+  }
+  previewNotches();
+ }
+ for(const [container,attr,value] of [['wizard9HandHoles','data-handholes',pocketDraft.handHoles],['wizard9Top','data-top',pocketDraft.top]]){
+  document.querySelectorAll('#'+container+' ['+attr+']').forEach(b=>{const active=b.getAttribute(attr)===value;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
+ }
+ if(!$('wizard9Completed').hidden)updateFinalSummary();
+ if(step===2){
+  $('wizard9Question').textContent=choice==='pocket'?'How big is each pocket, inside?':'How big is the outside of the box?';
+  $('wizard9HeightLabel').firstChild.textContent=choice==='pocket'?'Tall (how deep the pocket is)':'Height';
+  keys.forEach((k,i)=>$(ids[i]).value=drafts[choice][k]);
+  $('wizard9Error').textContent='';updateConversions();
+ }
+}
+function enter(kind){choice=kind;step=2;display();}
+$('boxWizardOpen').addEventListener('click',()=>{step=1;display();});
+$('wizard9Pocket').addEventListener('click',()=>enter('pocket'));
+$('wizard9Overall').addEventListener('click',()=>enter('overall'));
+$('wizard9Back').addEventListener('click',()=>{keys.forEach((k,i)=>drafts[choice][k]=$(ids[i]).value);step=1;display()});
+ids.forEach((id,i)=>$(id).addEventListener('input',()=>{if(choice)drafts[choice][keys[i]]=$(id).value;updateConversions();}));
+$('wizard9Save').addEventListener('click',()=>{
+ const vals=ids.map(id=>parseDimension($(id).value));
+ if(vals.some(v=>!v)){ $('wizard9Error').textContent='Please enter a valid, positive measurement in each box.';ids[vals.findIndex(v=>!v)].focus();return;}
+ const [w,d,h,t]=vals.map(v=>v.mm);
+ if(t*2>=Math.min(w,d,h)){$('wizard9Error').textContent='Material thickness must be less than half the smallest dimension.';return;}
+ const summary=keys.map((k,i)=>`${k==='wide'?'Width':k==='depth'?'Front to back':k==='height'?(choice==='pocket'?'Inside pocket depth':'Outside height'):'Material thickness'}: ${Number(vals[i].inch.toFixed(5))} in (${Number(vals[i].mm.toFixed(3))} mm)`).join('\n');
+ $('wizard9Summary').textContent=(choice==='pocket'?'Built around pocket size':'Built around overall box size')+'\n'+summary;
+ // These are wizard draft values; no panels are regenerated until subsequent steps are designed.
+ step=3;display();
+});
+$('wizard9Edit').addEventListener('click',()=>{step=2;display()});
+$('wizardOverallPocketsBack').addEventListener('click',()=>{step=2;display()});
+document.querySelectorAll('#wizardOverallPocketsChoice [data-overall-pockets]').forEach(b=>b.addEventListener('click',()=>{overallHasPockets=b.dataset.overallPockets;step=4;display();}));
+$('wizard9PocketBack').addEventListener('click',()=>{step=layoutStep()-1;display()});
+$('wizard9PocketCount').addEventListener('input',()=>{
+ const n=Number($('wizard9PocketCount').value);
+ pocketDraft.count=n;
+ $('wizard9PocketError').textContent='';
+});
+document.querySelectorAll('#wizard9Pockets [data-layout]').forEach(button=>button.addEventListener('click',()=>{
+ const count=Number($('wizard9PocketCount').value);
+ if(!Number.isInteger(count)||count<1||count>100){
+   $('wizard9PocketError').textContent='Enter a whole number of pockets between 1 and 100.';
+   $('wizard9PocketCount').focus();return;
+ }
+ if(count!==4){
+   $('wizard9PocketError').textContent='These seven layouts each describe four pockets. Enter 4 pockets to use one of these layouts.';
+   $('wizard9PocketCount').focus();return;
+ }
+ pocketDraft.count=count;pocketDraft.layout=button.dataset.layout;step=itemStep();display();
+}));
+function showItemConversion(){
+ const value=$('wizard9ItemHeight').value.trim(),result=$('wizard9ItemHeightResult');
+ const parsed=parseDimension(value);
+ result.textContent=!value?'Optional — leave blank to skip':parsed?`${Number(parsed.inch.toFixed(5))} in  ·  ${Number(parsed.mm.toFixed(4))} mm`:'Enter a valid height, such as 3 1/8 or 76 mm';
+ result.classList.toggle('invalid',!!value&&!parsed);
+}
+$('wizard9ItemHeight').addEventListener('input',()=>{pocketDraft.itemHeight=$('wizard9ItemHeight').value;showItemConversion();});
+$('wizard9ItemBack').addEventListener('click',()=>{step=layoutStep();display()});
+$('wizard9ItemNext').addEventListener('click',()=>{
+ const raw=$('wizard9ItemHeight').value.trim(),height=raw?parseDimension(raw):null;
+ if(raw&&!height){$('wizard9ItemError').textContent='Enter a valid positive item height or leave the box empty.';$('wizard9ItemHeight').focus();return;}
+ pocketDraft.itemHeight=raw;
+ const layoutNames={
+  side:'4 in a row, side by side',grid:'2 across x 2 front to back',depth:'4 in a row, front to back',
+  right:'3 on the left, 1 long on the right',left:'1 long on the left, 3 on the right',
+  back:'3 in front, 1 long in back',front:'1 long in front, 3 in back'};
+ $('wizard9Summary').textContent+='\nPockets: '+pocketDraft.count+'\nLayout: '+(layoutNames[pocketDraft.layout]||'Not selected')+
+  '\nItem height: '+(height?`${Number(height.inch.toFixed(5))} in (${Number(height.mm.toFixed(3))} mm)`:'Not provided');
+ step=dividerStep();display();
+});
+$('wizard9DividerBack').addEventListener('click',()=>{step=itemStep();display()});
+document.querySelectorAll('#wizard9Dividers [data-divider]').forEach(button=>button.addEventListener('click',()=>{
+ pocketDraft.divider=button.dataset.divider;
+ const kind=pocketDraft.divider==='loose'?'Loose (lift out)':'Fixed (tabbed in)';
+ $('wizard9Summary').textContent=$('wizard9Summary').textContent.replace(/\nDivider attachment:.*$/m,'')+'\nDivider attachment: '+kind;
+ step=notchStep();display();
+}));
+
+function previewNotches(){
+ const parsed=['wide','depth','height','thickness'].map(key=>parseDimension(drafts[choice][key]));
+ if(parsed.some(p=>!p))return;
+ let [pw,pd,ph,thick]=parsed.map(p=>p.mm);
+ const layout=pocketDraft.layout||'grid';
+ const isSpecial=['right','left','front','back'].includes(layout);
+ const cols=layout==='side'?4:layout==='depth'?1:isSpecial&&(layout==='front'||layout==='back')?3:2;
+ const rows=layout==='depth'?4:layout==='side'?1:isSpecial&&(layout==='right'||layout==='left')?3:2;
+ if(choice==='overall'){
+  pw=(pw-(cols+1)*thick)/cols;
+  pd=(pd-(rows+1)*thick)/rows;
+  ph=ph-2*thick;
+ }
+ if(Math.min(pw,pd,ph)<=0)return;
+ const w=cols*pw+(cols+1)*thick,d=rows*pd+(rows+1)*thick,h=ph+2*thick;
+ if(w>3000||d>3000||h>3000)return;
+ window.LaserWizardEditor.preview({w,d,h,t:thick,layout,cols,rows,dividerNotches:pocketDraft.dividerNotches,wallNotches:pocketDraft.wallNotches});
+ $('wizard9NotchFeedback').textContent='3D preview updated. Preview is illustrative; inspect the actual flat cutting paths before cutting.';
+}
+for(const [attribute,key] of [['data-divider-notch','dividerNotches'],['data-wall-notch','wallNotches']]){
+ document.querySelectorAll('#wizard9Notches ['+attribute+']').forEach(button=>button.addEventListener('click',()=>{
+   pocketDraft[key]=button.getAttribute(attribute);
+   display();
+ }));
+}
+$('wizard9NotchBack').addEventListener('click',()=>{step=dividerStep();display()});
+$('wizard9NotchNext').addEventListener('click',()=>{
+ if(!pocketDraft.dividerNotches||!pocketDraft.wallNotches){$('wizard9NotchFeedback').textContent='Select one divider option and one outer wall option first.';return;}
+ $('wizard9Summary').textContent+='\nDivider notches: '+pocketDraft.dividerNotches+'\nWall notches: '+pocketDraft.wallNotches;
+ step=handStep();display();
+});
+
+$('wizard9HandBack').addEventListener('click',()=>{step=previousHandStep();display()});
+document.querySelectorAll('#wizard9HandHoles [data-handholes]').forEach(b=>b.addEventListener('click',()=>{
+ pocketDraft.handHoles=b.dataset.handholes;step=topStep();display();
+}));
+$('wizard9TopBack').addEventListener('click',()=>{step=handStep();display()});
+document.querySelectorAll('#wizard9Top [data-top]').forEach(b=>b.addEventListener('click',()=>{
+ pocketDraft.top=b.dataset.top;
+ const topNames={open:'Open top',shoebox:'Shoebox lid',dropin:'Drop-in lid',closed:'Closed box'};
+ $('wizard9FinalSummary').textContent='Hand holes: '+(pocketDraft.handHoles==='yes'?'Yes':'No')+'\nTop: '+topNames[pocketDraft.top]+'\nDivider attachment: '+(pocketDraft.divider||'Not set')+'\nDivider notches: '+(pocketDraft.dividerNotches||'None')+'\nWall notches: '+(pocketDraft.wallNotches||'None');
+ step=completeStep();display();
+}));
+$('wizard9CompletedBack').addEventListener('click',()=>{step=topStep();display()});
+$('wizard9Generate').addEventListener('click',()=>{
+ const status=$('wizard9GenerateStatus');status.textContent='';
+ const oneOpenSpace=choice==='overall'&&overallHasPockets==='no';
+ const hasDividers=!oneOpenSpace;
+ if(!pocketDraft.handHoles||!pocketDraft.top||(choice==='overall'&&!overallHasPockets)||
+   (hasDividers&&(!pocketDraft.layout||!pocketDraft.divider||!pocketDraft.dividerNotches||!pocketDraft.wallNotches))){
+  status.textContent='Complete all the steps on your selected wizard route first.';return;
+ }
+ const measurements=['wide','depth','height','thickness'].map(k=>parseDimension(drafts[choice][k]));
+ if(measurements.some(v=>!v)){status.textContent='Return to Step 2 and enter valid measurements.';return;}
+ let [pw,pd,ph,t]=measurements.map(x=>x.mm);
+ const targetW=pw,targetD=pd,targetH=ph;
+ const map={side:[4,1],grid:[2,2],depth:[1,4],right:[2,3],left:[2,3],back:[3,2],front:[3,2]};
+ const [cols,rows]=oneOpenSpace?[1,1]:(map[pocketDraft.layout]||[2,2]);
+ if(choice==='overall'){
+  pw=(targetW-(cols+1)*t)/cols;
+  pd=(targetD-(rows+1)*t)/rows;
+  ph=targetH-2*t;
+ }
+ if(Math.min(pw,pd,ph)<20||t<.5||2*t>=Math.min(pw,pd,ph)){
+  status.textContent=choice==='overall'?'Outside box is too small for the chosen pockets and material thickness. Increase dimensions or choose fewer pockets.':'Pocket dimensions must be at least 20 mm and greater than twice the material thickness.';return;
+ }
+ const slotClearance=oneOpenSpace?0:Number($('wizardDividerClearance').value);
+ if(!Number.isFinite(slotClearance)||slotClearance<0||slotClearance>2){
+  status.textContent='Enter divider clearance from 0 to 2 mm.';return;
+ }
+ let built;
+ try{
+   built=window.LaserWizardEditor.generate({pw,pd,ph,t,layout:oneOpenSpace?'none':pocketDraft.layout,
+    dividerMode:oneOpenSpace?'loose':pocketDraft.divider,dividerNotches:oneOpenSpace?'none':pocketDraft.dividerNotches,
+    wallNotches:oneOpenSpace?'none':pocketDraft.wallNotches,handHoles:pocketDraft.handHoles,top:pocketDraft.top,
+    slotClearance,oneOpenSpace,choice,pocketDraft});
+ }catch(e){status.textContent='Could not generate: '+e.message;return;}
+ status.textContent=`Generated ${built.parts.length} editable ${oneOpenSpace?'single-space box':'box and divider'} cutting parts. ${built.geometryWarnings.join(' ')} Hand holes, lids, kerf and physical fit still require further verification.`;
+});
+
+
+});
+</script><script id="pasteboard-name-script">
+(()=>{
+ 'use strict';
+ const button=document.getElementById('pasteboardNameButton');
+ const input=document.getElementById('pasteboardNameInput');
+ if(!button||!input)return;
+ const key='laser-design-studio-pasteboard-name';
+ let current='Pasteboard 1',old=current;
+ try{const saved=localStorage.getItem(key);if(saved&&saved.trim())current=saved.slice(0,60);}catch(e){}
+ const show=()=>{button.textContent=current;button.title='Click to rename '+current;};
+ const close=commit=>{
+  if(input.hidden)return;
+  if(commit){const next=input.value.trim();current=next||old;try{localStorage.setItem(key,current)}catch(e){}}
+  else current=old;
+  input.hidden=true;button.hidden=false;show();button.focus();
+ };
+ button.addEventListener('click',()=>{
+  old=current;input.value=current;button.hidden=true;input.hidden=false;input.focus();input.select();
+ });
+ input.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.preventDefault();close(true)}
+  else if(e.key==='Escape'){e.preventDefault();close(false)}
+  e.stopPropagation();
+ });
+ input.addEventListener('blur',()=>close(true));
+ input.addEventListener('pointerdown',e=>e.stopPropagation());
+ show();
+})();
+</script></body></html>
