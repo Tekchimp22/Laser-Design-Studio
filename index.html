@@ -168,7 +168,7 @@ aside.right{min-width:0}
 .right-tab-bar{flex-shrink:0}
 @media(max-width:1000px){.right-tabbed-box{max-height:none}.right-tab-content{overflow:visible}.color-mode-table{grid-template-columns:minmax(0,1fr) minmax(85px,120px)}}
 </style><style id="workspace-canvas-fit">
-.workspace{padding:0!important;background:#fff!important;justify-content:center;align-items:flex-start;scrollbar-gutter:stable;}
+.workspace{padding:0!important;justify-content:center;align-items:flex-start;scrollbar-gutter:stable;}
 .workspace .page{margin:0;box-shadow:none;background:#fff;flex:none;}
 .workspace #art{max-width:none;display:block;}
 </style><style id="text-formatting-two-rows">
@@ -207,7 +207,7 @@ aside.right{min-width:0}
 .box-gen-overlay[hidden]{display:none!important}.box-gen-overlay{position:fixed;inset:0;z-index:9000;background:#111b2bbe;display:flex;align-items:center;justify-content:center;padding:16px}
 .box-gen-dialog{width:min(580px,100%);max-height:92vh;overflow:auto;box-sizing:border-box;background:#213148;color:#edf3fb;border:1px solid #56708b;border-radius:12px;padding:20px;box-shadow:0 18px 55px #0007}
 .box-gen-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.box-gen-head h2{font-size:19px;margin:0}.box-gen-head button{font-size:18px}.box-gen-dialog p{font-size:13px;line-height:1.5;color:#d6e1ef}
-.box-gen-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.box-gen-fields label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:12px}
+.box-gen-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.box-gen-fields label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:11px}
 .box-gen-fields input{box-sizing:border-box;width:100%;min-width:0;padding:9px;border-radius:5px;border:1px solid #8da0b4;background:#fafcff;color:#1d293b;font-size:14px}
 .box-gen-check{display:flex;gap:8px;align-items:center;margin:14px 0;font-size:13px}.box-gen-actions{display:flex;justify-content:flex-end;gap:10px}
 .box-gen-actions #boxGenMake{background:#147454}.box-gen-hint{font-size:11px!important;color:#e8c992!important}
@@ -234,24 +234,7 @@ aside.right{min-width:0}
 </style><style id="box-lid-css">.zoom-control-box .box-lid-controls{display:inline-flex;gap:4px}.zoom-control-box .box-lid-controls[hidden]{display:none!important}.zoom-control-box .box-lid-controls button{font-size:12px;padding:6px 9px}.zoom-control-box .box-lid-controls button.selected{background:#2278bd;color:white;border-color:#8ed4ff}</style><style id="solid-3d-preview-style">
 #box3DStage{background:radial-gradient(ellipse at 52% 36%,#fbfdff 0%,#e9f0f7 70%,#d9e4ef 100%)}
 #box3DCanvas{display:block}
-</style><style id="box-edit-control-style">#boxEditSettings{margin-left:8px;background:#2a526e;color:white;border:1px solid #5e93ba;padding:6px 10px;border-radius:5px}#boxGenCount{width:100%}</style><style id="box-edit-tab-style">#rightTabEditBox h2{margin:0 0 8px}#rightTabEditBox #boxEditSettings{display:block;width:100%;margin:12px 0 0;background:#23619c;border:1px solid #4d91ca;border-radius:5px;padding:11px;color:white;font-weight:600}#rightTabEditBox #boxEditSettings[hidden]{display:none!important}#rightTabEditBox .fine{line-height:1.5}</style><style id="box-wizard-styles">
-.box-wizard-sidebar{margin-top:10px}
-.box-wizard-trigger{display:flex;align-items:center;gap:10px;width:100%;border-radius:7px;padding:10px 11px;border:1px solid #537da4;background:#254d70;color:#f5faff;font-weight:650;text-align:left;cursor:pointer}
-.box-wizard-trigger:hover{background:#346c99}.box-wizard-trigger svg{flex-shrink:0}
-.box-wizard-progress{margin:10px 0 14px}.box-wizard-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:12px}
-.box-wizard-steps span{padding:7px 2px;background:#263b50;color:#becfdf;border-radius:5px;text-align:center;font-size:11px}
-.box-wizard-steps span.current{background:#1c659a;color:white;outline:1px solid #66b6e9}
-.box-wizard-steps span.completed{background:#2e6656;color:#effff8}
-#boxWizardStepHelp{font-size:12px;margin:6px 0;color:#c2d1dd}
-.box-wizard-review{background:#14293b;border:1px solid #516c83;padding:13px;border-radius:8px;line-height:1.8}
-.box-wizard-navigation{display:flex;justify-content:space-between;margin-top:12px;gap:10px}
-.box-wizard-navigation button{padding:9px 14px}
-#boxGenOverlay[data-wizard="true"] .box-gen-fields label[hidden],
-#boxGenOverlay[data-wizard="true"] .box-gen-check[hidden],
-#boxGenOverlay[data-wizard="true"] .box-unit-control[hidden]{display:none!important}
-#boxGenOverlay[data-wizard="true"] #boxGenMake[hidden]{display:none!important}
-@media(max-width:560px){.box-wizard-steps{grid-template-columns:repeat(2,1fr)}}
-</style><style id="right-docked-box-wizard-css">
+</style><style id="box-edit-control-style">#boxEditSettings{margin-left:8px;background:#2a526e;color:white;border:1px solid #5e93ba;padding:6px 10px;border-radius:5px}#boxGenCount{width:100%}</style><style id="box-edit-tab-style">#rightTabEditBox h2{margin:0 0 8px}#rightTabEditBox #boxEditSettings{display:block;width:100%;margin:12px 0 0;background:#23619c;border:1px solid #4d91ca;border-radius:5px;padding:11px;color:white;font-weight:600}#rightTabEditBox #boxEditSettings[hidden]{display:none!important}#rightTabEditBox .fine{line-height:1.5}</style><style id="right-docked-box-wizard-css">
 aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:auto;align-items:stretch}
 .right-box-wizard-panel{flex:none;min-width:0;background:#17263a;border:1px solid #51647e;border-radius:8px;overflow:hidden}
 .right-box-wizard-heading{display:flex;flex-direction:column;gap:3px;background:#22364d;padding:11px 13px;border-bottom:1px solid #51647e}
@@ -304,9 +287,9 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 .wizard9-divider-choices button{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;white-space:normal;line-height:1.45;padding:14px;border-radius:8px;background:#274a6d;color:#f4f9ff;border:1px solid #5a84a7;cursor:pointer}
 .wizard9-divider-choices button strong{font-size:14px}.wizard9-divider-choices button span{font-size:12px;color:#d2e2f1}
 .wizard9-divider-choices button:hover,.wizard9-divider-choices button.selected{background:#326c9d;border-color:#8ac9ff}
-</style><style id="wizard-notch-step6">#wizard9Notches .wizard9-divider-choices{display:grid;gap:8px}#wizard9Notches .wizard9-divider-choices button{display:flex;flex-direction:column;text-align:left;gap:6px;white-space:normal;padding:12px;background:#284865;border:1px solid #597b99;border-radius:7px;color:#f8fbff}#wizard9Notches .wizard9-divider-choices button.selected{border-color:#9dd8ff;background:#256b99}#wizard9Notches .wizard9-divider-choices span{font-size:12px;color:#d5e3ec}</style><style id="wizard-clearance-style">.wizard-clearance-field{display:flex;flex-direction:column;gap:6px;font-size:13px;margin:12px 0}.wizard-clearance-field input{width:100%;max-width:180px;box-sizing:border-box;padding:8px;background:#f6faff;color:#152639;border:1px solid #839ab1;border-radius:5px}.wizard-clearance-field small{color:#c9d6e5;font-size:11px;line-height:1.4}</style><style id="pasteboard-edge-rulers">
+</style><style id="pasteboard-edge-rulers">
 /* Tan rulers and alignment grid are confined to the pasteboard; artwork area stays solid white. */
-.workspace{display:block!important;position:relative!important;background:#d9dee5!important;padding:34px 0 0!important;overflow:auto!important;}
+.workspace{display:block!important;position:relative!important;background-color:#d8d0c1!important;padding:34px 0 0!important;overflow:auto!important;}
 .workspace .ruler-page{display:block!important;width:max-content;height:max-content;margin:46px auto 64px!important;box-shadow:0 3px 18px #0003!important;background:#fff!important;}
 .workspace .ruler-page #art{display:block!important;margin:0!important;}
 .workspace .pasteboard-ruler-layer{position:sticky;top:34px;left:0;width:100%;height:0;z-index:30;pointer-events:none;display:block;background:transparent;}
@@ -364,7 +347,106 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 .secondary-toolbar .toolbar-tools-group #booleanMain .boolean-corner{right:1px;bottom:0;font-size:9px;}
 .secondary-toolbar .toolbar-tools-group #booleanMenu{position:absolute;left:0;top:calc(100% + 5px);width:max-content;min-width:0;grid-template-columns:repeat(3,38px);gap:5px;padding:6px;z-index:1000;}
 .secondary-toolbar .toolbar-tools-group #booleanMenu button{width:38px;height:38px;padding:6px;}
-</style></head><body><header><h1>◈ Laser Design Studio <small>Phase 2 · Hybrid Editor</small></h1><button id="new">New</button><div class="settings-wrap" id="settingsWrap"><button type="button" id="settingsBtn" title="Settings" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06-1.95 1.95-.06-.06A1.6 1.6 0 0 0 16 18.4a1.6 1.6 0 0 0-.96 1.46V20h-2.76v-.14A1.6 1.6 0 0 0 11.3 18.4a1.6 1.6 0 0 0-1.77.32l-.06.06-1.95-1.95.06-.06A1.6 1.6 0 0 0 7.9 15a1.6 1.6 0 0 0-1.46-.96H6.3v-2.76h.14A1.6 1.6 0 0 0 7.9 10.3a1.6 1.6 0 0 0-.32-1.77l-.06-.06 1.95-1.95.06.06A1.6 1.6 0 0 0 11.3 6.9a1.6 1.6 0 0 0 .96-1.46V5.3h2.76v.14A1.6 1.6 0 0 0 16 6.9a1.6 1.6 0 0 0 1.77-.32l.06-.06 1.95 1.95-.06.06A1.6 1.6 0 0 0 19.4 10.3a1.6 1.6 0 0 0 1.46.96H21v2.76h-.14A1.6 1.6 0 0 0 19.4 15Z" transform="translate(-1 -0.65)"/></svg><span>Settings</span></button><div id="settingsPanel" hidden role="dialog" aria-modal="false" aria-label="Settings" aria-labelledby="settingsHeading"><div class="settings-head"><h2 id="settingsHeading">Settings</h2><button id="settingsClose" type="button" title="Close Settings" aria-label="Close Settings">✕</button></div><div class="settings-tabs" role="tablist" aria-label="Settings categories"><button type="button" id="workspaceTab" role="tab" aria-controls="workspaceTabPanel" aria-selected="true" tabindex="0">Workspace Settings</button><button type="button" id="canvasTab" role="tab" aria-controls="canvasTabPanel" aria-selected="false" tabindex="-1">Canvas</button><button type="button" id="aboutTab" role="tab" aria-controls="aboutTabPanel" aria-selected="false" tabindex="-1">About</button></div><div id="workspaceTabPanel" role="tabpanel" aria-labelledby="workspaceTab"><h3>Workspace Settings</h3><label><input type="checkbox" id="grid" checked> Show pasteboard grid only</label><label>Major grid spacing (mm)</label><select id="gridSize"><option value="5">5 mm</option><option value="10" selected>10 mm</option><option value="20">20 mm</option><option value="25">25 mm</option><option value="50">50 mm</option></select><label><input type="checkbox" id="fineGrid" checked> Show fine grid (1/10 spacing)</label><label><input type="checkbox" id="snap"> Snap objects to grid</label><label>Snap spacing (mm)</label><select id="snapSize"><option value="0.5">0.5 mm</option><option value="1" selected>1 mm</option><option value="2">2 mm</option><option value="5">5 mm</option><option value="10">10 mm</option></select><label><input type="checkbox" id="easyGrab" checked> Easy grab (click inside shapes)</label><label>Grab tolerance <span id="grabLabel">14 px</span></label><input id="grabRange" type="range" min="6" max="30" value="14" step="2"></div><div id="canvasTabPanel" role="tabpanel" aria-labelledby="canvasTab" hidden><h3>Canvas</h3><div class="work-area-group"><label for="workAreaCategory" class="work-area-heading">WORK AREA (YOUR LASER'S BED)</label><select id="workAreaCategory" aria-label="Work area selection"><option value="" selected>Select work area</option><option value="common">Common Sizes</option></select><div id="commonSizesWrap" hidden><label for="commonSizes">Common Sizes</label><select id="commonSizes"><option value="">Choose a size</option><option value="100x100">100 × 100 mm</option><option value="200x200">200 × 200 mm</option><option value="300x200">300 × 200 mm</option><option value="400x400">400 × 400 mm</option><option value="600x400">600 × 400 mm</option></select></div><p class="work-area-hint">Choose a preset to fill in the dimensions below, then click Apply canvas size.</p></div><p>Set the physical size of your design workspace in millimeters. Default: 400 × 400 mm (15.748 × 15.748 in).</p><div class="fields"><div><label for="canvasW">Width (mm)</label><input id="canvasW" type="number" value="400" min="1" max="3000"></div><div><label for="canvasH">Height (mm)</label><input id="canvasH" type="number" value="400" min="1" max="3000"></div></div><button id="canvasApply" type="button" style="margin-top:10px">Apply canvas size</button></div><div id="aboutTabPanel" role="tabpanel" aria-labelledby="aboutTab" hidden><h3>About Laser Design Studio</h3><p>Create vector artwork and export SVG files for LightBurn.</p><p>This editor does not control laser hardware.</p></div></div></div><button type="button" id="boxGenOpen" title="Create a finger-joint box design">Box Generator</button><div class="header-file-actions" style="display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap"><button id="export" style="background:#14654e">Export SVG for LightBurn</button></div><input id="file" type="file" accept=".json,application/json"></header>
+</style><style id="keychain-generator-styles">
+.keychain-sidebar-section{border-bottom:none;padding:2px 0 16px;margin:0 0 12px}
+.keychain-square-button{width:74px;height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;border:1px solid #6887a4;border-radius:8px;background:#293d55;color:#f3f7fb;font-weight:600;font-size:12px}
+.keychain-square-button:hover,.keychain-square-button:focus-visible{background:#365b7b;outline-offset:2px}
+.keychain-dialog-backdrop[hidden]{display:none!important}.keychain-dialog-backdrop{position:fixed;inset:0;z-index:11000;background:#0c1427c9;display:flex;align-items:center;justify-content:center;padding:16px}
+.keychain-dialog{width:min(480px,96vw);max-height:90vh;overflow:auto;background:#203148;border:1px solid #6c829f;border-radius:12px;box-shadow:0 18px 50px #0008;padding:20px}
+.keychain-dialog-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.keychain-dialog h2{font-size:19px;margin:0;color:#edf4ff}
+.keychain-dialog .keychain-help{font-size:12px;line-height:1.5;color:#c4d6e9}.keychain-dialog label{color:#dce8f8;font-size:12px;display:flex;flex-direction:column;gap:5px;margin:0}
+.keychain-dialog input,.keychain-dialog select{background:#fff;color:#1b293e;padding:9px;width:100%;box-sizing:border-box}
+.keychain-fields{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:16px 0}.keychain-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}.keychain-actions #keychainGenerate{background:#12765b}
+.keychain-error{color:#ffc1a5;font-size:12px;min-height:16px;margin:0}
+@media(max-width:500px){.keychain-fields{grid-template-columns:1fr}}
+</style>
+<style id="phase3-right-sidebar-restored">
+/* Restore the right sidebar without restoring its former Colors/Info UI.
+   Existing hidden controls stay mounted so editor handlers still work. */
+.app{grid-template-columns:190px minmax(0,1fr) 290px!important;}
+.app > aside.right{display:flex!important;flex-direction:column;min-width:0;min-height:480px;gap:12px;}
+.app > aside.right > .right-tabbed-box{display:none!important;}
+.phase3-sidebar-empty{min-height:280px;flex:1;border:1px dashed #42556c;border-radius:8px;background:#17263a;padding:14px;}
+.phase3-sidebar-empty h2{margin:0 0 8px;font-size:13px;color:#bfdbf6;}
+.phase3-sidebar-empty p{margin:0;color:#a7bcd4;font-size:12px;line-height:1.5;}
+@media(max-width:1000px){.app{grid-template-columns:145px minmax(0,1fr) 240px!important;}}
+@media(max-width:720px){.app{grid-template-columns:145px minmax(0,1fr)!important;}.app > aside.right{grid-column:1/-1;min-height:160px;}.phase3-sidebar-empty{min-height:120px;}}
+@media(max-width:570px){.app{display:block!important;}.app > aside.right{min-height:120px;}}
+</style>
+
+<style id="phase3-keychain-docked-style">
+/* Generator settings are docked in the right sidebar, not a floating dialog. */
+.app > aside.right #keychainGenOverlay.keychain-dialog-backdrop{
+ position:relative;inset:auto;z-index:auto;display:block;width:100%;height:auto;
+ background:transparent;padding:0;flex:0 0 auto;align-items:unset;justify-content:unset;
+}
+.app > aside.right #keychainGenOverlay.keychain-dialog-backdrop[hidden]{display:none!important}
+.app > aside.right #keychainGenOverlay .keychain-dialog{
+ width:100%;max-height:none;overflow:visible;padding:13px;border-radius:8px;
+ background:#203148;box-shadow:none;min-width:0;
+}
+.app > aside.right #keychainGenOverlay .keychain-dialog h2{font-size:15px;line-height:1.35}
+.app > aside.right #keychainGenOverlay .keychain-dialog-head{gap:7px}
+.app > aside.right #keychainGenOverlay .keychain-dialog-head button{padding:5px 8px;flex-shrink:0}
+.app > aside.right #keychainGenOverlay .keychain-fields{grid-template-columns:minmax(0,1fr);gap:11px;margin:13px 0}
+.app > aside.right #keychainGenOverlay .keychain-actions{flex-direction:column-reverse;align-items:stretch;gap:7px}
+.app > aside.right #keychainGenOverlay .keychain-actions button{width:100%}
+.app > aside.right:has(#keychainGenOverlay:not([hidden])) .phase3-sidebar-empty{display:none}
+.app > aside.right #keychainGenOverlay .keychain-help{margin:12px 0}
+</style>
+<style id="keychain-board-shape-style">
+#keychainGenOverlay .board-shape-panel{margin-top:14px;border:1px solid #637c99;border-radius:9px;background:#182b41;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+#keychainGenOverlay .board-shape-title{display:block;margin:0;padding:10px 13px;background:#304a68;border-bottom:1px solid #637c99;color:#e8f2ff;font-weight:700;letter-spacing:.04em;font-size:12px}
+#keychainGenOverlay .board-shape-body{min-height:45px;padding:12px 13px;box-sizing:border-box}
+
+#keychainGenOverlay .board-shape-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;}
+#keychainGenOverlay .board-shape-option{min-width:0;min-height:66px;padding:6px 2px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:#293e58;color:#e8f2ff;border:1px solid #607995;border-radius:6px;font-size:10px;line-height:1.1;cursor:pointer}
+#keychainGenOverlay .board-shape-option svg{width:43px;max-width:100%;height:29px;stroke:currentColor;stroke-width:3;fill:none;}
+#keychainGenOverlay .board-shape-option:hover{background:#355373;border-color:#8fb5dc;}
+#keychainGenOverlay .board-shape-option.selected{background:#215f91;border-color:#a1d8ff;box-shadow:inset 0 0 0 1px #a1d8ff;}
+#keychainGenOverlay .board-shape-option:focus-visible{outline:3px solid #f4cb81;outline-offset:2px;}
+#keychainGenOverlay .board-shape-add{display:block;width:100%;box-sizing:border-box;margin-top:12px;padding:9px 8px;border:1px solid #5083b0;border-radius:6px;background:#215f91;color:#fff;font-size:12px;font-weight:600;cursor:pointer;}
+#keychainGenOverlay .board-shape-add:hover{background:#2874ae;}
+
+#keychainGenOverlay .board-text-panel{margin-top:12px;border:1px solid #637c99;border-radius:9px;background:#182b41;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+#keychainGenOverlay .board-text-title{margin:0;padding:10px 13px;background:#304a68;border-bottom:1px solid #637c99;color:#e8f2ff;font-weight:700;letter-spacing:.04em;font-size:12px}
+#keychainGenOverlay .board-text-body{padding:12px 13px}
+#keychainGenOverlay .board-text-body label{display:block;font-size:12px;font-weight:600;color:#e8f2ff;margin-bottom:6px}
+#keychainGenOverlay #boardKeychainText{width:100%;box-sizing:border-box;background:#f7fbff;color:#122235;border:1px solid #87a6c7;border-radius:6px;padding:9px 10px;font-size:13px}
+#keychainGenOverlay .board-text-hint{font-size:11px;line-height:1.4;color:#bed1e6;margin:8px 0 0}
+
+#keychainGenOverlay .keychain-settings-panel{margin-top:12px;border:1px solid #637c99;border-radius:9px;background:#182b41;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+#keychainGenOverlay .keychain-settings-title{margin:0;padding:10px 13px;background:#304a68;border-bottom:1px solid #637c99;color:#e8f2ff;font-weight:700;letter-spacing:.04em;font-size:12px}
+#keychainGenOverlay .keychain-settings-body{min-height:45px;padding:12px 13px;box-sizing:border-box}
+#keychainGenOverlay .keychain-outline-heading{display:flex;justify-content:space-between;align-items:center;color:#e8f2ff;font-size:12px;font-weight:600;margin-bottom:10px}
+#keychainGenOverlay .keychain-outline-heading span{color:#bed1e6;font-weight:400}
+#keychainGenOverlay .keychain-outline-control{display:flex;align-items:center;gap:8px}
+
+#keychainGenOverlay #keychainOutlineWidth{width:76px;min-width:76px;flex:0 0 76px;box-sizing:border-box;border:1px solid #87a6c7;border-radius:6px;background:#f7fbff;color:#142536;padding:8px 4px 8px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}#keychainGenOverlay #keychainOutlineWidth:focus{outline:2px solid #58aaff;outline-offset:2px}
+#keychainGenOverlay .keychain-letters-heading{font-size:12px;font-weight:750;color:#e8f2ff;letter-spacing:.045em;margin-bottom:11px}
+#keychainGenOverlay .keychain-outline-label{flex:0 0 auto;margin:0;font-size:12px;color:#e8f2ff;font-weight:500;white-space:nowrap}
+#keychainGenOverlay .keychain-outline-unit{font-size:12px;color:#d7e5f4;white-space:nowrap}
+#keychainGenOverlay .keychain-outline-control{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;white-space:nowrap}
+#keychainGenOverlay .keychain-outline-hint{font-size:11px;color:#bed1e6;line-height:1.4;margin:9px 0 0}
+
+</style>
+<style id="phase3-compact-generator-sidebar">
+/* Narrow the Generators sidebar to its 74 px Keychain control, plus padding. */
+@media (min-width:571px){
+ .app{grid-template-columns:104px minmax(0,1fr) 290px!important}
+ .app > aside.generator-sidebar{padding:12px 14px;min-width:0;box-sizing:border-box}
+ .app > aside.generator-sidebar .keychain-sidebar-section{padding:2px 0 6px;margin:0;border:0}
+ .app > aside.generator-sidebar .keychain-sidebar-section h2{font-size:12px;white-space:nowrap;margin:3px 0 10px}
+ .app > aside.generator-sidebar .keychain-square-button{width:74px;height:74px;box-sizing:border-box}
+}
+@media (min-width:571px) and (max-width:1000px){
+ .app{grid-template-columns:104px minmax(0,1fr) 240px!important}
+}
+@media (min-width:571px) and (max-width:720px){
+ .app{grid-template-columns:104px minmax(0,1fr)!important}
+}
+</style>
+</head><body><header><h1>◈ Laser Design Studio <small>Phase 2 · Hybrid Editor</small></h1><button id="new">New</button><div class="settings-wrap" id="settingsWrap"><button type="button" id="settingsBtn" title="Settings" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06-1.95 1.95-.06-.06A1.6 1.6 0 0 0 16 18.4a1.6 1.6 0 0 0-.96 1.46V20h-2.76v-.14A1.6 1.6 0 0 0 11.3 18.4a1.6 1.6 0 0 0-1.77.32l-.06.06-1.95-1.95.06-.06A1.6 1.6 0 0 0 7.9 15a1.6 1.6 0 0 0-1.46-.96H6.3v-2.76h.14A1.6 1.6 0 0 0 7.9 10.3a1.6 1.6 0 0 0-.32-1.77l-.06-.06 1.95-1.95.06.06A1.6 1.6 0 0 0 11.3 6.9a1.6 1.6 0 0 0 .96-1.46V5.3h2.76v.14A1.6 1.6 0 0 0 16 6.9a1.6 1.6 0 0 0 1.77-.32l.06-.06 1.95 1.95-.06.06A1.6 1.6 0 0 0 19.4 10.3a1.6 1.6 0 0 0 1.46.96H21v2.76h-.14A1.6 1.6 0 0 0 19.4 15Z" transform="translate(-1 -0.65)"/></svg><span>Settings</span></button><div id="settingsPanel" hidden role="dialog" aria-modal="false" aria-label="Settings" aria-labelledby="settingsHeading"><div class="settings-head"><h2 id="settingsHeading">Settings</h2><button id="settingsClose" type="button" title="Close Settings" aria-label="Close Settings">✕</button></div><div class="settings-tabs" role="tablist" aria-label="Settings categories"><button type="button" id="workspaceTab" role="tab" aria-controls="workspaceTabPanel" aria-selected="true" tabindex="0">Workspace Settings</button><button type="button" id="canvasTab" role="tab" aria-controls="canvasTabPanel" aria-selected="false" tabindex="-1">Canvas</button><button type="button" id="aboutTab" role="tab" aria-controls="aboutTabPanel" aria-selected="false" tabindex="-1">About</button></div><div id="workspaceTabPanel" role="tabpanel" aria-labelledby="workspaceTab"><h3>Workspace Settings</h3><label><input type="checkbox" id="grid" checked> Show pasteboard grid only</label><label>Major grid spacing (mm)</label><select id="gridSize"><option value="5">5 mm</option><option value="10" selected>10 mm</option><option value="20">20 mm</option><option value="25">25 mm</option><option value="50">50 mm</option></select><label><input type="checkbox" id="fineGrid" checked> Show fine grid (1/10 spacing)</label><label><input type="checkbox" id="snap"> Snap objects to grid</label><label>Snap spacing (mm)</label><select id="snapSize"><option value="0.5">0.5 mm</option><option value="1" selected>1 mm</option><option value="2">2 mm</option><option value="5">5 mm</option><option value="10">10 mm</option></select><label><input type="checkbox" id="easyGrab" checked> Easy grab (click inside shapes)</label><label>Grab tolerance <span id="grabLabel">14 px</span></label><input id="grabRange" type="range" min="6" max="30" value="14" step="2"></div><div id="canvasTabPanel" role="tabpanel" aria-labelledby="canvasTab" hidden><h3>Canvas</h3><div class="work-area-group"><label for="workAreaCategory" class="work-area-heading">WORK AREA (YOUR LASER'S BED)</label><select id="workAreaCategory" aria-label="Work area selection"><option value="" selected>Select work area</option><option value="common">Common Sizes</option></select><div id="commonSizesWrap" hidden><label for="commonSizes">Common Sizes</label><select id="commonSizes"><option value="">Choose a size</option><option value="100x100">100 × 100 mm</option><option value="200x200">200 × 200 mm</option><option value="300x200">300 × 200 mm</option><option value="400x400">400 × 400 mm</option><option value="600x400">600 × 400 mm</option></select></div><p class="work-area-hint">Choose a preset to fill in the dimensions below, then click Apply canvas size.</p></div><p>Set the physical size of your design workspace in millimeters. Default: 400 × 400 mm (15.748 × 15.748 in).</p><div class="fields"><div><label for="canvasW">Width (mm)</label><input id="canvasW" type="number" value="400" min="1" max="3000"></div><div><label for="canvasH">Height (mm)</label><input id="canvasH" type="number" value="400" min="1" max="3000"></div></div><button id="canvasApply" type="button" style="margin-top:10px">Apply canvas size</button></div><div id="aboutTabPanel" role="tabpanel" aria-labelledby="aboutTab" hidden><h3>About Laser Design Studio</h3><p>Create vector artwork and export SVG files for LightBurn.</p><p>This editor does not control laser hardware.</p></div></div></div><button type="button" id="boxGenOpen" title="Create a finger-joint box design">Box Generator</button><div class="header-file-actions" style="display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap"><button id="export" style="background:#14654e">Export SVG for LightBurn</button></div><input id="file" type="file" accept=".json,application/json"></header>
 <div class="secondary-toolbar" role="toolbar" aria-label="Additional design toolbar"><span class="secondary-toolbar-label">QUICK ACTIONS</span><div class="tb-project-buttons"><div class="quick-group"><span class="quick-title">Project</span><div class="quick-actions"><button id="open" class="header-icon-button" type="button" title="Open Project" aria-label="Open Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v2"/><path d="M3 10h18l-2 10H5L3 10z"/></svg></button><button id="save" class="header-icon-button" type="button" title="Save Project" aria-label="Save Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h14l3 3v15H3V3z"/><path d="M7 3v6h10V3"/><path d="M7 21v-9h10v9"/><path d="M14 3v5"/></svg></button></div></div><div class="quick-group"><span class="quick-title">History</span><div class="quick-actions"><button type="button" id="undo" title="Undo (Ctrl+Z)" aria-label="Undo" class="header-icon-button">↶</button><button type="button" id="redo" title="Redo (Ctrl+Y)" aria-label="Redo" class="header-icon-button">↷</button></div></div><div class="quick-group"><span class="quick-title">Edit</span><div class="quick-actions"><button type="button" data-action="copy" title="Copy (Ctrl+C)" aria-label="Copy">⧉</button><button type="button" data-action="paste" title="Paste (Ctrl+V)" aria-label="Paste">▣</button><button type="button" data-action="duplicate" title="Duplicate" aria-label="Duplicate">⧉+</button><button type="button" data-action="remove" title="Delete" aria-label="Delete">✕</button><button type="button" id="zoomSelection" class="tb-icon-only" title="Zoom to Selection" aria-label="Zoom to Selection" disabled><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="11" height="11" rx="1" stroke-dasharray="2 2"/><circle cx="15" cy="15" r="5"/><path d="m19 19 3 3"/><path d="M15 12v6M12 15h6"/></svg></button><button type="button" class="tb-icon-only" data-action="group" title="Group" aria-label="Group"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="10" height="10" rx="1"/><rect x="11" y="10" width="10" height="10" rx="1"/><path d="M16 3v5M13.5 5.5h5"/></svg></button><button type="button" class="tb-icon-only" data-action="ungroup" title="Ungroup" aria-label="Ungroup"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="9" height="9" rx="1"/><rect x="13" y="12" width="9" height="9" rx="1"/><path d="M13 5h8M17 1v8"/></svg></button></div></div></div><div class="quick-group"><span class="quick-title">Align Objects</span><div class="quick-actions"><button type="button" class="tb-icon-only" id="alignLeft" title="Align Left" aria-label="Align Left"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 3v18M8 6h12v4H8zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignCenter" title="Align Center" aria-label="Align Center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 6h16v4H4zM7 14h10v4H7z"/></svg></button><button type="button" class="tb-icon-only" id="alignRight" title="Align Right" aria-label="Align Right"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 3v18M4 6h12v4H4zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignTop" title="Align Top" aria-label="Align Top"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 4h18M6 8h4v12H6zM14 8h4v8h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignMiddle" title="Align Middle" aria-label="Align Middle"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 12h20M6 4h4v16H6zM14 6h4v12h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignBottom" title="Align Bottom" aria-label="Align Bottom"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 20h18M6 4h4v12H6zM14 8h4v8h-4z"/></svg></button></div></div><div class="quick-group toolbar-tools-group" aria-label="Drawing tools"><div class="tools-box"><h2>Tools</h2><div class="tools-grid"><button class="tool active select-icon-only" data-tool="select" type="button" title="Select (V)" aria-label="Select" aria-keyshortcuts="V"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M5 3l14 9-7.2 1.1-3.1 7.1L5 3z"/><path d="M12 13l4 7"/></svg></button><div class="shape-picker" id="shapePicker"><div class="shape-main-row"><button class="tool shape-primary shapes-dropdown-only" id="shapesMain" type="button" title="Shapes" aria-label="Shapes menu" aria-haspopup="true" aria-expanded="false" aria-controls="shapesMenu">▭</button></div><div class="shape-submenu" id="shapesMenu" role="menu" hidden><button type="button" role="menuitem" data-shape="rect">▭ Rectangle</button><button type="button" role="menuitem" data-shape="ellipse">◯ Ellipse</button><button type="button" role="menuitem" data-shape="polygon">⬡ Hexagon</button></div></div><button class="tool draw-lines-icon-only" data-tool="line" type="button" title="Draw Lines" aria-label="Draw Lines"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 19L10 13L14 16L20 5"/><circle cx="4" cy="19" r="2"/><circle cx="10" cy="13" r="2"/><circle cx="14" cy="16" r="2"/><circle cx="20" cy="5" r="2"/></svg></button><button class="tool select-icon-only" data-tool="text" type="button" title="Create Text" aria-label="Create Text"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 6V4h16v2M12 4v16M8 20h8"/></svg></button><button id="openOffsetPanel" class="tool offset-icon-button" type="button" title="Offset" aria-label="Offset" aria-haspopup="dialog" aria-controls="offsetPanel"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="7" width="10" height="10" rx="1"/><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 2"/></svg></button><div class="shape-picker" id="booleanPicker"><div class="shape-main-row"><button class="tool shape-primary boolean-icon-main" id="booleanMain" type="button" aria-label="Boolean Tools" aria-haspopup="true" aria-controls="booleanMenu" aria-expanded="false" title="Boolean Tools"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="3" y="5" width="12" height="12" rx="2"/><circle cx="15" cy="13" r="6"/><path d="M16 3v4m-2-2h4"/></svg><span class="boolean-corner" aria-hidden="true">▾</span></button></div><div class="shape-submenu" id="booleanMenu" role="menu" hidden><button type="button" role="menuitem" aria-label="Weld" title="Weld" data-boolean="weld" class="chosen"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></button><button type="button" role="menuitem" aria-label="Subtract" title="Subtract" data-boolean="subtract"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="4" y="5" width="14" height="14" rx="1"/><path d="M12 5v7h7" stroke-dasharray="2 2"/><path d="M18 4v5"/></svg></button><button type="button" role="menuitem" aria-label="Intersect" title="Intersect" data-boolean="intersect"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/><path d="M12 7c2 2 3 3 3 5s-1 3-3 5c-2-2-3-3-3-5s1-3 3-5z" fill="currentColor" stroke="none" opacity=".65"/></svg></button></div></div></div></div></div></div><div class="secondary-toolbar-space" aria-label="Space for future tools"></div></div>
 <div class="topbar" role="toolbar" aria-label="Workspace editing toolbar">
 <div class="tb-group tb-size-card"><span class="tb-card-title">Size &amp; Position</span><div hidden aria-hidden="true"><input type="number" id="tbX" step="0.1" tabindex="-1"><input type="number" id="tbY" step="0.1" tabindex="-1"></div><div class="tb-size-row"><label class="tb-field">W <input type="number" id="tbW" step="0.1" min="0.1" aria-label="Selection width in millimeters"></label><label class="tb-field">H <input type="number" id="tbH" step="0.1" min="0.1" aria-label="Selection height in millimeters"></label><label class="tb-field">Rotation <input type="number" id="tbAngle" step="1" aria-label="Selection rotation in degrees"></label></div><div class="tb-units-row"><div class="unit-switch" role="group" aria-label="Measurement units"><button type="button" id="unitMM" class="active" aria-pressed="true" title="Use millimeters">mm</button><button type="button" id="unitIN" aria-pressed="false" title="Use inches">in</button></div></div></div>
@@ -373,9 +455,44 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 
 
 </div>
-<div class="app"><aside><div hidden aria-hidden="true"><button id="front">To front</button><button id="back">To back</button><button id="weld">Weld</button><button id="subtract">Subtract</button><button id="intersect">Intersect</button></div><section class="box-wizard-sidebar"><h2>Box Wizard</h2><button id="boxWizardOpen" class="box-wizard-trigger" type="button" title="Step-by-step 3D box wizard"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 7 12 3l9 4v10l-9 4-9-4z"/><path d="m3 7 9 4 9-4M12 11v10"/><path d="m7 14 2 2 4-5"/></svg><span>Box Wizard</span></button><p class="fine">Create and review your box one step at a time.</p></section><div hidden aria-hidden="true"><button id="copy">Copy</button><button id="paste">Paste</button><button id="duplicate">Duplicate</button><button id="remove">Delete</button><button id="group">Group</button><button id="ungroup">Ungroup</button></div></aside>
+<div class="app"><aside class="generator-sidebar"><section class="keychain-sidebar-section"><h2>Generators</h2><button type="button" id="keychainGenOpen" class="keychain-square-button" aria-controls="keychainGenOverlay" aria-expanded="false" title="Open Keychain Generator" aria-label="Open Keychain Generator"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3"/><path d="M9.2 9.2 14 14"/><rect x="12" y="12" width="9" height="9" rx="2"/><circle cx="16.5" cy="16.5" r="1"/></svg><span>Keychain</span></button></section><div hidden aria-hidden="true"><button id="front">To front</button><button id="back">To back</button><button id="weld">Weld</button><button id="subtract">Subtract</button><button id="intersect">Intersect</button></div><div hidden aria-hidden="true"><button id="copy">Copy</button><button id="paste">Paste</button><button id="duplicate">Duplicate</button><button id="remove">Delete</button><button id="group">Group</button><button id="ungroup">Ungroup</button></div></aside>
 <main><div class="workspace-zoom-row"><div class="zoom-control-box" role="group" aria-label="Workspace zoom controls"><span class="zoom-control-title">Zoom</span><button id="minus" type="button" title="Zoom out" aria-label="Zoom out">−</button><output id="tbZoom" aria-live="polite">100%</output><button id="plus" type="button" title="Zoom in" aria-label="Zoom in">+</button><span class="zoom-view-divider" aria-hidden="true"></span><div class="box-view-controls" role="group" aria-label="Box view"><button type="button" id="boxFlatView" class="selected" aria-pressed="true">Flat</button><button type="button" id="box3DView" aria-pressed="false">3D</button><span class="zoom-view-divider" aria-hidden="true"></span><span class="box-lid-controls" id="boxLidControls" hidden><button type="button" id="boxLidClosed" class="selected" aria-pressed="true" title="Show assembled box with the lid closed">Lid closed</button><button type="button" id="boxLidOpen" aria-pressed="false" title="Show assembled box with the lid open">Lid open</button></span></div></div></div><div class="workspace"><div class="pasteboard-ruler-layer" aria-label="Pasteboard rulers"><div class="ruler-corner" aria-label="Ruler origin marker">0</div><div class="pasteboard-name-tab" id="pasteboardNameTab" aria-label="Pasteboard name"><button type="button" id="pasteboardNameButton" class="pasteboard-name-button" title="Click to rename pasteboard">Pasteboard 1</button><input id="pasteboardNameInput" class="pasteboard-name-input" type="text" maxlength="60" aria-label="Rename pasteboard" hidden></div><canvas id="rulerTop" class="ruler-top" aria-label="Horizontal pasteboard ruler"></canvas><canvas id="rulerLeft" class="ruler-left" aria-label="Vertical pasteboard ruler"></canvas></div><div id="box3DStage" hidden><canvas id="box3DCanvas" aria-label="Interactive assembled box preview; drag to rotate"></canvas><span class="box-3d-tip">Drag to rotate · Preview only</span></div><div class="page ruler-page"><svg id="art" viewBox="0 0 400 400" width="850" height="850" xmlns="http://www.w3.org/2000/svg" aria-label="Vector design workspace"><defs><pattern id="minorGridPattern" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#b7c9df" stroke-width=".32"/></pattern><pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse"><rect id="minorGridFill" width="10" height="10" fill="url(#minorGridPattern)"/><path id="majorGridPath" d="M10 0H0V10" fill="none" stroke="#7d99b8" stroke-width=".68"/></pattern></defs><rect id="paper" x="0" y="0" width="400" height="400" fill="white"/><g id="artObjects"></g><g id="overlays"></g><rect id="outline" x="0" y="0" width="400" height="400" fill="none" stroke="#94a3b8" stroke-width=".6" pointer-events="none"/></svg></div></div><div id="status" class="status">Ready. Draw a shape, or select one to edit it.</div></main>
-<aside class="right"><div class="right-tabbed-box" aria-label="Right sidebar panel">
+<aside class="right"><div class="phase3-sidebar-empty" aria-label="Right sidebar"><h2>Right Sidebar</h2><p>Space for future Phase 3 tools and generator settings.</p></div><div id="keychainGenOverlay" class="keychain-dialog-backdrop" hidden>
+ <section class="keychain-dialog" role="region" aria-labelledby="keychainGenTitle">
+  <div class="keychain-dialog-head"><h2 id="keychainGenTitle">Keychain Generator</h2><button type="button" id="keychainGenClose" aria-label="Close Keychain Generator">✕</button></div>
+  <div class="board-shape-panel" role="group" aria-labelledby="boardShapeTitle">
+   <h3 class="board-shape-title" id="boardShapeTitle">BOARD SHAPE</h3>
+   <div class="board-shape-body">
+    <div class="board-shape-options" role="group" aria-label="Choose a keychain board shape">
+     <button type="button" class="board-shape-option selected" data-board-shape="roundrect" aria-pressed="true" title="Rounded Rectangle"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="7" y="9" width="50" height="30" rx="10"/></svg><span>Rounded<br>Rectangle</span></button>
+     <button type="button" class="board-shape-option" data-board-shape="rectangle" aria-pressed="false" title="Rectangle"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="7" y="9" width="50" height="30"/></svg><span>Rectangle</span></button>
+     <button type="button" class="board-shape-option" data-board-shape="oval" aria-pressed="false" title="Circle or Oval"><svg viewBox="0 0 64 48" aria-hidden="true"><ellipse cx="32" cy="24" rx="25" ry="15"/></svg><span>Circle / Oval</span></button>
+    </div>
+    <button type="button" id="boardShapeAdd" class="board-shape-add">Add Keychain to Canvas</button>
+   </div>
+  </div>
+  <div class="board-text-panel" role="group" aria-labelledby="boardTextTitle">
+   <h3 class="board-text-title" id="boardTextTitle">KEYCHAIN TEXT</h3>
+   <div class="board-text-body">
+    <label for="boardKeychainText">Text</label>
+    <input type="text" id="boardKeychainText" placeholder="Type a name or message" maxlength="100" autocomplete="off" spellcheck="false">
+    <p class="board-text-hint">Bold outlined letters fit with even edge spacing and slight letter overlap. Rounded Rectangle expands for longer names.</p>
+   </div>
+  </div>
+  <div class="keychain-settings-panel" role="group" aria-labelledby="keychainSettingsTitle">
+   <h3 class="keychain-settings-title" id="keychainSettingsTitle">Keychain</h3>
+   <div class="keychain-settings-body">
+    <div class="keychain-letters-heading">LETTERS</div>
+    <div class="keychain-outline-control">
+     <label for="keychainOutlineWidth" class="keychain-outline-label">Outline Width</label>
+     <input id="keychainOutlineWidth" type="number" min="0.05" max="2" step="0.05" value="0.30" inputmode="decimal" aria-label="Letter outline width in millimeters">
+     <span class="keychain-outline-unit" aria-hidden="true">mm</span>
+    </div>
+    <p class="keychain-outline-hint">Enter a width from 0.05 to 2.00 mm, or use the box arrows. Updates the preview instantly.</p>
+   </div>
+  </div>
+ </section>
+</div><div class="right-tabbed-box" aria-label="Right sidebar panel">
 <div class="right-tab-content">
 <section id="rightTabObjects" class="right-tab-panel" hidden aria-hidden="true" style="display:none"><h2>Objects</h2><div id="layers"></div></section>
 <section id="rightTabInspector" class="right-tab-panel" hidden aria-hidden="true" style="display:none"><h2>Object Inspector</h2><p id="selectionLabel" class="fine">Nothing selected</p><div hidden aria-hidden="true"><input id="x" type="number" step=".1" tabindex="-1"><input id="y" type="number" step=".1" tabindex="-1"><input id="w" type="number" step=".1" min=".1" tabindex="-1"><input id="h" type="number" step=".1" min=".1" tabindex="-1"></div><div hidden aria-hidden="true"><input id="angle" type="number" step="1" tabindex="-1"><input id="textValue" type="text" maxlength="200" tabindex="-1"></div><button id="apply" class="full" style="margin-top:8px">Apply changes</button><p class="fine">Positions and sizes refer to local unrotated object bounds. Multi-selection supports shared move and resize.</p></section>
@@ -396,12 +513,7 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 <button type="button" id="rightTabButtonColors" class="right-tab active" role="tab" aria-selected="true" aria-controls="rightTabColors" tabindex="0" data-right-tab="Colors">Colors</button>
 
 <button type="button" id="rightTabButtonInfo" class="right-tab" role="tab" aria-selected="false" aria-controls="rightTabInfo" tabindex="-1" data-right-tab="Info">Info</button>
-</div></div><section id="rightBoxWizardPanel" class="right-box-wizard-panel" aria-label="Box Wizard" aria-live="off">
- <div class="right-box-wizard-heading"><strong>Box Wizard</strong><span id="wizardDockState">Select Box Wizard on the left to get started</span></div>
- <div id="rightBoxWizardContent" class="right-box-wizard-content">
-   <p id="wizardDockPlaceholder" class="fine">Choose <strong>Box Wizard</strong> on the left sidebar to create or update a box, step by step.</p>
- </div>
-</section></aside></div>
+</div></div></aside></div>
 <nav class="bottom-color-toolbar" role="toolbar" aria-label="Color palette">
 <span class="bottom-palette-label">Color Palette</span>
 <button type="button" class="bottom-swatch active" data-bottom-color="#000000" title="00 · Black" aria-label="00 Black" aria-pressed="true"><span class="swatch-square" style="background:#000000"><span class="swatch-number">00</span></span></button>
@@ -550,10 +662,54 @@ function renderDraftPath(over){
  over.appendChild(svg('path',{d,fill:'none',stroke:'#35b7f5','stroke-width':'.7','stroke-dasharray':'2 1','pointer-events':'none'}));
  ns.forEach((p,i)=>over.appendChild(svg('circle',{cx:p.x,cy:p.y,r:i===0?2:1.3,fill:i===0?'#fdbb4d':'#35b7f5','pointer-events':'none'})));
 }
-function shapeNode(o){let n;if(o.type==='rect')n=svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h});else if(o.type==='ellipse')n=svg('ellipse',{cx:o.x+o.w/2,cy:o.y+o.h/2,rx:o.w/2,ry:o.h/2});else if(o.type==='line')n=svg('line',{x1:o.x,y1:o.y,x2:o.x+o.w,y2:o.y+o.h});else if(o.type==='vectorPath')n=svg('path',{d:vectorPathD(o)});else if(o.type==='polygon'){const p=Array.from({length:6},(_,i)=>{let a=i*Math.PI/3;return `${round(o.x+o.w*(.5+.5*Math.cos(a)))},${round(o.y+o.h*(.5+.5*Math.sin(a)))}`}).join(' ');n=svg('polygon',{points:p})}else if(o.type==='text'&&o.weld){
+
+// Phase 3 keychain lettering: true ink-bound centering, tall bold outlines,
+// slight negative tracking for a reference-style overlap and equal edge margins.
+// The same SVG node is used for the live preview, editable objects and export.
+const boardTextCanvas=document.createElement('canvas').getContext('2d');
+const boardTextFont='Impact, "Arial Black", sans-serif';
+function boardInk(value,size){
+ boardTextCanvas.font=`900 ${size}px ${boardTextFont}`;
+ const m=boardTextCanvas.measureText(value);
+ return {width:m.width,left:Number.isFinite(m.actualBoundingBoxLeft)?m.actualBoundingBoxLeft:0,
+ right:Number.isFinite(m.actualBoundingBoxRight)?m.actualBoundingBoxRight:m.width,
+ up:Number.isFinite(m.actualBoundingBoxAscent)?m.actualBoundingBoxAscent:size*.73,
+ down:Number.isFinite(m.actualBoundingBoxDescent)?m.actualBoundingBoxDescent:size*.08};
+}
+function keychainDisplayNode(o){
+ const value=String(o.uppercase?String(o.text||'').toUpperCase():o.text||'');
+ const outlineWidth=Number.isFinite(Number(o.keychainOutlineWidth))?Math.max(.05,Number(o.keychainOutlineWidth)):0.30;
+ const px=Math.max(.3,o.keychainMargin??2)+outlineWidth/2;
+ const chars=Array.from(value);
+ const gaps=Math.max(0,chars.length-1);
+ const boxW=Math.max(1,o.w),boxH=Math.max(1,o.h);
+ function dimensions(size){
+  const ink=boardInk(value,size);
+  const tracking=gaps?(-size*.065):0;
+  return {...ink,tracking,inkWidth:ink.left+ink.right+gaps*tracking,inkHeight:ink.up+ink.down};
+ }
+ let low=.2, high=Math.min(350,Math.max(30,boxH*5));
+ for(let i=0;i<28;i++){
+  const mid=(low+high)/2,m=dimensions(mid);
+  if(m.inkWidth<=boxW-2*px && m.inkHeight<=boxH-2*px)low=mid;
+  else high=mid;
+ }
+ const size=Math.max(.2,low),m=dimensions(size);
+ const textX=o.x+(boxW-m.inkWidth)/2+m.left;
+ const baseline=o.y+(boxH+m.up-m.down)/2;
+ const node=svg('text',{x:round(textX),y:round(baseline),
+  'font-family':boardTextFont,'font-size':round(size),'font-weight':'900',
+  'letter-spacing':round(m.tracking),'font-style':'normal',
+  fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,
+  'stroke-width':o.mode==='fill'?0:round(outlineWidth),
+  'stroke-linejoin':'round','paint-order':'stroke fill'});
+ node.textContent=value;
+ return node;
+}
+function shapeNode(o){let n;if(o.type==='rect')n=svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h});else if(o.type==='ellipse')n=svg('ellipse',{cx:o.x+o.w/2,cy:o.y+o.h/2,rx:o.w/2,ry:o.h/2});else if(o.type==='line')n=svg('line',{x1:o.x,y1:o.y,x2:o.x+o.w,y2:o.y+o.h});else if(o.type==='vectorPath')n=svg('path',{d:vectorPathD(o)});else if(o.type==='polygon'){const p=Array.from({length:6},(_,i)=>{let a=i*Math.PI/3;return `${round(o.x+o.w*(.5+.5*Math.cos(a)))},${round(o.y+o.h*(.5+.5*Math.sin(a)))}`}).join(' ');n=svg('polygon',{points:p})}else if(o.type==='text'&&o.keychainBoldFit){n=keychainDisplayNode(o)}else if(o.type==='text'&&o.weld){
  const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));
  n=svg('path',{d:weldedTextPath(o,fit),'fill-rule':'evenodd',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:'.25','vector-effect':'non-scaling-stroke'});
- }else if(o.type==='text'){const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));n=svg('text',{x:o.x+1.5,y:o.y+1.5+fit.size,'font-size':fit.size,'font-family':o.font||'Arial','font-weight':o.bold?'bold':'normal','font-style':o.italic?'italic':'normal',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:Math.max(.15,fit.size*.022),'paint-order':'stroke fill','letter-spacing':fit.hspace,'data-text-weld-preview':o.weld?'true':'false'});fit.lines.forEach((line,i)=>{let t=svg('tspan',{x:o.x+1.5,y:o.y+1.5+fit.size+i*(fit.size*1.2+fit.vspace)});t.textContent=line||' ';n.appendChild(t)})}else if(o.type==='path')n=svg('path',{d:pathString(o), 'fill-rule':'evenodd'});if(o.type!=='text'){
+ }else if(o.type==='text'){const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));n=svg('text',{x:o.x+1.5,y:o.y+1.5+fit.size,'font-size':fit.size,'font-family':o.font||'Arial','font-weight':o.bold?'bold':'normal','font-style':o.italic?'italic':'normal',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:(o.keychainThinOutline?Math.max(.045,fit.size*.006):Math.max(.15,fit.size*.022)),'paint-order':'stroke fill','letter-spacing':fit.hspace,'data-text-weld-preview':o.weld?'true':'false'});fit.lines.forEach((line,i)=>{let t=svg('tspan',{x:o.x+1.5,y:o.y+1.5+fit.size+i*(fit.size*1.2+fit.vspace)});t.textContent=line||' ';n.appendChild(t)})}else if(o.type==='path')n=svg('path',{d:pathString(o), 'fill-rule':'evenodd'});if(o.type!=='text'){
   const isFill=(o.mode==='fill'&&o.type!=='line'&&(o.type!=='vectorPath'||o.closed));
   Object.entries({fill:isFill?o.color:'none',stroke:isFill?'none':o.color,'stroke-width':'.25','vector-effect':'non-scaling-stroke'}).forEach(([k,v])=>n.setAttribute(k,v));
 }if(o.angle)n.setAttribute('transform',`rotate(${o.angle} ${round(o.x+o.w/2)} ${round(o.y+o.h/2)})`);n.setAttribute('data-id',o.id);n.classList.add('obj');if(o.hidden)n.setAttribute('display','none');return n}
@@ -670,8 +826,8 @@ function updatePasteboardGrid(){
   lines.push(`linear-gradient(to bottom, ${color} 1px, transparent 1px)`);
   sizes.push(`${step}px ${step}px`,`${step}px ${step}px`);
  };
- if(fine&&minor>=3)addPair(minor,'rgba(106,88,60,.26)');
- addPair(major,'rgba(92,70,38,.52)');
+ if(fine&&minor>=3)addPair(minor,'rgba(106,88,60,.32)');
+ addPair(major,'rgba(85,67,42,.64)');
  const x=canvasRect.left-areaRect.left,y=canvasRect.top-areaRect.top;
  area.style.backgroundImage=lines.join(',');
  area.style.backgroundSize=sizes.join(',');
@@ -1482,6 +1638,431 @@ window.LaserWizardEditor={
    setBoxView('3d');drawBox3D();
  }
 };
+
+// Phase 3: fresh-start Keychain board with editable text, shared canvas preview and final layout.
+(function setupKeychainGenerator(){
+ const overlay=$('keychainGenOverlay');
+ const openBtn=$('keychainGenOpen');
+ const closeBtn=$('keychainGenClose');
+ const options=[...overlay.querySelectorAll('[data-board-shape]')];
+ const textInput=$('boardKeychainText');
+ const outlineInput=$('keychainOutlineWidth');
+ let outlineWidth=0.30;
+ let chosen='roundrect',priorFocus=null,preview=null,holeDrag=null;
+ const x=20,y=20,h=30,r=7; // board height and corner radius in mm
+ const boardTextMargin=2; // equal optical margin at left, right, top and bottom
+ const holeDiameter=4.5, holeOuterDiameter=10, tabOverlap=3;
+ let holePreference={x:x-6,y:y+h/2};
+ function boardWidth(){
+  if(chosen!=='roundrect')return 55;
+  const value=textInput.value.trim().toUpperCase();
+  if(!value)return 55;
+  const reference=boardInk(value,40);
+  const heightScale=(h-2*boardTextMargin)/Math.max(1,reference.up+reference.down);
+  const size=40*heightScale;
+  const letters=boardInk(value,size);
+  const natural=letters.left+letters.right-Math.max(0,Array.from(value).length-1)*size*.065;
+  return Math.min(250,Math.max(55,natural+boardTextMargin*2));
+ }
+ function roundedPoints(){
+  const w=boardWidth();
+  const pts=[];
+  for(const [cx,cy,start] of [[w-r,r,-Math.PI/2],[w-r,h-r,0],[r,h-r,Math.PI/2],[r,r,Math.PI]]){
+   for(let j=0;j<=64;j++){
+    const a=start+j*Math.PI/128;
+    pts.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);
+   }
+  }
+  return pts;
+ }
+
+ // Closest position on the *continuous* outline, not the nearest grid point.
+ // Segment projection lets the tab glide smoothly even with a slow pointer.
+ function projectHoleAnchor(target){
+  const outline=boardOutline();
+  let best=null,bestDistance=Infinity;
+  const center={x:x+boardWidth()/2,y:y+h/2};
+  for(let i=0;i<outline.length;i++){
+   const a=outline[i],b=outline[(i+1)%outline.length];
+   const dx=b[0]-a[0],dy=b[1]-a[1],length2=dx*dx+dy*dy;
+   if(length2<1e-12)continue;
+   const t=Math.max(0,Math.min(1,((target.x-a[0])*dx+(target.y-a[1])*dy)/length2));
+   const edgeX=a[0]+t*dx,edgeY=a[1]+t*dy;
+   const d2=(target.x-edgeX)**2+(target.y-edgeY)**2;
+   if(d2>=bestDistance)continue;
+   let nx=dy,ny=-dx;
+   if(nx*(edgeX-center.x)+ny*(edgeY-center.y)<0){nx=-nx;ny=-ny;}
+   const length=Math.hypot(nx,ny);nx/=length;ny/=length;
+   // On an exact polygon corner, use the bisector of the adjoining sides
+   // so placement does not suddenly jump when moving past the corner.
+   if(t<=1e-7||t>=1-1e-7){
+    const cornerIndex=t<=1e-7?i:(i+1)%outline.length;
+    const prev=outline[(cornerIndex-1+outline.length)%outline.length];
+    const corner=outline[cornerIndex],next=outline[(cornerIndex+1)%outline.length];
+    const v1=[corner[0]-prev[0],corner[1]-prev[1]];
+    const v2=[next[0]-corner[0],next[1]-corner[1]];
+    const l1=Math.hypot(...v1)||1,l2=Math.hypot(...v2)||1;
+    let ax=v1[1]/l1+v2[1]/l2,ay=-v1[0]/l1-v2[0]/l2;
+    if(ax*(corner[0]-center.x)+ay*(corner[1]-center.y)<0){ax=-ax;ay=-ay;}
+    const len=Math.hypot(ax,ay);
+    if(len>1e-5){nx=ax/len;ny=ay/len;}
+   }
+   best={edgeX,edgeY,nx,ny};bestDistance=d2;
+  }
+  const offset=holeOuterDiameter/2-tabOverlap;
+  return {...best,cx:best.edgeX+best.nx*offset,cy:best.edgeY+best.ny*offset};
+ }
+ function currentHoleAnchor(){
+  return projectHoleAnchor(holePreference||{x:x-6,y:y+h/2});
+ }
+ // Weld the circle to the board perimeter geometrically: two boundary-circle
+ // intersections, the exposed body arc, and the exposed tab arc form ONE loop.
+ // The mounting hole is retained as the one separate inner cutting loop.
+ function boardOutline(){
+  const w=boardWidth();
+  if(chosen==='rectangle')return [[x,y],[x+w,y],[x+w,y+h],[x,y+h]];
+  if(chosen==='roundrect')return roundedPoints().map(([px,py])=>[x+px,y+py]);
+  return Array.from({length:480},(_,i)=>{
+   const theta=2*Math.PI*i/480;
+   return [x+w/2+(w/2)*Math.cos(theta),y+h/2+(h/2)*Math.sin(theta)];
+  });
+ }
+ function containsPolygon(p,outline){
+  let inside=false;
+  for(let i=0,j=outline.length-1;i<outline.length;j=i++){
+   const a=outline[i],b=outline[j];
+   if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;
+  }
+  return inside;
+ }
+ function keychainWeldGeometry(preference=holePreference){
+  const outline=boardOutline(),anchor=projectHoleAnchor(preference);
+  const cx=anchor.cx,cy=anchor.cy,rad=holeOuterDiameter/2;
+  const lengths=[],starts=[];
+  let perimeter=0;
+  for(let i=0;i<outline.length;i++){
+   starts.push(perimeter);
+   const a=outline[i],b=outline[(i+1)%outline.length];
+   const length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+   lengths.push(length);perimeter+=length;
+  }
+  const hits=[];
+  for(let i=0;i<outline.length;i++){
+   const p=outline[i],q=outline[(i+1)%outline.length];
+   const dx=q[0]-p[0],dy=q[1]-p[1],ox=p[0]-cx,oy=p[1]-cy;
+   const A=dx*dx+dy*dy,B=2*(ox*dx+oy*dy),C=ox*ox+oy*oy-rad*rad;
+   const discr=B*B-4*A*C;
+   if(discr<0||A<1e-10)continue;
+   const root=Math.sqrt(Math.max(0,discr));
+   for(const t of [(-B-root)/(2*A),(-B+root)/(2*A)]){
+    if(t< -1e-8 || t>1+1e-8)continue;
+    const u=Math.min(1,Math.max(0,t));
+    const hit={i,t:u,s:starts[i]+u*lengths[i],x:p[0]+u*dx,y:p[1]+u*dy};
+    if(!hits.some(v=>Math.hypot(v.x-hit.x,v.y-hit.y)<1e-5))hits.push(hit);
+   }
+  }
+  hits.sort((a,b)=>a.s-b.s);
+  if(hits.length!==2)throw Error('Move the attachment tab slightly away from the corner to keep one clean welded outline.');
+  const [first,second]=hits;
+  function pointAt(s){
+   const value=((s%perimeter)+perimeter)%perimeter;
+   let i=starts.findIndex((v,k)=>value>=v-1e-9&&value<=v+lengths[k]+1e-9);
+   if(i<0)i=outline.length-1;
+   const a=outline[i],b=outline[(i+1)%outline.length],t=(value-starts[i])/(lengths[i]||1);
+   return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+  }
+  const midway=pointAt((first.s+second.s)/2);
+  const covered=Math.hypot(midway[0]-cx,midway[1]-cy)<rad;
+  // Trace only the body edge that is outside the tab.
+  const start=covered?second:first,finish=covered?first:second;
+  const endS=finish.s<=start.s?finish.s+perimeter:finish.s;
+  const outer=[[start.x,start.y]];
+  for(let i=0;i<outline.length;i++){
+   let vertexS=starts[(i+1)%outline.length];
+   if(i===outline.length-1)vertexS=perimeter;
+   while(vertexS<=start.s+1e-7)vertexS+=perimeter;
+   if(vertexS<endS-1e-7)outer.push(outline[(i+1)%outline.length]);
+  }
+  // Vertices may be encountered in a different order around the wrap.
+  // Sort by perimeter position and rebuild ordered body segment.
+  const vertices=[];
+  for(let i=0;i<outline.length;i++){
+   let ps=starts[i];
+   if(ps<=start.s+1e-7)ps+=perimeter;
+   if(ps<endS-1e-7)vertices.push({s:ps,p:outline[i]});
+  }
+  vertices.sort((a,b)=>a.s-b.s);
+  outer.length=1;
+  for(const v of vertices)outer.push([...v.p]);
+  outer.push([finish.x,finish.y]);
+  // Connect the visible body portion with the circle arc outside the body.
+  const theta0=Math.atan2(finish.y-cy,finish.x-cx);
+  const theta1=Math.atan2(start.y-cy,start.x-cx);
+  const ccw=((theta1-theta0)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+  const midCcw=[cx+rad*Math.cos(theta0+ccw/2),cy+rad*Math.sin(theta0+ccw/2)];
+  const sweep=containsPolygon(midCcw,outline)?ccw-2*Math.PI:ccw;
+  const steps=Math.max(64,Math.ceil(Math.abs(sweep)*rad/.08));
+  const circleArc=[[finish.x,finish.y]];
+  for(let j=1;j<steps;j++){
+   const theta=theta0+sweep*j/steps;
+   circleArc.push([cx+rad*Math.cos(theta),cy+rad*Math.sin(theta)]);
+  }
+  circleArc.push([start.x,start.y]);
+
+  // Round BOTH inward corners where the outside tab meets the board. The
+  // transition is part of the same welded cutting loop, never another line.
+  // An approximately 2 mm lead-in on each side gives a soft-radius shoulder.
+  function cumulative(points){
+   const distances=[0];
+   for(let i=1;i<points.length;i++)distances.push(distances[i-1]+Math.hypot(points[i][0]-points[i-1][0],points[i][1]-points[i-1][1]));
+   return distances;
+  }
+  function atDistance(points,cums,d){
+   const v=Math.max(0,Math.min(cums[cums.length-1],d));
+   let i=1;
+   while(i<cums.length-1&&cums[i]<v)i++;
+   const delta=cums[i]-cums[i-1];
+   const t=delta>1e-9?(v-cums[i-1])/delta:0;
+   return [points[i-1][0]+(points[i][0]-points[i-1][0])*t,points[i-1][1]+(points[i][1]-points[i-1][1])*t];
+  }
+  function trimmed(points,cums,startDist,endDist){
+   const result=[atDistance(points,cums,startDist)];
+   for(let i=1;i<points.length-1;i++)if(cums[i]>startDist+1e-8&&cums[i]<endDist-1e-8)result.push(points[i]);
+   result.push(atDistance(points,cums,endDist));
+   return result;
+  }
+  function bezier(points,from,control,to){
+   const stepCount=24;
+   for(let i=1;i<=stepCount;i++){
+    const t=i/stepCount,u=1-t;
+    points.push([u*u*from[0]+2*u*t*control[0]+t*t*to[0],u*u*from[1]+2*u*t*control[1]+t*t*to[1]]);
+   }
+  }
+  const bodyDistances=cumulative(outer),tabDistances=cumulative(circleArc);
+  const bodyLength=bodyDistances[bodyDistances.length-1],tabLength=tabDistances[tabDistances.length-1];
+  const joinRadius=2.0; // mm of smoothly rounded attachment at both shoulders
+  const trim=Math.min(joinRadius,bodyLength*.22,tabLength*.22);
+  const bodyTrimmed=trimmed(outer,bodyDistances,trim,bodyLength-trim);
+  const tabTrimmed=trimmed(circleArc,tabDistances,trim,tabLength-trim);
+  const contour=[...bodyTrimmed];
+  bezier(contour,bodyTrimmed[bodyTrimmed.length-1],[finish.x,finish.y],tabTrimmed[0]);
+  contour.push(...tabTrimmed.slice(1));
+  bezier(contour,tabTrimmed[tabTrimmed.length-1],[start.x,start.y],bodyTrimmed[0]);
+  outer.length=0;
+  outer.push(...contour);
+  const hole=Array.from({length:72},(_,i)=>{
+   const angle=2*Math.PI*i/72;
+   return [cx+holeDiameter/2*Math.cos(angle),cy+holeDiameter/2*Math.sin(angle)];
+  });
+  const xx=outer.map(p=>p[0]),yy=outer.map(p=>p[1]);
+  const minx=Math.min(...xx),maxx=Math.max(...xx),miny=Math.min(...yy),maxy=Math.max(...yy);
+  return {outer,hole,anchor,minx,maxx,miny,maxy};
+ }
+ function shapeObject(geometry=keychainWeldGeometry()){
+  const {outer,hole,minx,maxx,miny,maxy}=geometry;
+  const w=maxx-minx,hgt=maxy-miny;
+  const normalized=ring=>ring.map(([px,py])=>[round((px-minx)/w),round((py-miny)/hgt)]);
+  return {type:'path',name:'Keychain — welded outline and hole',
+   x:round(minx),y:round(miny),w:round(w),h:round(hgt),angle:0,
+   color:'#000000',mode:'line',group:null,hidden:false,locked:false,
+   loops:[normalized(outer),normalized(hole)]};
+ }
+ function textObject(){
+  const value=textInput.value.trim().toUpperCase();
+  if(!value)return null;
+  const w=boardWidth();
+  return {type:'text',name:'Keychain Text',text:value,
+   x,y,w,h,size:26,font:'Impact',hspace:0,vspace:0,
+   bold:true,italic:false,uppercase:true,weld:false,
+   angle:0,color:'#0000ff',mode:'line',
+   keychainBoldFit:true,keychainMargin:boardTextMargin,keychainOutlineWidth:outlineWidth,
+   group:null,hidden:false,locked:false};
+ }
+
+ // Fit the full current design (existing objects + temporary keychain) to the
+ // visible workspace. This changes only zoom/scroll, never artwork dimensions.
+ // Generous virtual pasteboard margins allow proper centering near 0,0.
+ const keychainPage=document.querySelector('.workspace .ruler-page');
+ const workspaceArea=document.querySelector('.workspace');
+ let fitFrame=0,fitRevision=0;
+ let savedMargins=null;
+ function autoFitWorkspace(){
+  if(overlay.hidden)return;
+  const board=shapeObject();
+  const text=textObject();
+  const content=[...objects.filter(o=>!o.hidden),board,...(text?[text]:[])];
+  if(!content.length)return;
+  const minx=Math.min(...content.map(o=>o.x));
+  const miny=Math.min(...content.map(o=>o.y));
+  const maxx=Math.max(...content.map(o=>o.x+o.w));
+  const maxy=Math.max(...content.map(o=>o.y+o.h));
+  const cx=(minx+maxx)/2,cy=(miny+maxy)/2;
+  const contentW=Math.max(1,maxx-minx),contentH=Math.max(1,maxy-miny);
+  const availableW=Math.max(120,workspaceArea.clientWidth-96);
+  const availableH=Math.max(120,workspaceArea.clientHeight-96);
+  const base=fittedCanvasWidth();
+  const desired=Math.max(.06,Math.min(12,
+   availableW*W/(base*contentW),
+   availableH*W/(base*contentH)));
+  zoom=desired;updateZoom();
+  // Restore position after changing the SVG's rendered dimensions.
+  const token=++fitRevision;
+  requestAnimationFrame(()=>{
+   if(overlay.hidden||token!==fitRevision)return;
+   const art=$('art'),pixelsPerMM=art.getBoundingClientRect().width/W;
+   const width=workspaceArea.clientWidth,height=workspaceArea.clientHeight;
+   const rulerWidth=34,rulerHeight=27;
+   const left=Math.max(40,width/2-rulerWidth-cx*pixelsPerMM);
+   const right=Math.max(40,width/2-(W-cx)*pixelsPerMM);
+   const top=Math.max(46,height/2-rulerHeight-cy*pixelsPerMM);
+   const bottom=Math.max(64,height/2-(H-cy)*pixelsPerMM);
+   keychainPage.style.setProperty('margin-left',left+'px','important');
+   keychainPage.style.setProperty('margin-right',right+'px','important');
+   keychainPage.style.setProperty('margin-top',top+'px','important');
+   keychainPage.style.setProperty('margin-bottom',bottom+'px','important');
+   // Use measured element positions; this also handles scrollable pasteboards.
+   const box=art.getBoundingClientRect(),area=workspaceArea.getBoundingClientRect();
+   const centerPageX=box.left-area.left+workspaceArea.scrollLeft+cx*pixelsPerMM;
+   const centerPageY=box.top-area.top+workspaceArea.scrollTop+cy*pixelsPerMM;
+   workspaceArea.scrollTo({
+    left:Math.max(0,centerPageX-width/2),
+    top:Math.max(0,centerPageY-height/2),
+    behavior:'instant'
+   });
+   updateCanvasRulers();
+  });
+ }
+ function scheduleAutoFitWorkspace(){
+  if(overlay.hidden||holeDrag)return;
+  if(fitFrame)cancelAnimationFrame(fitFrame);
+  fitFrame=requestAnimationFrame(()=>{fitFrame=0;autoFitWorkspace();});
+ }
+ function clearPreview(){if(preview){preview.remove();preview=null;}}
+ function startHoleDrag(event){
+  event.preventDefault();event.stopPropagation();
+  holeDrag={pointerId:event.pointerId};
+  // The preview handle gets redrawn on every move; capture on the stable SVG.
+  try{$('art').setPointerCapture(event.pointerId);}catch(e){}
+  const candidate=point(event);
+  try{keychainWeldGeometry(candidate);holePreference=candidate;}catch(e){}
+  previewShape();
+ }
+ function previewShape(){
+  clearPreview();
+  if(overlay.hidden)return;
+  let geometry;
+  try{geometry=keychainWeldGeometry();}catch(err){notice(err.message);return;}
+  const group=svg('g',{'data-preview-only':'board-shape','aria-label':'Temporary keychain preview with one welded outside cut path'});
+  const board=shapeNode(shapeObject(geometry));
+  board.removeAttribute('data-id');board.classList.remove('obj');
+  // Warm wood-tone preview only: the stored board remains a black Line cut.
+  // evenodd keeps the 4.5 mm hole clear instead of painting over it.
+  board.setAttribute('fill','#D9B784');
+  board.setAttribute('fill-rule','evenodd');
+  board.setAttribute('stroke','#17120D');
+  board.setAttribute('stroke-width','0.24');
+  board.setAttribute('vector-effect','non-scaling-stroke');
+  board.setAttribute('pointer-events','none');
+  group.appendChild(board);
+  // Dark high-contrast draggable highlight for the attachment hole, preview-only. It is never exported.
+  const handle=svg('circle',{cx:round(geometry.anchor.cx),cy:round(geometry.anchor.cy),
+   r:round(holeOuterDiameter/2+1.3),fill:'#142536','fill-opacity':'.72',
+   stroke:'#08121e','stroke-width':'.9','stroke-dasharray':'1.5 1',
+   'vector-effect':'non-scaling-stroke','data-keychain-hole-handle':'true'});
+  handle.style.cursor=holeDrag?'grabbing':'grab';
+  handle.style.touchAction='none';
+  handle.addEventListener('pointerdown',startHoleDrag);
+  group.insertBefore(handle,board); // keep the black cutting contours crisp above the dark highlight
+  const text=textObject();
+  if(text){
+   const lettering=shapeNode(text);
+   lettering.removeAttribute('data-id');lettering.classList.remove('obj');
+   lettering.setAttribute('pointer-events','none');
+   group.appendChild(lettering);
+  }
+  $('art').insertBefore(group,$('outline'));
+  preview=group;
+  scheduleAutoFitWorkspace();
+ }
+ function selectShape(shape){
+  chosen=shape;
+  for(const button of options){
+   const on=button.dataset.boardShape===shape;
+   button.classList.toggle('selected',on);
+   button.setAttribute('aria-pressed',String(on));
+  }
+  previewShape();
+ }
+ function close(){
+  overlay.hidden=true;
+  holeDrag=null;
+  fitRevision++;
+  if(fitFrame){cancelAnimationFrame(fitFrame);fitFrame=0;}
+  clearPreview();
+  if(savedMargins){
+   const [ml,mr,mt,mb]=savedMargins;
+   for(const [prop,old] of [['margin-left',ml],['margin-right',mr],['margin-top',mt],['margin-bottom',mb]]){
+    if(old)keychainPage.style.setProperty(prop,old);else keychainPage.style.removeProperty(prop);
+   }
+   savedMargins=null;
+  }
+  openBtn.setAttribute('aria-expanded','false');
+  if(priorFocus&&typeof priorFocus.focus==='function')priorFocus.focus();
+ }
+ function open(){
+  priorFocus=document.activeElement;
+  if(!savedMargins)savedMargins=[keychainPage.style.marginLeft,keychainPage.style.marginRight,keychainPage.style.marginTop,keychainPage.style.marginBottom];
+  overlay.hidden=false;
+  openBtn.setAttribute('aria-expanded','true');
+  setBoxView('flat');
+  previewShape();
+  options.find(button=>button.dataset.boardShape===chosen)?.focus();
+ }
+ window.addEventListener('resize',scheduleAutoFitWorkspace);
+ options.forEach(button=>button.addEventListener('click',()=>selectShape(button.dataset.boardShape)));
+ function setOutlineWidth(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  outlineWidth=Math.min(2,Math.max(.05,Math.round(n*20)/20));
+  outlineInput.value=outlineWidth.toFixed(2);
+  previewShape();
+ }
+ outlineInput.addEventListener('input',()=>{const v=Number(outlineInput.value);if(outlineInput.value.trim()!==''&&Number.isFinite(v)&&v>=.05&&v<=2){outlineWidth=v;previewShape();}});
+ outlineInput.addEventListener('change',()=>setOutlineWidth(outlineInput.value||outlineWidth));
+ textInput.addEventListener('input',previewShape);
+ $('boardShapeAdd').addEventListener('click',()=>{
+  let board;
+  try{board=shapeObject();}catch(e){notice(e.message);return;}
+  const text=textObject();
+  const items=[board,...(text?[text]:[])];
+  history();
+  for(const item of items)item.id=nextId++;
+  clearPreview();
+  objects.push(...items);ids=items.map(item=>item.id);
+  close();render();
+  notice(text?'Created one welded outer cut path with a 4.5 mm hole, plus editable blue Line text. Verify in LightBurn.':'Created one welded outer cut path with a separate 4.5 mm inner hole. Verify in LightBurn.');
+ });
+ openBtn.addEventListener('click',open);
+ closeBtn.addEventListener('click',close);
+
+ let pendingDragPoint=null,dragFrame=0;
+ function renderHoleDrag(){
+  dragFrame=0;
+  if(!holeDrag||overlay.hidden||!pendingDragPoint)return;
+  const candidate=pendingDragPoint;pendingDragPoint=null;
+  try{keychainWeldGeometry(candidate);holePreference=candidate;previewShape();}
+  catch(e){/* retain last valid welded position */}
+ }
+ document.addEventListener('pointermove',event=>{
+  if(!holeDrag||overlay.hidden||event.pointerId!==holeDrag.pointerId)return;
+  pendingDragPoint=point(event);
+  if(!dragFrame)dragFrame=requestAnimationFrame(renderHoleDrag);
+ });
+ document.addEventListener('pointerup',event=>{if(holeDrag&&event.pointerId===holeDrag.pointerId){if(dragFrame){cancelAnimationFrame(dragFrame);dragFrame=0;}if(pendingDragPoint){try{keychainWeldGeometry(pendingDragPoint);holePreference=pendingDragPoint;previewShape();}catch(e){}pendingDragPoint=null;}holeDrag=null;scheduleAutoFitWorkspace();}});
+ document.addEventListener('pointercancel',event=>{if(holeDrag&&event.pointerId===holeDrag.pointerId){holeDrag=null;pendingDragPoint=null;if(dragFrame)cancelAnimationFrame(dragFrame);dragFrame=0;}});
+
+})();
+
 })();</script><script>
 (function(){
 const buttons=[...document.querySelectorAll('[data-right-tab]')];
@@ -1520,372 +2101,7 @@ buttons.forEach((b,i)=>{b.addEventListener('click',()=>activate(b,false));b.addE
   <div class="box-wizard-navigation" id="boxWizardNavigation" hidden><button type="button" id="boxWizardBack">Back</button><button type="button" id="boxWizardNext">Next step</button></div><div class="box-gen-actions"><button type="button" id="boxGenCancel">Cancel</button><button type="button" id="boxGenMake">Generate on Canvas</button></div>
   <p class="box-gen-hint">Cut/fit warning: this is a first-version layout. Test on scrap and verify kerf, joint clearance, material thickness, and assembly before cutting a full project.</p>
  </section>
-</div><script id="box-wizard-script">
-
-document.addEventListener('DOMContentLoaded',()=>{
-const $=id=>document.getElementById(id);
-const host=$('rightBoxWizardContent');
-const wizard=document.createElement('div');
-wizard.id='boxWizardNineSteps';
-wizard.hidden=true;
-wizard.innerHTML=`
-<div class="wizard9-progress"><strong id="wizard9Step">Step 1 of 8</strong><div class="wizard9-track"><span id="wizard9TrackFill"></span></div></div>
-<section id="wizard9Choice">
- <h3>What should the box be built around?</h3>
- <div class="wizard9-choices">
-  <button type="button" id="wizard9Pocket" class="wizard9-choice">The size of each pocket</button>
-  <button type="button" id="wizard9Overall" class="wizard9-choice">The overall box size</button>
- </div>
-</section>
-<section id="wizard9Measurements" hidden>
- <h3 id="wizard9Question"></h3>
- <p class="wizard9-help">Type a number in inches, or add mm or in (for example 3 in, 76 mm or 3 1/8).</p>
- <div class="wizard9-inputs">
-  <label>Wide (left to right)<input type="text" id="wizard9Wide" inputmode="decimal" placeholder="e.g. 3 1/8" autocomplete="off"><small id="wizard9WideResult"></small></label>
-  <label>Front to back<input type="text" id="wizard9Depth" inputmode="decimal" placeholder="e.g. 76 mm" autocomplete="off"><small id="wizard9DepthResult"></small></label>
-  <label id="wizard9HeightLabel">Tall (how deep the pocket is)<input type="text" id="wizard9Height" inputmode="decimal" placeholder="e.g. 3 in" autocomplete="off"><small id="wizard9HeightResult"></small></label>
-  <label>Material thickness<input type="text" id="wizard9Thickness" inputmode="decimal" placeholder="e.g. 1/8 in" autocomplete="off"><small id="wizard9ThicknessResult"></small></label>
- </div>
- <p class="wizard9-validation" id="wizard9Error" role="status" aria-live="polite"></p>
- <div class="wizard9-actions">
-  <button type="button" id="wizard9Back">Back to Step 1</button>
-  <button type="button" id="wizard9Save">Save &amp; Continue</button>
- </div>
-</section>
-<section id="wizardOverallPocketsChoice" hidden>
- <h3>Do you need pockets?</h3>
- <p class="wizard9-help">Pockets are made with dividers that slot together inside the box.</p>
- <div class="wizard9-divider-choices">
-  <button type="button" data-overall-pockets="yes"><strong>Yes, divide it into pockets</strong><span>You'll choose how many next.</span></button>
-  <button type="button" data-overall-pockets="no"><strong>No, one open space</strong><span>Straight on to the top.</span></button>
- </div>
- <div class="wizard9-actions"><button type="button" id="wizardOverallPocketsBack">Back to Step 2</button></div>
-</section>
-<section id="wizard9Pockets" hidden>
- <h3>How many pockets?</h3>
- <div class="wizard9-inputs"><label>Pockets<input type="number" id="wizard9PocketCount" value="4" min="1" max="100" step="1"></label></div>
- <p class="wizard9-help" style="margin-top:14px">Then pick how they're laid out. The ones with a long pocket use a divider that stops at another one.</p>
- <div class="wizard9-layouts" role="group" aria-label="Pocket arrangement">
-  <button type="button" data-layout="side">4 in a row, side by side</button>
-  <button type="button" data-layout="grid">2 across x 2 front to back</button>
-  <button type="button" data-layout="depth">4 in a row, front to back</button>
-  <button type="button" data-layout="right">3 on the left, 1 long on the right</button>
-  <button type="button" data-layout="left">1 long on the left, 3 on the right</button>
-  <button type="button" data-layout="back">3 in front, 1 long in back</button>
-  <button type="button" data-layout="front">1 long in front, 3 in back</button>
- </div>
- <p id="wizard9PocketError" class="wizard9-validation" role="status" aria-live="polite"></p>
- <div class="wizard9-actions"><button type="button" id="wizard9PocketBack">Back to Step 2</button></div>
-</section>
-<section id="wizard9Item" hidden>
- <h3>How tall is what you're storing?</h3>
- <p class="wizard9-help">Optional. It lets the wizard check whether a lid will close and suggest finger notches when things sit below the top. Leave it empty to skip.</p>
- <div class="wizard9-inputs"><label>Item height<input id="wizard9ItemHeight" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 3 1/8 or 76 mm"><small id="wizard9ItemHeightResult"></small></label></div>
- <p id="wizard9ItemError" class="wizard9-validation" role="status" aria-live="polite"></p>
- <div class="wizard9-actions"><button type="button" id="wizard9ItemBack">Back to Step 3</button><button type="button" id="wizard9ItemNext">Save &amp; Continue</button></div>
-</section>
-<section id="wizard9Dividers" hidden>
- <h3>Should the dividers lift out or be fixed in?</h3>
- <p class="wizard9-help">Either way, the dividers slot together where they cross.</p>
- <div class="wizard9-divider-choices" role="group" aria-label="Divider attachment options">
-  <button type="button" data-divider="loose" aria-pressed="false"><strong>Loose (lift out)</strong><span>The dividers sit in the box and lift out as one grid.</span></button>
-  <button type="button" data-divider="fixed" aria-pressed="false"><strong>Fixed (tabbed in)</strong><span>Tabs on the dividers lock into slots in the walls and bottom.</span></button>
- </div>
- <div class="wizard9-actions"><button type="button" id="wizard9DividerBack">Back to Step 4</button></div>
-</section>
-<section id="wizard9Notches" hidden>
- <h3>Do you want finger notches in the dividers?</h3>
- <p class="wizard9-help">A rounded scoop in the top of a divider, one per pocket, so you can reach in and grab what's inside.</p>
- <div class="wizard9-divider-choices" id="wizard9DividerNotchChoices" role="group" aria-label="Finger notches in dividers">
-  <button type="button" data-divider-notch="none"><strong>No notches</strong><span>Straight tops on every divider.</span></button>
-  <button type="button" data-divider-notch="all"><strong>Notches in all the dividers</strong><span>Front-to-back (A) and side-to-side (B).</span></button>
-  <button type="button" data-divider-notch="a"><strong>Front-to-back dividers only (A)</strong><span>The dividers that run from front to back.</span></button>
-  <button type="button" data-divider-notch="b"><strong>Side-to-side dividers only (B)</strong><span>The dividers that run from side to side.</span></button>
- </div>
- <h3 style="margin-top:19px">Do you want finger notches in the outer walls?</h3>
- <p class="wizard9-help">The same shape and size as the dividers' notches, one over each pocket along the wall. Walls with hand holes don't get them, and a closed box can't have them.</p>
- <div class="wizard9-divider-choices" id="wizard9WallNotchChoices" role="group" aria-label="Finger notches in outer walls">
-  <button type="button" data-wall-notch="none"><strong>No wall notches</strong><span>Straight tops on the outer walls.</span></button>
-  <button type="button" data-wall-notch="ends"><strong>Left and right ends</strong><span>Reach in from the sides.</span></button>
-  <button type="button" data-wall-notch="frontback"><strong>Front and back</strong><span>Reach in from the front.</span></button>
-  <button type="button" data-wall-notch="all"><strong>All four walls</strong><span>Notches all the way around.</span></button>
- </div>
- <p id="wizard9NotchFeedback" class="wizard9-help" aria-live="polite">Choose one option in each section to preview the notches in 3D.</p>
- <div class="wizard9-actions"><button type="button" id="wizard9NotchBack">Back to Step 5</button><button type="button" id="wizard9NotchNext">Continue to Step 7</button></div>
-</section>
-<section id="wizard9HandHoles" hidden><h3>Do you want hand holes to carry it?</h3><p class="wizard9-help">Rounded slots near the top of the two narrower walls, big enough for four fingers. They stay clear of a lid.</p><div class="wizard9-divider-choices">
-<button type="button" data-handholes="yes"><strong>Yes, hand holes</strong><span>About 3 1/4 in wide and 1 in tall.</span></button>
-<button type="button" data-handholes="no"><strong>No hand holes</strong><span>Solid walls.</span></button></div><div class="wizard9-actions"><button type="button" id="wizard9HandBack">Back to Step 6</button></div></section>
-<section id="wizard9Top" hidden><h3>What goes on top?</h3><div class="wizard9-divider-choices">
-<button type="button" data-top="open"><strong>Open top</strong><span>No lid; everything is easy to reach.</span></button>
-<button type="button" data-top="shoebox"><strong>Shoebox lid</strong><span>A shallow lid that slips down over the box.</span></button>
-<button type="button" data-top="dropin"><strong>Drop-in lid</strong><span>Sits on top with an insert and a ring handle.</span></button>
-<button type="button" data-top="closed"><strong>Closed box</strong><span>A top fitted on with tabs, like the rest of the box.</span></button></div>
-<p class="wizard9-help" id="wizard9TopHint" aria-live="polite"></p>
-<div class="wizard9-actions"><button type="button" id="wizard9TopBack">Back to Step 7</button></div></section>
-<section id="wizard9Completed" hidden><h3>Box Wizard — Your choices</h3><div id="wizard9FinalSummary" style="white-space:pre-line;line-height:1.8"></div><p class="wizard9-help">Generate editable laser-cut panels and divider parts, then inspect the assembled preview in 3D. Prototype and check kerf and joints before production.</p><label class="wizard-clearance-field">Divider slot clearance (mm)
- <input id="wizardDividerClearance" type="number" min="0" max="2" step="0.05" value="0.15" aria-label="Extra width added to divider crossing slots in millimeters">
- <small>Added to slot width (material thickness + clearance). Start with a scrap fit test.</small></label>
- <button id="wizard9Generate" type="button">Generate Box on Canvas</button><p id="wizard9GenerateStatus" class="wizard9-help" role="status" aria-live="polite"></p><div class="wizard9-actions"><button type="button" id="wizard9CompletedBack">Back to Step 8</button></div></section>
-<section id="wizard9Pending" hidden>
- <h3 id="wizard9PendingTitle">Next steps coming soon</h3>
- <p>Your measurements and layout choices are saved in this session. We can build the remaining steps next.</p>
- <div id="wizard9Summary"></div>
- <button type="button" id="wizard9Edit">Back to previous step</button>
-</section>`;
-host.appendChild(wizard);
-let step=1,choice=null;
-const pocketDraft={count:4,layout:null,itemHeight:'',divider:null,dividerNotches:null,wallNotches:null,handHoles:null,top:null};
-let overallHasPockets=null;
-const drafts={pocket:{wide:'',depth:'',height:'',thickness:''},overall:{wide:'',depth:'',height:'',thickness:''}};
-const keys=['wide','depth','height','thickness'];
-const ids=['wizard9Wide','wizard9Depth','wizard9Height','wizard9Thickness'];
-const res=['wizard9WideResult','wizard9DepthResult','wizard9HeightResult','wizard9ThicknessResult'];
-function parseDimension(input){
- let str=String(input).trim().toLowerCase().replace(/[″"]/g,' in').replace(/[′']/g,' in').replace(/\s+/g,' ');
- if(!str)return null;
- const match=str.match(/^(.*?)\s*(mm|millimeters?|in|inches?|inch)?$/);
- if(!match)return null;
- const number=match[1].trim(),unit=match[2]||'in';
- let n;
- const mixed=number.match(/^(\d+)\s+(\d+)\/(\d+)$/);
- const fraction=number.match(/^(\d+)\/(\d+)$/);
- if(mixed){if(+mixed[3]===0)return null;n=+mixed[1]+(+mixed[2]/+mixed[3]);}
- else if(fraction){if(+fraction[2]===0)return null;n=+fraction[1]/+fraction[2];}
- else if(/^\d+(?:\.\d+)?$/.test(number))n=Number(number);
- else return null;
- if(!Number.isFinite(n)||n<=0)return null;
- return {mm:n*(unit.startsWith('m')?1:25.4),inch:n/(unit.startsWith('m')?25.4:1)};
-}
-function updateConversions(){
- ids.forEach((id,i)=>{
-  const el=$(id),v=el.value.trim(),result=$(res[i]),parsed=parseDimension(v);
-  result.textContent=!v?'':parsed?`${Number(parsed.inch.toFixed(5))} in  ·  ${Number(parsed.mm.toFixed(4))} mm`:'Enter a positive value, such as 3 1/8 or 76 mm';
-  result.classList.toggle('invalid',!!v&&!parsed);
- });
-}
-// The overall-box route has its own step numbers and forks at Step 3.
-function routeSteps(){return choice==='overall'?(overallHasPockets==='yes'?9:5):8;}
-function currentStepNumber(){return choice==='overall'&&step===10?9:choice==='overall'&&overallHasPockets==='no'&&step===6?5:choice==='pocket'&&step===9?8:step;}
-function currentProgress(){return choice==='overall'? Math.min(currentStepNumber(),routeSteps()):Math.min(step,8);}
-function handStep(){return choice==='overall'?(overallHasPockets==='no'?4:8):7;}
-function topStep(){return choice==='overall'?(overallHasPockets==='no'?5:9):8;}
-function completeStep(){return choice==='overall'?(overallHasPockets==='no'?6:10):9;}
-function layoutStep(){return choice==='overall'?4:3;}
-function itemStep(){return choice==='overall'?5:4;}
-function dividerStep(){return choice==='overall'?6:5;}
-function notchStep(){return choice==='overall'?7:6;}
-function previousHandStep(){return choice==='overall'?(overallHasPockets==='no'?3:7):6;}
-function updateFinalSummary(){
- const topNames={open:'Open top',shoebox:'Shoebox lid',dropin:'Drop-in lid',closed:'Closed box'};
- const measurementNames=['Width','Front to back','Height','Material thickness'];
- const dimensionText=keys.map((k,i)=>{const d=parseDimension(drafts[choice][k]);return measurementNames[i]+': '+(d?d.mm.toFixed(2)+' mm':'Not set');}).join('\n');
- $('wizard9FinalSummary').textContent=(choice==='overall'?'Overall box size':'Pocket size')+'\n'+dimensionText+'\nPockets: '+(choice==='overall'&&overallHasPockets==='no'?'No — one open space':pocketDraft.count+' ('+(pocketDraft.layout||'Unselected')+')')+'\nHand holes: '+(pocketDraft.handHoles==='yes'?'Yes':'No')+'\nTop: '+(topNames[pocketDraft.top]||'Not selected')+(choice==='overall'&&overallHasPockets==='no'?'':'\nDivider attachment: '+(pocketDraft.divider||'Not selected')+'\nDivider notches: '+(pocketDraft.dividerNotches||'None')+'\nWall notches: '+(pocketDraft.wallNotches||'None'));
- $('wizardDividerClearance').closest('label').hidden=choice==='overall'&&overallHasPockets==='no';
-}
-function display(){
- wizard.hidden=false;
- $('wizardDockPlaceholder').hidden=true;
- const visibleStep=currentProgress(),total=routeSteps();
- $('wizardDockState').textContent=`Step ${visibleStep} of ${total}`;
- $('wizard9Step').textContent=`Step ${visibleStep} of ${total}`;
- $('wizard9TrackFill').style.width=`${Math.min(100,visibleStep/total*100)}%`;
- const overall=choice==='overall',pocketPath=!overall||overallHasPockets==='yes';
- $('wizard9Choice').hidden=step!==1;
- $('wizard9Measurements').hidden=step!==2;
- $('wizardOverallPocketsChoice').hidden=!(overall&&step===3);
- $('wizard9Pockets').hidden=!(pocketPath&&step===layoutStep());
- $('wizard9Item').hidden=!(pocketPath&&step===itemStep());
- $('wizard9Dividers').hidden=!(pocketPath&&step===dividerStep());
- $('wizard9Notches').hidden=!(pocketPath&&step===notchStep());
- $('wizard9HandHoles').hidden=step!==handStep();
- $('wizard9Top').hidden=step!==topStep();
- $('wizard9Completed').hidden=step!==completeStep();
- $('wizard9Pending').hidden=true;
- $('wizard9PocketBack').textContent=`Back to Step ${layoutStep()-1}`;
- $('wizard9ItemBack').textContent=`Back to Step ${itemStep()-1}`;
- $('wizard9DividerBack').textContent=`Back to Step ${dividerStep()-1}`;
- $('wizard9NotchBack').textContent=`Back to Step ${notchStep()-1}`;
- $('wizard9NotchNext').textContent=`Continue to Step ${notchStep()+1}`;
- $('wizard9HandBack').textContent=`Back to Step ${previousHandStep()}`;
- $('wizard9TopBack').textContent=`Back to Step ${topStep()-1}`;
- $('wizard9CompletedBack').textContent=`Back to Step ${topStep()}`;
- document.querySelectorAll('#wizardOverallPocketsChoice [data-overall-pockets]').forEach(b=>{
-  const active=b.dataset.overallPockets===overallHasPockets;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));
- });
- if(!$('wizard9Pockets').hidden){
-  $('wizard9PocketCount').value=pocketDraft.count;
-  document.querySelectorAll('#wizard9Pockets [data-layout]').forEach(b=>{
-   const active=b.dataset.layout===pocketDraft.layout;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));
-  });
- }
- if(!$('wizard9Item').hidden){$('wizard9ItemHeight').value=pocketDraft.itemHeight;showItemConversion();}
- document.querySelectorAll('#wizard9Dividers [data-divider]').forEach(b=>{const active=b.dataset.divider===pocketDraft.divider;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
- if(!$('wizard9Notches').hidden){
-  for(const [attr,value] of [['data-divider-notch',pocketDraft.dividerNotches],['data-wall-notch',pocketDraft.wallNotches]]){
-   document.querySelectorAll('#wizard9Notches ['+attr+']').forEach(b=>{const active=b.getAttribute(attr)===value;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
-  }
-  previewNotches();
- }
- for(const [container,attr,value] of [['wizard9HandHoles','data-handholes',pocketDraft.handHoles],['wizard9Top','data-top',pocketDraft.top]]){
-  document.querySelectorAll('#'+container+' ['+attr+']').forEach(b=>{const active=b.getAttribute(attr)===value;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
- }
- if(!$('wizard9Completed').hidden)updateFinalSummary();
- if(step===2){
-  $('wizard9Question').textContent=choice==='pocket'?'How big is each pocket, inside?':'How big is the outside of the box?';
-  $('wizard9HeightLabel').firstChild.textContent=choice==='pocket'?'Tall (how deep the pocket is)':'Height';
-  keys.forEach((k,i)=>$(ids[i]).value=drafts[choice][k]);
-  $('wizard9Error').textContent='';updateConversions();
- }
-}
-function enter(kind){choice=kind;step=2;display();}
-$('boxWizardOpen').addEventListener('click',()=>{step=1;display();});
-$('wizard9Pocket').addEventListener('click',()=>enter('pocket'));
-$('wizard9Overall').addEventListener('click',()=>enter('overall'));
-$('wizard9Back').addEventListener('click',()=>{keys.forEach((k,i)=>drafts[choice][k]=$(ids[i]).value);step=1;display()});
-ids.forEach((id,i)=>$(id).addEventListener('input',()=>{if(choice)drafts[choice][keys[i]]=$(id).value;updateConversions();}));
-$('wizard9Save').addEventListener('click',()=>{
- const vals=ids.map(id=>parseDimension($(id).value));
- if(vals.some(v=>!v)){ $('wizard9Error').textContent='Please enter a valid, positive measurement in each box.';ids[vals.findIndex(v=>!v)].focus();return;}
- const [w,d,h,t]=vals.map(v=>v.mm);
- if(t*2>=Math.min(w,d,h)){$('wizard9Error').textContent='Material thickness must be less than half the smallest dimension.';return;}
- const summary=keys.map((k,i)=>`${k==='wide'?'Width':k==='depth'?'Front to back':k==='height'?(choice==='pocket'?'Inside pocket depth':'Outside height'):'Material thickness'}: ${Number(vals[i].inch.toFixed(5))} in (${Number(vals[i].mm.toFixed(3))} mm)`).join('\n');
- $('wizard9Summary').textContent=(choice==='pocket'?'Built around pocket size':'Built around overall box size')+'\n'+summary;
- // These are wizard draft values; no panels are regenerated until subsequent steps are designed.
- step=3;display();
-});
-$('wizard9Edit').addEventListener('click',()=>{step=2;display()});
-$('wizardOverallPocketsBack').addEventListener('click',()=>{step=2;display()});
-document.querySelectorAll('#wizardOverallPocketsChoice [data-overall-pockets]').forEach(b=>b.addEventListener('click',()=>{overallHasPockets=b.dataset.overallPockets;step=4;display();}));
-$('wizard9PocketBack').addEventListener('click',()=>{step=layoutStep()-1;display()});
-$('wizard9PocketCount').addEventListener('input',()=>{
- const n=Number($('wizard9PocketCount').value);
- pocketDraft.count=n;
- $('wizard9PocketError').textContent='';
-});
-document.querySelectorAll('#wizard9Pockets [data-layout]').forEach(button=>button.addEventListener('click',()=>{
- const count=Number($('wizard9PocketCount').value);
- if(!Number.isInteger(count)||count<1||count>100){
-   $('wizard9PocketError').textContent='Enter a whole number of pockets between 1 and 100.';
-   $('wizard9PocketCount').focus();return;
- }
- if(count!==4){
-   $('wizard9PocketError').textContent='These seven layouts each describe four pockets. Enter 4 pockets to use one of these layouts.';
-   $('wizard9PocketCount').focus();return;
- }
- pocketDraft.count=count;pocketDraft.layout=button.dataset.layout;step=itemStep();display();
-}));
-function showItemConversion(){
- const value=$('wizard9ItemHeight').value.trim(),result=$('wizard9ItemHeightResult');
- const parsed=parseDimension(value);
- result.textContent=!value?'Optional — leave blank to skip':parsed?`${Number(parsed.inch.toFixed(5))} in  ·  ${Number(parsed.mm.toFixed(4))} mm`:'Enter a valid height, such as 3 1/8 or 76 mm';
- result.classList.toggle('invalid',!!value&&!parsed);
-}
-$('wizard9ItemHeight').addEventListener('input',()=>{pocketDraft.itemHeight=$('wizard9ItemHeight').value;showItemConversion();});
-$('wizard9ItemBack').addEventListener('click',()=>{step=layoutStep();display()});
-$('wizard9ItemNext').addEventListener('click',()=>{
- const raw=$('wizard9ItemHeight').value.trim(),height=raw?parseDimension(raw):null;
- if(raw&&!height){$('wizard9ItemError').textContent='Enter a valid positive item height or leave the box empty.';$('wizard9ItemHeight').focus();return;}
- pocketDraft.itemHeight=raw;
- const layoutNames={
-  side:'4 in a row, side by side',grid:'2 across x 2 front to back',depth:'4 in a row, front to back',
-  right:'3 on the left, 1 long on the right',left:'1 long on the left, 3 on the right',
-  back:'3 in front, 1 long in back',front:'1 long in front, 3 in back'};
- $('wizard9Summary').textContent+='\nPockets: '+pocketDraft.count+'\nLayout: '+(layoutNames[pocketDraft.layout]||'Not selected')+
-  '\nItem height: '+(height?`${Number(height.inch.toFixed(5))} in (${Number(height.mm.toFixed(3))} mm)`:'Not provided');
- step=dividerStep();display();
-});
-$('wizard9DividerBack').addEventListener('click',()=>{step=itemStep();display()});
-document.querySelectorAll('#wizard9Dividers [data-divider]').forEach(button=>button.addEventListener('click',()=>{
- pocketDraft.divider=button.dataset.divider;
- const kind=pocketDraft.divider==='loose'?'Loose (lift out)':'Fixed (tabbed in)';
- $('wizard9Summary').textContent=$('wizard9Summary').textContent.replace(/\nDivider attachment:.*$/m,'')+'\nDivider attachment: '+kind;
- step=notchStep();display();
-}));
-
-function previewNotches(){
- const parsed=['wide','depth','height','thickness'].map(key=>parseDimension(drafts[choice][key]));
- if(parsed.some(p=>!p))return;
- let [pw,pd,ph,thick]=parsed.map(p=>p.mm);
- const layout=pocketDraft.layout||'grid';
- const isSpecial=['right','left','front','back'].includes(layout);
- const cols=layout==='side'?4:layout==='depth'?1:isSpecial&&(layout==='front'||layout==='back')?3:2;
- const rows=layout==='depth'?4:layout==='side'?1:isSpecial&&(layout==='right'||layout==='left')?3:2;
- if(choice==='overall'){
-  pw=(pw-(cols+1)*thick)/cols;
-  pd=(pd-(rows+1)*thick)/rows;
-  ph=ph-2*thick;
- }
- if(Math.min(pw,pd,ph)<=0)return;
- const w=cols*pw+(cols+1)*thick,d=rows*pd+(rows+1)*thick,h=ph+2*thick;
- if(w>3000||d>3000||h>3000)return;
- window.LaserWizardEditor.preview({w,d,h,t:thick,layout,cols,rows,dividerNotches:pocketDraft.dividerNotches,wallNotches:pocketDraft.wallNotches});
- $('wizard9NotchFeedback').textContent='3D preview updated. Preview is illustrative; inspect the actual flat cutting paths before cutting.';
-}
-for(const [attribute,key] of [['data-divider-notch','dividerNotches'],['data-wall-notch','wallNotches']]){
- document.querySelectorAll('#wizard9Notches ['+attribute+']').forEach(button=>button.addEventListener('click',()=>{
-   pocketDraft[key]=button.getAttribute(attribute);
-   display();
- }));
-}
-$('wizard9NotchBack').addEventListener('click',()=>{step=dividerStep();display()});
-$('wizard9NotchNext').addEventListener('click',()=>{
- if(!pocketDraft.dividerNotches||!pocketDraft.wallNotches){$('wizard9NotchFeedback').textContent='Select one divider option and one outer wall option first.';return;}
- $('wizard9Summary').textContent+='\nDivider notches: '+pocketDraft.dividerNotches+'\nWall notches: '+pocketDraft.wallNotches;
- step=handStep();display();
-});
-
-$('wizard9HandBack').addEventListener('click',()=>{step=previousHandStep();display()});
-document.querySelectorAll('#wizard9HandHoles [data-handholes]').forEach(b=>b.addEventListener('click',()=>{
- pocketDraft.handHoles=b.dataset.handholes;step=topStep();display();
-}));
-$('wizard9TopBack').addEventListener('click',()=>{step=handStep();display()});
-document.querySelectorAll('#wizard9Top [data-top]').forEach(b=>b.addEventListener('click',()=>{
- pocketDraft.top=b.dataset.top;
- const topNames={open:'Open top',shoebox:'Shoebox lid',dropin:'Drop-in lid',closed:'Closed box'};
- $('wizard9FinalSummary').textContent='Hand holes: '+(pocketDraft.handHoles==='yes'?'Yes':'No')+'\nTop: '+topNames[pocketDraft.top]+'\nDivider attachment: '+(pocketDraft.divider||'Not set')+'\nDivider notches: '+(pocketDraft.dividerNotches||'None')+'\nWall notches: '+(pocketDraft.wallNotches||'None');
- step=completeStep();display();
-}));
-$('wizard9CompletedBack').addEventListener('click',()=>{step=topStep();display()});
-$('wizard9Generate').addEventListener('click',()=>{
- const status=$('wizard9GenerateStatus');status.textContent='';
- const oneOpenSpace=choice==='overall'&&overallHasPockets==='no';
- const hasDividers=!oneOpenSpace;
- if(!pocketDraft.handHoles||!pocketDraft.top||(choice==='overall'&&!overallHasPockets)||
-   (hasDividers&&(!pocketDraft.layout||!pocketDraft.divider||!pocketDraft.dividerNotches||!pocketDraft.wallNotches))){
-  status.textContent='Complete all the steps on your selected wizard route first.';return;
- }
- const measurements=['wide','depth','height','thickness'].map(k=>parseDimension(drafts[choice][k]));
- if(measurements.some(v=>!v)){status.textContent='Return to Step 2 and enter valid measurements.';return;}
- let [pw,pd,ph,t]=measurements.map(x=>x.mm);
- const targetW=pw,targetD=pd,targetH=ph;
- const map={side:[4,1],grid:[2,2],depth:[1,4],right:[2,3],left:[2,3],back:[3,2],front:[3,2]};
- const [cols,rows]=oneOpenSpace?[1,1]:(map[pocketDraft.layout]||[2,2]);
- if(choice==='overall'){
-  pw=(targetW-(cols+1)*t)/cols;
-  pd=(targetD-(rows+1)*t)/rows;
-  ph=targetH-2*t;
- }
- if(Math.min(pw,pd,ph)<20||t<.5||2*t>=Math.min(pw,pd,ph)){
-  status.textContent=choice==='overall'?'Outside box is too small for the chosen pockets and material thickness. Increase dimensions or choose fewer pockets.':'Pocket dimensions must be at least 20 mm and greater than twice the material thickness.';return;
- }
- const slotClearance=oneOpenSpace?0:Number($('wizardDividerClearance').value);
- if(!Number.isFinite(slotClearance)||slotClearance<0||slotClearance>2){
-  status.textContent='Enter divider clearance from 0 to 2 mm.';return;
- }
- let built;
- try{
-   built=window.LaserWizardEditor.generate({pw,pd,ph,t,layout:oneOpenSpace?'none':pocketDraft.layout,
-    dividerMode:oneOpenSpace?'loose':pocketDraft.divider,dividerNotches:oneOpenSpace?'none':pocketDraft.dividerNotches,
-    wallNotches:oneOpenSpace?'none':pocketDraft.wallNotches,handHoles:pocketDraft.handHoles,top:pocketDraft.top,
-    slotClearance,oneOpenSpace,choice,pocketDraft});
- }catch(e){status.textContent='Could not generate: '+e.message;return;}
- status.textContent=`Generated ${built.parts.length} editable ${oneOpenSpace?'single-space box':'box and divider'} cutting parts. ${built.geometryWarnings.join(' ')} Hand holes, lids, kerf and physical fit still require further verification.`;
-});
-
-
-});
-</script><script id="pasteboard-name-script">
+</div><script id="pasteboard-name-script">
 (()=>{
  'use strict';
  const button=document.getElementById('pasteboardNameButton');
