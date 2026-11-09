@@ -231,7 +231,7 @@ aside.right{min-width:0}
 .zoom-control-box .zoom-view-divider{width:1px;height:25px;background:#60758d;margin:0 5px}
 .zoom-control-box .box-view-controls{position:static;inset:auto;z-index:auto;margin:0;align-self:center;box-shadow:none;background:transparent;border:0;border-radius:0;padding:0;display:flex;gap:5px}
 .zoom-control-box .box-view-controls button{font-size:12px;padding:6px 11px;min-width:46px}
-</style><style id="box-lid-css">.zoom-control-box .box-lid-controls{display:inline-flex;gap:4px}.zoom-control-box .box-lid-controls[hidden]{display:none!important}.zoom-control-box .box-lid-controls button{font-size:12px;padding:6px 9px}.zoom-control-box .box-lid-controls button.selected{background:#2278bd;color:white;border-color:#8ed4ff}</style><style id="solid-3d-preview-style">
+</style><style id="zoom-to-fit-button-css">.zoom-control-box #zoomToFit{font-size:12px;font-weight:600;line-height:1.2;white-space:nowrap;min-width:94px;padding:6px 10px;height:30px}</style><style id="box-lid-css">.zoom-control-box .box-lid-controls{display:inline-flex;gap:4px}.zoom-control-box .box-lid-controls[hidden]{display:none!important}.zoom-control-box .box-lid-controls button{font-size:12px;padding:6px 9px}.zoom-control-box .box-lid-controls button.selected{background:#2278bd;color:white;border-color:#8ed4ff}</style><style id="solid-3d-preview-style">
 #box3DStage{background:radial-gradient(ellipse at 52% 36%,#fbfdff 0%,#e9f0f7 70%,#d9e4ef 100%)}
 #box3DCanvas{display:block}
 </style><style id="box-edit-control-style">#boxEditSettings{margin-left:8px;background:#2a526e;color:white;border:1px solid #5e93ba;padding:6px 10px;border-radius:5px}#boxGenCount{width:100%}</style><style id="box-edit-tab-style">#rightTabEditBox h2{margin:0 0 8px}#rightTabEditBox #boxEditSettings{display:block;width:100%;margin:12px 0 0;background:#23619c;border:1px solid #4d91ca;border-radius:5px;padding:11px;color:white;font-weight:600}#rightTabEditBox #boxEditSettings[hidden]{display:none!important}#rightTabEditBox .fine{line-height:1.5}</style><style id="right-docked-box-wizard-css">
@@ -405,14 +405,22 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 #keychainGenOverlay .board-shape-option:hover{background:#355373;border-color:#8fb5dc;}
 #keychainGenOverlay .board-shape-option.selected{background:#215f91;border-color:#a1d8ff;box-shadow:inset 0 0 0 1px #a1d8ff;}
 #keychainGenOverlay .board-shape-option:focus-visible{outline:3px solid #f4cb81;outline-offset:2px;}
-#keychainGenOverlay .board-shape-add{display:block;width:100%;box-sizing:border-box;margin-top:12px;padding:9px 8px;border:1px solid #5083b0;border-radius:6px;background:#215f91;color:#fff;font-size:12px;font-weight:600;cursor:pointer;}
-#keychainGenOverlay .board-shape-add:hover{background:#2874ae;}
 
 #keychainGenOverlay .board-text-panel{margin-top:12px;border:1px solid #637c99;border-radius:9px;background:#182b41;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
 #keychainGenOverlay .board-text-title{margin:0;padding:10px 13px;background:#304a68;border-bottom:1px solid #637c99;color:#e8f2ff;font-weight:700;letter-spacing:.04em;font-size:12px}
 #keychainGenOverlay .board-text-body{padding:12px 13px}
 #keychainGenOverlay .board-text-body label{display:block;font-size:12px;font-weight:600;color:#e8f2ff;margin-bottom:6px}
 #keychainGenOverlay #boardKeychainText{width:100%;box-sizing:border-box;background:#f7fbff;color:#122235;border:1px solid #87a6c7;border-radius:6px;padding:9px 10px;font-size:13px}
+#keychainGenOverlay .board-text-paired-controls{display:grid;grid-template-columns:86px 86px;gap:12px;align-items:start;margin-top:12px}
+#keychainGenOverlay .board-text-paired-controls .board-text-control{margin-top:0;min-width:0}
+#keychainGenOverlay .board-text-control{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:12px}
+#keychainGenOverlay .board-text-control label{margin:0;display:block;width:86px;max-width:100%;box-sizing:border-box;font-size:9px;letter-spacing:-.35px;font-weight:600;color:#e8f2ff;white-space:nowrap}
+#keychainGenOverlay .keychain-overlap-spinner{display:flex;width:86px;max-width:100%;height:38px;box-sizing:border-box;overflow:hidden;border:1px solid #87a6c7;border-radius:6px;background:#f7fbff}
+#keychainGenOverlay #keychainLetterOverlap{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainLetterOverlap::-webkit-inner-spin-button,#keychainGenOverlay #keychainLetterOverlap::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay #keychainLetterOverlap:focus{outline:none}
+#keychainGenOverlay .keychain-overlap-spinner:focus-within{outline:2px solid #58aaff;outline-offset:2px}
+#keychainGenOverlay .board-text-unit{font-size:12px;color:#d7e5f4;white-space:nowrap}
 #keychainGenOverlay .board-text-hint{font-size:11px;line-height:1.4;color:#bed1e6;margin:8px 0 0}
 
 #keychainGenOverlay .keychain-settings-panel{margin-top:12px;border:1px solid #637c99;border-radius:9px;background:#182b41;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
@@ -422,11 +430,53 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 #keychainGenOverlay .keychain-outline-heading span{color:#bed1e6;font-weight:400}
 #keychainGenOverlay .keychain-outline-control{display:flex;align-items:center;gap:8px}
 
-#keychainGenOverlay #keychainOutlineWidth{width:76px;min-width:76px;flex:0 0 76px;box-sizing:border-box;border:1px solid #87a6c7;border-radius:6px;background:#f7fbff;color:#142536;padding:8px 4px 8px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}#keychainGenOverlay #keychainOutlineWidth:focus{outline:2px solid #58aaff;outline-offset:2px}
+#keychainGenOverlay #keychainOutlineWidth{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainOutlineWidth::-webkit-inner-spin-button,#keychainGenOverlay #keychainOutlineWidth::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay #keychainOutlineWidth:focus{outline:none}
+#keychainGenOverlay .board-text-paired-controls .board-text-control label{font-size:9px;letter-spacing:-.45px;white-space:nowrap}
 #keychainGenOverlay .keychain-letters-heading{font-size:12px;font-weight:750;color:#e8f2ff;letter-spacing:.045em;margin-bottom:11px}
 #keychainGenOverlay .keychain-outline-label{flex:0 0 auto;margin:0;font-size:12px;color:#e8f2ff;font-weight:500;white-space:nowrap}
 #keychainGenOverlay .keychain-outline-unit{font-size:12px;color:#d7e5f4;white-space:nowrap}
 #keychainGenOverlay .keychain-outline-control{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;white-space:nowrap}
+#keychainGenOverlay .keychain-style-heading{font-size:12px;font-weight:700;color:#e8f2ff;letter-spacing:.02em;margin:17px 0 9px}
+#keychainGenOverlay .keychain-style-options{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+#keychainGenOverlay .keychain-style-button{min-width:0;min-height:38px;padding:8px 5px;border-radius:6px;border:1px solid #6685a6;background:#263c56;color:#e7f2ff;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+#keychainGenOverlay .keychain-style-button:hover{border-color:#a9d3fc;background:#315274}
+#keychainGenOverlay .keychain-style-button.selected{background:#23619c;border-color:#89c5ff;box-shadow:inset 0 0 0 1px rgba(137,197,255,.3)}
+#keychainGenOverlay .keychain-style-button:focus-visible{outline:2px solid #b4daff;outline-offset:2px}
+#keychainGenOverlay .keychain-board-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:15px;align-items:start}
+#keychainGenOverlay .keychain-corner-control{display:flex;flex-direction:column;gap:6px;margin-top:0;min-width:0}
+#keychainGenOverlay .keychain-border-control{display:flex;flex-direction:column;gap:6px;min-width:0}
+#keychainGenOverlay .keychain-ring-control{display:flex;flex-direction:column;gap:6px;min-width:0}
+#keychainGenOverlay .keychain-ring-control label,#keychainGenOverlay .keychain-hole-control label{display:block;max-width:100%;font-size:10px;letter-spacing:-.35px;white-space:nowrap;font-weight:600;color:#e8f2ff}
+#keychainGenOverlay .keychain-hole-control{display:flex;flex-direction:column;gap:6px;min-width:0}
+#keychainGenOverlay .keychain-pattern-control{display:flex;flex-direction:column;gap:6px;min-width:0;grid-column:1 / -1;margin-top:0}
+#keychainGenOverlay .keychain-pattern-control label{display:block;max-width:100%;font-size:10px;letter-spacing:-.35px;white-space:nowrap;font-weight:600;color:#e8f2ff}
+#keychainGenOverlay #keychainPattern{display:block;width:100%;min-width:0;max-width:100%;height:38px;box-sizing:border-box;border:1px solid #87a6c7;border-radius:6px;background:#f7fbff;color:#142536;padding:0 30px 0 10px;font-size:13px;font-weight:600;appearance:auto;-webkit-appearance:menulist;-moz-appearance:menulist}
+#keychainGenOverlay #keychainPattern:focus{outline:2px solid #58aaff;outline-offset:2px}
+#keychainGenOverlay #keychainHoleDiameter{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainHoleDiameter::-webkit-inner-spin-button,#keychainGenOverlay #keychainHoleDiameter::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay #keychainHoleDiameter:focus{outline:none}
+#keychainGenOverlay #keychainRingDiameter{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainRingDiameter::-webkit-inner-spin-button,#keychainGenOverlay #keychainRingDiameter::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay #keychainRingDiameter:focus{outline:none}
+#keychainGenOverlay .keychain-border-control label{display:block;max-width:100%;font-size:10px;letter-spacing:-.35px;white-space:nowrap;font-weight:600;color:#e8f2ff}
+#keychainGenOverlay #keychainBorderWidth{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainBorderWidth::-webkit-inner-spin-button,#keychainGenOverlay #keychainBorderWidth::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay #keychainBorderWidth:focus{outline:none}
+#keychainGenOverlay .keychain-corner-control label{display:block;width:86px;max-width:100%;font-size:10px;letter-spacing:-.35px;white-space:nowrap;font-weight:600;color:#e8f2ff}
+#keychainGenOverlay .keychain-radius-spinner{display:flex;width:86px;max-width:100%;height:38px;box-sizing:border-box;overflow:hidden;border:1px solid #87a6c7;border-radius:6px;background:#f7fbff}
+#keychainGenOverlay #keychainCornerRadius{width:100%;min-width:0;flex:1;box-sizing:border-box;background:transparent;color:#142536;border:0;border-radius:0;padding:5px 2px 5px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield;-webkit-appearance:none}
+#keychainGenOverlay #keychainCornerRadius::-webkit-inner-spin-button,#keychainGenOverlay #keychainCornerRadius::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0;display:none}
+#keychainGenOverlay .keychain-radius-spinner:focus-within{outline:2px solid #58aaff;outline-offset:2px}
+#keychainGenOverlay #keychainCornerRadius:focus{outline:none}
+#keychainGenOverlay .keychain-radius-spinner-arrows{flex:0 0 22px;display:flex;flex-direction:column;height:100%;border-left:1px solid #87a6c7}
+#keychainGenOverlay .keychain-radius-spinner-arrows button{display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;margin:0;border:0;border-radius:0;padding:0;background:#e4edf7;color:#183a5e;font-size:10px;line-height:1;cursor:pointer}
+#keychainGenOverlay .keychain-radius-spinner-arrows button+button{border-top:1px solid #87a6c7}
+#keychainGenOverlay .keychain-radius-spinner-arrows button:hover:not(:disabled){background:#b6d8f7}
+#keychainGenOverlay .keychain-radius-spinner-arrows button:active:not(:disabled){background:#8cc4f6}
+#keychainGenOverlay .keychain-radius-spinner-arrows button:disabled{opacity:.45;cursor:not-allowed}
+#keychainGenOverlay #keychainCornerRadius:disabled{opacity:.58;cursor:not-allowed}
 #keychainGenOverlay .keychain-outline-hint{font-size:11px;color:#bed1e6;line-height:1.4;margin:9px 0 0}
 
 </style>
@@ -446,7 +496,7 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
  .app{grid-template-columns:104px minmax(0,1fr)!important}
 }
 </style>
-</head><body><header><h1>◈ Laser Design Studio <small>Phase 2 · Hybrid Editor</small></h1><button id="new">New</button><div class="settings-wrap" id="settingsWrap"><button type="button" id="settingsBtn" title="Settings" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06-1.95 1.95-.06-.06A1.6 1.6 0 0 0 16 18.4a1.6 1.6 0 0 0-.96 1.46V20h-2.76v-.14A1.6 1.6 0 0 0 11.3 18.4a1.6 1.6 0 0 0-1.77.32l-.06.06-1.95-1.95.06-.06A1.6 1.6 0 0 0 7.9 15a1.6 1.6 0 0 0-1.46-.96H6.3v-2.76h.14A1.6 1.6 0 0 0 7.9 10.3a1.6 1.6 0 0 0-.32-1.77l-.06-.06 1.95-1.95.06.06A1.6 1.6 0 0 0 11.3 6.9a1.6 1.6 0 0 0 .96-1.46V5.3h2.76v.14A1.6 1.6 0 0 0 16 6.9a1.6 1.6 0 0 0 1.77-.32l.06-.06 1.95 1.95-.06.06A1.6 1.6 0 0 0 19.4 10.3a1.6 1.6 0 0 0 1.46.96H21v2.76h-.14A1.6 1.6 0 0 0 19.4 15Z" transform="translate(-1 -0.65)"/></svg><span>Settings</span></button><div id="settingsPanel" hidden role="dialog" aria-modal="false" aria-label="Settings" aria-labelledby="settingsHeading"><div class="settings-head"><h2 id="settingsHeading">Settings</h2><button id="settingsClose" type="button" title="Close Settings" aria-label="Close Settings">✕</button></div><div class="settings-tabs" role="tablist" aria-label="Settings categories"><button type="button" id="workspaceTab" role="tab" aria-controls="workspaceTabPanel" aria-selected="true" tabindex="0">Workspace Settings</button><button type="button" id="canvasTab" role="tab" aria-controls="canvasTabPanel" aria-selected="false" tabindex="-1">Canvas</button><button type="button" id="aboutTab" role="tab" aria-controls="aboutTabPanel" aria-selected="false" tabindex="-1">About</button></div><div id="workspaceTabPanel" role="tabpanel" aria-labelledby="workspaceTab"><h3>Workspace Settings</h3><label><input type="checkbox" id="grid" checked> Show pasteboard grid only</label><label>Major grid spacing (mm)</label><select id="gridSize"><option value="5">5 mm</option><option value="10" selected>10 mm</option><option value="20">20 mm</option><option value="25">25 mm</option><option value="50">50 mm</option></select><label><input type="checkbox" id="fineGrid" checked> Show fine grid (1/10 spacing)</label><label><input type="checkbox" id="snap"> Snap objects to grid</label><label>Snap spacing (mm)</label><select id="snapSize"><option value="0.5">0.5 mm</option><option value="1" selected>1 mm</option><option value="2">2 mm</option><option value="5">5 mm</option><option value="10">10 mm</option></select><label><input type="checkbox" id="easyGrab" checked> Easy grab (click inside shapes)</label><label>Grab tolerance <span id="grabLabel">14 px</span></label><input id="grabRange" type="range" min="6" max="30" value="14" step="2"></div><div id="canvasTabPanel" role="tabpanel" aria-labelledby="canvasTab" hidden><h3>Canvas</h3><div class="work-area-group"><label for="workAreaCategory" class="work-area-heading">WORK AREA (YOUR LASER'S BED)</label><select id="workAreaCategory" aria-label="Work area selection"><option value="" selected>Select work area</option><option value="common">Common Sizes</option></select><div id="commonSizesWrap" hidden><label for="commonSizes">Common Sizes</label><select id="commonSizes"><option value="">Choose a size</option><option value="100x100">100 × 100 mm</option><option value="200x200">200 × 200 mm</option><option value="300x200">300 × 200 mm</option><option value="400x400">400 × 400 mm</option><option value="600x400">600 × 400 mm</option></select></div><p class="work-area-hint">Choose a preset to fill in the dimensions below, then click Apply canvas size.</p></div><p>Set the physical size of your design workspace in millimeters. Default: 400 × 400 mm (15.748 × 15.748 in).</p><div class="fields"><div><label for="canvasW">Width (mm)</label><input id="canvasW" type="number" value="400" min="1" max="3000"></div><div><label for="canvasH">Height (mm)</label><input id="canvasH" type="number" value="400" min="1" max="3000"></div></div><button id="canvasApply" type="button" style="margin-top:10px">Apply canvas size</button></div><div id="aboutTabPanel" role="tabpanel" aria-labelledby="aboutTab" hidden><h3>About Laser Design Studio</h3><p>Create vector artwork and export SVG files for LightBurn.</p><p>This editor does not control laser hardware.</p></div></div></div><button type="button" id="boxGenOpen" title="Create a finger-joint box design">Box Generator</button><div class="header-file-actions" style="display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap"><button id="export" style="background:#14654e">Export SVG for LightBurn</button></div><input id="file" type="file" accept=".json,application/json"></header>
+</head><body><header><h1>◈ Laser Design Studio <small>Phase 2 · Hybrid Editor</small></h1><button id="new">New</button><div class="settings-wrap" id="settingsWrap"><button type="button" id="settingsBtn" title="Settings" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .32 1.77l.06.06-1.95 1.95-.06-.06A1.6 1.6 0 0 0 16 18.4a1.6 1.6 0 0 0-.96 1.46V20h-2.76v-.14A1.6 1.6 0 0 0 11.3 18.4a1.6 1.6 0 0 0-1.77.32l-.06.06-1.95-1.95.06-.06A1.6 1.6 0 0 0 7.9 15a1.6 1.6 0 0 0-1.46-.96H6.3v-2.76h.14A1.6 1.6 0 0 0 7.9 10.3a1.6 1.6 0 0 0-.32-1.77l-.06-.06 1.95-1.95.06.06A1.6 1.6 0 0 0 11.3 6.9a1.6 1.6 0 0 0 .96-1.46V5.3h2.76v.14A1.6 1.6 0 0 0 16 6.9a1.6 1.6 0 0 0 1.77-.32l.06-.06 1.95 1.95-.06.06A1.6 1.6 0 0 0 19.4 10.3a1.6 1.6 0 0 0 1.46.96H21v2.76h-.14A1.6 1.6 0 0 0 19.4 15Z" transform="translate(-1 -0.65)"/></svg><span>Settings</span></button><div id="settingsPanel" hidden role="dialog" aria-modal="false" aria-label="Settings" aria-labelledby="settingsHeading"><div class="settings-head"><h2 id="settingsHeading">Settings</h2><button id="settingsClose" type="button" title="Close Settings" aria-label="Close Settings">✕</button></div><div class="settings-tabs" role="tablist" aria-label="Settings categories"><button type="button" id="workspaceTab" role="tab" aria-controls="workspaceTabPanel" aria-selected="true" tabindex="0">Workspace Settings</button><button type="button" id="canvasTab" role="tab" aria-controls="canvasTabPanel" aria-selected="false" tabindex="-1">Canvas</button><button type="button" id="aboutTab" role="tab" aria-controls="aboutTabPanel" aria-selected="false" tabindex="-1">About</button></div><div id="workspaceTabPanel" role="tabpanel" aria-labelledby="workspaceTab"><h3>Workspace Settings</h3><label><input type="checkbox" id="grid" checked> Show pasteboard grid only</label><label>Major grid spacing (mm)</label><select id="gridSize"><option value="5">5 mm</option><option value="10" selected>10 mm</option><option value="20">20 mm</option><option value="25">25 mm</option><option value="50">50 mm</option></select><label><input type="checkbox" id="fineGrid" checked> Show fine grid (1/10 spacing)</label><label><input type="checkbox" id="snap"> Snap objects to grid</label><label>Snap spacing (mm)</label><select id="snapSize"><option value="0.5">0.5 mm</option><option value="1" selected>1 mm</option><option value="2">2 mm</option><option value="5">5 mm</option><option value="10">10 mm</option></select><label><input type="checkbox" id="easyGrab" checked> Easy grab (click inside shapes)</label><label>Grab tolerance <span id="grabLabel">14 px</span></label><input id="grabRange" type="range" min="6" max="30" value="14" step="2"></div><div id="canvasTabPanel" role="tabpanel" aria-labelledby="canvasTab" hidden><h3>Canvas</h3><div class="work-area-group"><label for="workAreaCategory" class="work-area-heading">WORK AREA (YOUR LASER'S BED)</label><select id="workAreaCategory" aria-label="Work area selection"><option value="" selected>Select work area</option><option value="common">Common Sizes</option></select><div id="commonSizesWrap" hidden><label for="commonSizes">Common Sizes</label><select id="commonSizes"><option value="">Choose a size</option><option value="100x100">100 × 100 mm</option><option value="200x200">200 × 200 mm</option><option value="300x200">300 × 200 mm</option><option value="400x400">400 × 400 mm</option><option value="600x400">600 × 400 mm</option></select></div><p class="work-area-hint">Choose a preset to fill in the dimensions below, then click Apply canvas size.</p></div><p>Set the physical size of your design workspace in millimeters. Default: 400 × 400 mm (15.748 × 15.748 in).</p><div class="fields"><div><label for="canvasW">Width (mm)</label><input id="canvasW" type="number" value="400" min="1" max="3000"></div><div><label for="canvasH">Height (mm)</label><input id="canvasH" type="number" value="400" min="1" max="3000"></div></div><button id="canvasApply" type="button" style="margin-top:10px">Apply canvas size</button></div><div id="aboutTabPanel" role="tabpanel" aria-labelledby="aboutTab" hidden><h3>About Laser Design Studio</h3><p>Create vector artwork and export SVG files for LightBurn.</p><p>This editor does not control laser hardware.</p></div></div></div><div class="header-file-actions" style="display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap"><button id="export" style="background:#14654e">Export SVG for LightBurn</button></div><input id="file" type="file" accept=".json,application/json"></header>
 <div class="secondary-toolbar" role="toolbar" aria-label="Additional design toolbar"><span class="secondary-toolbar-label">QUICK ACTIONS</span><div class="tb-project-buttons"><div class="quick-group"><span class="quick-title">Project</span><div class="quick-actions"><button id="open" class="header-icon-button" type="button" title="Open Project" aria-label="Open Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v2"/><path d="M3 10h18l-2 10H5L3 10z"/></svg></button><button id="save" class="header-icon-button" type="button" title="Save Project" aria-label="Save Project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h14l3 3v15H3V3z"/><path d="M7 3v6h10V3"/><path d="M7 21v-9h10v9"/><path d="M14 3v5"/></svg></button></div></div><div class="quick-group"><span class="quick-title">History</span><div class="quick-actions"><button type="button" id="undo" title="Undo (Ctrl+Z)" aria-label="Undo" class="header-icon-button">↶</button><button type="button" id="redo" title="Redo (Ctrl+Y)" aria-label="Redo" class="header-icon-button">↷</button></div></div><div class="quick-group"><span class="quick-title">Edit</span><div class="quick-actions"><button type="button" data-action="copy" title="Copy (Ctrl+C)" aria-label="Copy">⧉</button><button type="button" data-action="paste" title="Paste (Ctrl+V)" aria-label="Paste">▣</button><button type="button" data-action="duplicate" title="Duplicate" aria-label="Duplicate">⧉+</button><button type="button" data-action="remove" title="Delete" aria-label="Delete">✕</button><button type="button" id="zoomSelection" class="tb-icon-only" title="Zoom to Selection" aria-label="Zoom to Selection" disabled><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="11" height="11" rx="1" stroke-dasharray="2 2"/><circle cx="15" cy="15" r="5"/><path d="m19 19 3 3"/><path d="M15 12v6M12 15h6"/></svg></button><button type="button" class="tb-icon-only" data-action="group" title="Group" aria-label="Group"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="10" height="10" rx="1"/><rect x="11" y="10" width="10" height="10" rx="1"/><path d="M16 3v5M13.5 5.5h5"/></svg></button><button type="button" class="tb-icon-only" data-action="ungroup" title="Ungroup" aria-label="Ungroup"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="9" height="9" rx="1"/><rect x="13" y="12" width="9" height="9" rx="1"/><path d="M13 5h8M17 1v8"/></svg></button></div></div></div><div class="quick-group"><span class="quick-title">Align Objects</span><div class="quick-actions"><button type="button" class="tb-icon-only" id="alignLeft" title="Align Left" aria-label="Align Left"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 3v18M8 6h12v4H8zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignCenter" title="Align Center" aria-label="Align Center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 6h16v4H4zM7 14h10v4H7z"/></svg></button><button type="button" class="tb-icon-only" id="alignRight" title="Align Right" aria-label="Align Right"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 3v18M4 6h12v4H4zM8 14h8v4H8z"/></svg></button><button type="button" class="tb-icon-only" id="alignTop" title="Align Top" aria-label="Align Top"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 4h18M6 8h4v12H6zM14 8h4v8h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignMiddle" title="Align Middle" aria-label="Align Middle"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 12h20M6 4h4v16H6zM14 6h4v12h-4z"/></svg></button><button type="button" class="tb-icon-only" id="alignBottom" title="Align Bottom" aria-label="Align Bottom"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 20h18M6 4h4v12H6zM14 8h4v8h-4z"/></svg></button></div></div><div class="quick-group toolbar-tools-group" aria-label="Drawing tools"><div class="tools-box"><h2>Tools</h2><div class="tools-grid"><button class="tool active select-icon-only" data-tool="select" type="button" title="Select (V)" aria-label="Select" aria-keyshortcuts="V"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M5 3l14 9-7.2 1.1-3.1 7.1L5 3z"/><path d="M12 13l4 7"/></svg></button><div class="shape-picker" id="shapePicker"><div class="shape-main-row"><button class="tool shape-primary shapes-dropdown-only" id="shapesMain" type="button" title="Shapes" aria-label="Shapes menu" aria-haspopup="true" aria-expanded="false" aria-controls="shapesMenu">▭</button></div><div class="shape-submenu" id="shapesMenu" role="menu" hidden><button type="button" role="menuitem" data-shape="rect">▭ Rectangle</button><button type="button" role="menuitem" data-shape="ellipse">◯ Ellipse</button><button type="button" role="menuitem" data-shape="polygon">⬡ Hexagon</button></div></div><button class="tool draw-lines-icon-only" data-tool="line" type="button" title="Draw Lines" aria-label="Draw Lines"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 19L10 13L14 16L20 5"/><circle cx="4" cy="19" r="2"/><circle cx="10" cy="13" r="2"/><circle cx="14" cy="16" r="2"/><circle cx="20" cy="5" r="2"/></svg></button><button class="tool select-icon-only" data-tool="text" type="button" title="Create Text" aria-label="Create Text"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto;pointer-events:none"><path d="M4 6V4h16v2M12 4v16M8 20h8"/></svg></button><button id="openOffsetPanel" class="tool offset-icon-button" type="button" title="Offset" aria-label="Offset" aria-haspopup="dialog" aria-controls="offsetPanel"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="7" width="10" height="10" rx="1"/><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 2"/></svg></button><div class="shape-picker" id="booleanPicker"><div class="shape-main-row"><button class="tool shape-primary boolean-icon-main" id="booleanMain" type="button" aria-label="Boolean Tools" aria-haspopup="true" aria-controls="booleanMenu" aria-expanded="false" title="Boolean Tools"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="3" y="5" width="12" height="12" rx="2"/><circle cx="15" cy="13" r="6"/><path d="M16 3v4m-2-2h4"/></svg><span class="boolean-corner" aria-hidden="true">▾</span></button></div><div class="shape-submenu" id="booleanMenu" role="menu" hidden><button type="button" role="menuitem" aria-label="Weld" title="Weld" data-boolean="weld" class="chosen"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></button><button type="button" role="menuitem" aria-label="Subtract" title="Subtract" data-boolean="subtract"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><rect x="4" y="5" width="14" height="14" rx="1"/><path d="M12 5v7h7" stroke-dasharray="2 2"/><path d="M18 4v5"/></svg></button><button type="button" role="menuitem" aria-label="Intersect" title="Intersect" data-boolean="intersect"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events:none"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/><path d="M12 7c2 2 3 3 3 5s-1 3-3 5c-2-2-3-3-3-5s1-3 3-5z" fill="currentColor" stroke="none" opacity=".65"/></svg></button></div></div></div></div></div></div><div class="secondary-toolbar-space" aria-label="Space for future tools"></div></div>
 <div class="topbar" role="toolbar" aria-label="Workspace editing toolbar">
 <div class="tb-group tb-size-card"><span class="tb-card-title">Size &amp; Position</span><div hidden aria-hidden="true"><input type="number" id="tbX" step="0.1" tabindex="-1"><input type="number" id="tbY" step="0.1" tabindex="-1"></div><div class="tb-size-row"><label class="tb-field">W <input type="number" id="tbW" step="0.1" min="0.1" aria-label="Selection width in millimeters"></label><label class="tb-field">H <input type="number" id="tbH" step="0.1" min="0.1" aria-label="Selection height in millimeters"></label><label class="tb-field">Rotation <input type="number" id="tbAngle" step="1" aria-label="Selection rotation in degrees"></label></div><div class="tb-units-row"><div class="unit-switch" role="group" aria-label="Measurement units"><button type="button" id="unitMM" class="active" aria-pressed="true" title="Use millimeters">mm</button><button type="button" id="unitIN" aria-pressed="false" title="Use inches">in</button></div></div></div>
@@ -456,7 +506,7 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
 
 </div>
 <div class="app"><aside class="generator-sidebar"><section class="keychain-sidebar-section"><h2>Generators</h2><button type="button" id="keychainGenOpen" class="keychain-square-button" aria-controls="keychainGenOverlay" aria-expanded="false" title="Open Keychain Generator" aria-label="Open Keychain Generator"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3"/><path d="M9.2 9.2 14 14"/><rect x="12" y="12" width="9" height="9" rx="2"/><circle cx="16.5" cy="16.5" r="1"/></svg><span>Keychain</span></button></section><div hidden aria-hidden="true"><button id="front">To front</button><button id="back">To back</button><button id="weld">Weld</button><button id="subtract">Subtract</button><button id="intersect">Intersect</button></div><div hidden aria-hidden="true"><button id="copy">Copy</button><button id="paste">Paste</button><button id="duplicate">Duplicate</button><button id="remove">Delete</button><button id="group">Group</button><button id="ungroup">Ungroup</button></div></aside>
-<main><div class="workspace-zoom-row"><div class="zoom-control-box" role="group" aria-label="Workspace zoom controls"><span class="zoom-control-title">Zoom</span><button id="minus" type="button" title="Zoom out" aria-label="Zoom out">−</button><output id="tbZoom" aria-live="polite">100%</output><button id="plus" type="button" title="Zoom in" aria-label="Zoom in">+</button><span class="zoom-view-divider" aria-hidden="true"></span><div class="box-view-controls" role="group" aria-label="Box view"><button type="button" id="boxFlatView" class="selected" aria-pressed="true">Flat</button><button type="button" id="box3DView" aria-pressed="false">3D</button><span class="zoom-view-divider" aria-hidden="true"></span><span class="box-lid-controls" id="boxLidControls" hidden><button type="button" id="boxLidClosed" class="selected" aria-pressed="true" title="Show assembled box with the lid closed">Lid closed</button><button type="button" id="boxLidOpen" aria-pressed="false" title="Show assembled box with the lid open">Lid open</button></span></div></div></div><div class="workspace"><div class="pasteboard-ruler-layer" aria-label="Pasteboard rulers"><div class="ruler-corner" aria-label="Ruler origin marker">0</div><div class="pasteboard-name-tab" id="pasteboardNameTab" aria-label="Pasteboard name"><button type="button" id="pasteboardNameButton" class="pasteboard-name-button" title="Click to rename pasteboard">Pasteboard 1</button><input id="pasteboardNameInput" class="pasteboard-name-input" type="text" maxlength="60" aria-label="Rename pasteboard" hidden></div><canvas id="rulerTop" class="ruler-top" aria-label="Horizontal pasteboard ruler"></canvas><canvas id="rulerLeft" class="ruler-left" aria-label="Vertical pasteboard ruler"></canvas></div><div id="box3DStage" hidden><canvas id="box3DCanvas" aria-label="Interactive assembled box preview; drag to rotate"></canvas><span class="box-3d-tip">Drag to rotate · Preview only</span></div><div class="page ruler-page"><svg id="art" viewBox="0 0 400 400" width="850" height="850" xmlns="http://www.w3.org/2000/svg" aria-label="Vector design workspace"><defs><pattern id="minorGridPattern" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#b7c9df" stroke-width=".32"/></pattern><pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse"><rect id="minorGridFill" width="10" height="10" fill="url(#minorGridPattern)"/><path id="majorGridPath" d="M10 0H0V10" fill="none" stroke="#7d99b8" stroke-width=".68"/></pattern></defs><rect id="paper" x="0" y="0" width="400" height="400" fill="white"/><g id="artObjects"></g><g id="overlays"></g><rect id="outline" x="0" y="0" width="400" height="400" fill="none" stroke="#94a3b8" stroke-width=".6" pointer-events="none"/></svg></div></div><div id="status" class="status">Ready. Draw a shape, or select one to edit it.</div></main>
+<main><div class="workspace-zoom-row"><div class="zoom-control-box" role="group" aria-label="Workspace zoom controls"><span class="zoom-control-title">Zoom</span><button id="minus" type="button" title="Zoom out" aria-label="Zoom out">−</button><output id="tbZoom" aria-live="polite">100%</output><button id="plus" type="button" title="Zoom in" aria-label="Zoom in">+</button><button id="zoomToFit" type="button" title="Scale and center the entire design in the visible workspace" aria-label="Zoom to Fit">Zoom to Fit</button><span class="zoom-view-divider" aria-hidden="true"></span><div class="box-view-controls" role="group" aria-label="Box view"><button type="button" id="boxFlatView" class="selected" aria-pressed="true">Flat</button><button type="button" id="box3DView" aria-pressed="false">3D</button><span class="zoom-view-divider" aria-hidden="true"></span><span class="box-lid-controls" id="boxLidControls" hidden><button type="button" id="boxLidClosed" class="selected" aria-pressed="true" title="Show assembled box with the lid closed">Lid closed</button><button type="button" id="boxLidOpen" aria-pressed="false" title="Show assembled box with the lid open">Lid open</button></span></div></div></div><div class="workspace"><div class="pasteboard-ruler-layer" aria-label="Pasteboard rulers"><div class="ruler-corner" aria-label="Ruler origin marker">0</div><div class="pasteboard-name-tab" id="pasteboardNameTab" aria-label="Pasteboard name"><button type="button" id="pasteboardNameButton" class="pasteboard-name-button" title="Click to rename pasteboard">Pasteboard 1</button><input id="pasteboardNameInput" class="pasteboard-name-input" type="text" maxlength="60" aria-label="Rename pasteboard" hidden></div><canvas id="rulerTop" class="ruler-top" aria-label="Horizontal pasteboard ruler"></canvas><canvas id="rulerLeft" class="ruler-left" aria-label="Vertical pasteboard ruler"></canvas></div><div id="box3DStage" hidden><canvas id="box3DCanvas" aria-label="Interactive assembled box preview; drag to rotate"></canvas><span class="box-3d-tip">Drag to rotate · Preview only</span></div><div class="page ruler-page"><svg id="art" viewBox="0 0 400 400" width="850" height="850" xmlns="http://www.w3.org/2000/svg" aria-label="Vector design workspace"><defs><pattern id="minorGridPattern" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#b7c9df" stroke-width=".32"/></pattern><pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse"><rect id="minorGridFill" width="10" height="10" fill="url(#minorGridPattern)"/><path id="majorGridPath" d="M10 0H0V10" fill="none" stroke="#7d99b8" stroke-width=".68"/></pattern><pattern id="keychainDogPawsPattern" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-18) scale(0.6)"><g fill="#0000ff" fill-opacity=".88"><circle cx="3.1" cy="2.2" r="1.05"/><circle cx="5.15" cy="1.2" r=".95"/><circle cx="7.2" cy="2.25" r="1.05"/><circle cx="4.2" cy="5.05" r="1.35"/><ellipse cx="6.4" cy="5.35" rx="1.95" ry="1.55" transform="rotate(-10 6.4 5.35)"/></g></pattern><pattern id="keychainHeartsPattern" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-12) scale(0.6)"><g fill="#0000ff" fill-opacity=".9"><path d="M4.1 2.8c.7-1.1 2.3-1.3 3.2-.4.5.5.8 1.1.8 1.8 0 1-.5 1.9-1.3 2.6L4.1 9 1.4 6.8C.6 6.1.1 5.2.1 4.2c0-.7.3-1.4.8-1.8.9-.9 2.5-.7 3.2.4z"/></g></pattern><pattern id="keychainStarsPattern" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-10) scale(0.6)"><g fill="#0000ff" fill-opacity=".9"><path d="M8 1.8l1.5 3.2 3.5.4-2.6 2.5.7 3.5L8 9.6 4.9 11.4l.7-3.5L3 5.4l3.5-.4z"/><path d="M13.1 10.2l.8 1.7 1.9.2-1.4 1.3.4 1.9-1.7-1-1.7 1 .4-1.9-1.4-1.3 1.9-.2z"/><path d="M2.7 10.5l.7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z"/></g></pattern><pattern id="keychainCamouflagePattern" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="scale(0.6)"><rect width="22" height="22" fill="#0000ff" fill-opacity=".25"/><path d="M1 5c2.5-2.7 5.5-2 7.4-.8 1.8 1.1 4.8 1.3 6.5-.3 1.6-1.5 3.8-1.6 6.1-.1V9c-1.6.8-2.8 1.9-3.6 3.2-1.2 1.8-3.8 2.7-6 2.2-2.1-.4-4.5.1-5.9 1.6-1.3 1.4-2.9 2.1-4.5 2.2V5z" fill="#0000ff" fill-opacity=".5"/><path d="M7 11.6c1.7-1.4 4.4-1.8 6.5-.7 2 1 4.7 1.1 6.5-.5.6-.5 1.3-.9 2-.9v8.2c-1.6 0-3.3.5-4.7 1.8-1.5 1.3-3.6 1.9-5.5 1.1-2.7-1.1-5.2-.3-7.2 1.4C2.8 23.5 1.3 24 0 24v-5.8c2.3-.2 4.9-1.2 7-3z" fill="#0000ff" fill-opacity=".72"/><path d="M9.6 0c1.5.8 2.8 2.3 2.8 4.2 0 1.7-1.2 3.1-2.8 3.9-1.4.6-3 1-4.2 2.4-1.1 1.2-3 1.9-5.4 1.8V0z" fill="#0000ff" fill-opacity=".62"/></pattern></defs><rect id="paper" x="0" y="0" width="400" height="400" fill="white"/><g id="artObjects"></g><g id="overlays"></g><rect id="outline" x="0" y="0" width="400" height="400" fill="none" stroke="#94a3b8" stroke-width=".6" pointer-events="none"/></svg></div></div><div id="status" class="status">Ready. Draw a shape, or select one to edit it.</div></main>
 <aside class="right"><div class="phase3-sidebar-empty" aria-label="Right sidebar"><h2>Right Sidebar</h2><p>Space for future Phase 3 tools and generator settings.</p></div><div id="keychainGenOverlay" class="keychain-dialog-backdrop" hidden>
  <section class="keychain-dialog" role="region" aria-labelledby="keychainGenTitle">
   <div class="keychain-dialog-head"><h2 id="keychainGenTitle">Keychain Generator</h2><button type="button" id="keychainGenClose" aria-label="Close Keychain Generator">✕</button></div>
@@ -465,10 +515,9 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
    <div class="board-shape-body">
     <div class="board-shape-options" role="group" aria-label="Choose a keychain board shape">
      <button type="button" class="board-shape-option selected" data-board-shape="roundrect" aria-pressed="true" title="Rounded Rectangle"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="7" y="9" width="50" height="30" rx="10"/></svg><span>Rounded<br>Rectangle</span></button>
-     <button type="button" class="board-shape-option" data-board-shape="rectangle" aria-pressed="false" title="Rectangle"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="7" y="9" width="50" height="30"/></svg><span>Rectangle</span></button>
      <button type="button" class="board-shape-option" data-board-shape="oval" aria-pressed="false" title="Circle or Oval"><svg viewBox="0 0 64 48" aria-hidden="true"><ellipse cx="32" cy="24" rx="25" ry="15"/></svg><span>Circle / Oval</span></button>
     </div>
-    <button type="button" id="boardShapeAdd" class="board-shape-add">Add Keychain to Canvas</button>
+
    </div>
   </div>
   <div class="board-text-panel" role="group" aria-labelledby="boardTextTitle">
@@ -476,19 +525,92 @@ aside.right{display:flex;flex-direction:column;gap:12px;min-width:0;overflow-y:a
    <div class="board-text-body">
     <label for="boardKeychainText">Text</label>
     <input type="text" id="boardKeychainText" placeholder="Type a name or message" maxlength="100" autocomplete="off" spellcheck="false">
-    <p class="board-text-hint">Bold outlined letters fit with even edge spacing and slight letter overlap. Rounded Rectangle expands for longer names.</p>
+    <div class="board-text-paired-controls">
+     <div class="board-text-control">
+      <label for="keychainLetterOverlap">Letter Overlap (%)</label>
+      <div class="keychain-overlap-spinner">
+       <input type="number" id="keychainLetterOverlap" min="0" max="100" step="1" value="20" inputmode="numeric" aria-label="Letter overlap percentage from 0 to 100">
+       <div class="keychain-radius-spinner-arrows" aria-label="Letter overlap arrows">
+        <button type="button" id="keychainOverlapUp" aria-label="Increase letter overlap by 1 percent" title="Increase letter overlap">▲</button>
+        <button type="button" id="keychainOverlapDown" aria-label="Decrease letter overlap by 1 percent" title="Decrease letter overlap">▼</button>
+       </div>
+      </div>
+     </div>
+     <div class="board-text-control">
+      <label for="keychainOutlineWidth">Outline Width (mm)</label>
+      <div class="keychain-overlap-spinner">
+       <input id="keychainOutlineWidth" type="number" min="0.05" max="2" step="0.05" value="0.30" inputmode="decimal" aria-label="Letter outline width in millimeters">
+       <div class="keychain-radius-spinner-arrows" aria-label="Letter outline width arrows">
+        <button type="button" id="keychainOutlineUp" aria-label="Increase letter outline width by 0.05 mm" title="Increase outline width">▲</button>
+        <button type="button" id="keychainOutlineDown" aria-label="Decrease letter outline width by 0.05 mm" title="Decrease outline width">▼</button>
+       </div>
+      </div>
+     </div>
+    </div>
    </div>
   </div>
   <div class="keychain-settings-panel" role="group" aria-labelledby="keychainSettingsTitle">
    <h3 class="keychain-settings-title" id="keychainSettingsTitle">Keychain</h3>
    <div class="keychain-settings-body">
-    <div class="keychain-letters-heading">LETTERS</div>
-    <div class="keychain-outline-control">
-     <label for="keychainOutlineWidth" class="keychain-outline-label">Outline Width</label>
-     <input id="keychainOutlineWidth" type="number" min="0.05" max="2" step="0.05" value="0.30" inputmode="decimal" aria-label="Letter outline width in millimeters">
-     <span class="keychain-outline-unit" aria-hidden="true">mm</span>
+    <div class="keychain-style-heading" id="keychainStyleHeading">Style</div>
+    <div class="keychain-style-options" role="group" aria-labelledby="keychainStyleHeading">
+     <button type="button" class="keychain-style-button selected" data-keychain-style="one" aria-pressed="true">One Piece</button>
+     <button type="button" class="keychain-style-button" data-keychain-style="two" aria-pressed="false">Two Layers</button>
     </div>
-    <p class="keychain-outline-hint">Enter a width from 0.05 to 2.00 mm, or use the box arrows. Updates the preview instantly.</p>
+    <div class="keychain-board-controls">
+     <div class="keychain-corner-control">
+      <label for="keychainCornerRadius">Corner radius (mm)</label>
+      <div class="keychain-radius-spinner">
+       <input id="keychainCornerRadius" type="number" min="0" max="15" step="0.5" value="7" inputmode="decimal" aria-label="Rounded rectangle corner radius in millimeters">
+       <div class="keychain-radius-spinner-arrows" aria-label="Corner radius arrows">
+        <button type="button" id="keychainRadiusUp" aria-label="Increase corner radius by 0.5 mm" title="Increase corner radius">▲</button>
+        <button type="button" id="keychainRadiusDown" aria-label="Decrease corner radius by 0.5 mm" title="Decrease corner radius">▼</button>
+       </div>
+      </div>
+     </div>
+     <div class="keychain-border-control">
+      <label for="keychainBorderWidth">Border width (mm)</label>
+      <div class="keychain-radius-spinner">
+       <input id="keychainBorderWidth" type="number" min="0.05" max="3" step="0.05" value="0.25" inputmode="decimal" aria-label="Keychain board outline width in millimeters">
+       <div class="keychain-radius-spinner-arrows" aria-label="Border width arrows">
+        <button type="button" id="keychainBorderUp" aria-label="Increase border width by 0.05 mm" title="Increase border width">▲</button>
+        <button type="button" id="keychainBorderDown" aria-label="Decrease border width by 0.05 mm" title="Decrease border width">▼</button>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="keychain-board-controls" style="margin-top:12px">
+     <div class="keychain-ring-control">
+      <label for="keychainRingDiameter">Ring diameter (mm)</label>
+      <div class="keychain-radius-spinner">
+       <input id="keychainRingDiameter" type="number" min="8" max="20" step="0.5" value="10" inputmode="decimal" aria-label="Keychain attachment ring outside diameter in millimeters">
+       <div class="keychain-radius-spinner-arrows" aria-label="Ring diameter arrows">
+        <button type="button" id="keychainRingUp" aria-label="Increase ring diameter by 0.5 mm" title="Increase ring diameter">▲</button>
+        <button type="button" id="keychainRingDown" aria-label="Decrease ring diameter by 0.5 mm" title="Decrease ring diameter">▼</button>
+       </div>
+      </div>
+     </div>
+     <div class="keychain-hole-control">
+      <label for="keychainHoleDiameter">Hole diameter (mm)</label>
+      <div class="keychain-radius-spinner">
+       <input id="keychainHoleDiameter" type="number" min="2" max="8" step="0.5" value="4.5" inputmode="decimal" aria-label="Keychain ring inner hole diameter in millimeters">
+       <div class="keychain-radius-spinner-arrows" aria-label="Hole diameter arrows">
+        <button type="button" id="keychainHoleUp" aria-label="Increase hole diameter by 0.5 mm" title="Increase hole diameter">▲</button>
+        <button type="button" id="keychainHoleDown" aria-label="Decrease hole diameter by 0.5 mm" title="Decrease hole diameter">▼</button>
+       </div>
+      </div>
+     </div>
+      <div class="keychain-pattern-control">
+       <label for="keychainPattern">Pattern</label>
+       <select id="keychainPattern" aria-label="Keychain letter pattern">
+        <option value="none">None</option>
+        <option value="dogpaws">Dog Paws</option>
+        <option value="hearts">Hearts</option>
+        <option value="stars">Stars</option>
+        <option value="camouflage">Camouflage</option>
+       </select>
+      </div>
+    </div>
    </div>
   </div>
  </section>
@@ -664,29 +786,246 @@ function renderDraftPath(over){
 }
 
 // Phase 3 keychain lettering: true ink-bound centering, tall bold outlines,
-// slight negative tracking for a reference-style overlap and equal edge margins.
+// adjustable overlap between letters, and equal edge margins.
 // The same SVG node is used for the live preview, editable objects and export.
 const boardTextCanvas=document.createElement('canvas').getContext('2d');
 const boardTextFont='Impact, "Arial Black", sans-serif';
-function boardInk(value,size){
- boardTextCanvas.font=`900 ${size}px ${boardTextFont}`;
+function keychainFontFamily(font){return font?JSON.stringify(String(font))+', sans-serif':boardTextFont;}
+function boardInk(value,size,font){
+ boardTextCanvas.font=`900 ${size}px ${keychainFontFamily(font)}`;
  const m=boardTextCanvas.measureText(value);
  return {width:m.width,left:Number.isFinite(m.actualBoundingBoxLeft)?m.actualBoundingBoxLeft:0,
  right:Number.isFinite(m.actualBoundingBoxRight)?m.actualBoundingBoxRight:m.width,
  up:Number.isFinite(m.actualBoundingBoxAscent)?m.actualBoundingBoxAscent:size*.73,
  down:Number.isFinite(m.actualBoundingBoxDescent)?m.actualBoundingBoxDescent:size*.08};
 }
+function keychainTrackingForOverlap(value,size,overlapPercent,font){
+ const chars=Array.from(value||'');
+ if(chars.length<2)return 0;
+ const pct=Math.max(0,Math.min(100,Number(overlapPercent)||0))/100;
+ if(pct<=0)return 0;
+ const widths=chars.map(letter=>Math.max(.1,boardInk(letter,size,font).width));
+ const avg=widths.reduce((sum,w)=>sum+w,0)/widths.length;
+ return -(avg*pct*.85);
+}
+function keychainLetterMetrics(value,size,tracking,font){
+ const chars=Array.from(value||'');
+ if(!chars.length)return {left:0,right:0,up:0,down:0,inkWidth:0,inkHeight:0};
+ let cursor=0,minX=Infinity,maxX=-Infinity,up=0,down=0;
+ for(const letter of chars){
+  const ink=boardInk(letter,size,font);
+  minX=Math.min(minX,cursor-ink.left);
+  maxX=Math.max(maxX,cursor+ink.right);
+  up=Math.max(up,ink.up);
+  down=Math.max(down,ink.down);
+  cursor+=ink.width+tracking;
+ }
+ return {left:-minX,right:maxX,up,down,inkWidth:maxX-minX,inkHeight:up+down};
+}
+// Combine overlapping glyphs into a single painted silhouette before tracing
+// their visible contours. Adjacent letters therefore have no doubled cut lines.
+const keychainContourCache=new Map();
+function keychainUnifiedTextPath(o,value,size,tracking,startX,baseline){
+ const key=JSON.stringify([value,o.x,o.y,o.w,o.h,size,tracking,startX,baseline,o.font||'Impact']);
+ if(keychainContourCache.has(key))return keychainContourCache.get(key);
+ const pad=2,scale=Math.min(11,Math.max(5,Math.sqrt(1850000/Math.max(1,o.w*o.h))));
+ const cw=Math.max(1,Math.ceil((o.w+pad*2)*scale)),ch=Math.max(1,Math.ceil((o.h+pad*2)*scale));
+ const canvas=document.createElement('canvas');canvas.width=cw;canvas.height=ch;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ ctx.scale(scale,scale);ctx.fillStyle='#000';
+ ctx.font=`900 ${size}px ${keychainFontFamily(o.font)}`;ctx.textBaseline='alphabetic';
+ let px=startX-(o.x-pad),by=baseline-(o.y-pad);
+ for(const letter of Array.from(value)){
+  ctx.fillText(letter,px,by);
+  px+=ctx.measureText(letter).width+tracking;
+ }
+ const rgba=ctx.getImageData(0,0,cw,ch).data;
+ const inside=(ix,iy)=>ix>=0&&iy>=0&&ix<cw&&iy<ch&&rgba[(iy*cw+ix)*4+3]>125;
+ const edges=new Map();
+ function add(x,y,xx,yy){const k=x+','+y;if(!edges.has(k))edges.set(k,[]);edges.get(k).push([xx,yy]);}
+ for(let iy=0;iy<ch;iy++)for(let ix=0;ix<cw;ix++)if(inside(ix,iy)){
+  if(!inside(ix,iy-1))add(ix,iy,ix+1,iy);
+  if(!inside(ix+1,iy))add(ix+1,iy,ix+1,iy+1);
+  if(!inside(ix,iy+1))add(ix+1,iy+1,ix,iy+1);
+  if(!inside(ix-1,iy))add(ix,iy+1,ix,iy);
+ }
+ let result='';
+ for(const [key,starts] of edges){
+  while(starts.length){
+   const [sx,sy]=key.split(',').map(Number),pts=[[sx,sy]];
+   let ix=sx,iy=sy,guard=0;
+   do{
+    const branches=edges.get(ix+','+iy);
+    if(!branches||!branches.length)break;
+    const next=branches.pop();ix=next[0];iy=next[1];pts.push([ix,iy]);
+   }while((ix!==sx||iy!==sy)&&++guard<250000);
+   if(ix!==sx||iy!==sy||pts.length<4)continue;
+   const n=pts.length-1,corner=[];
+   for(let i=0;i<n;i++){
+    const a=pts[(i+n-1)%n],b=pts[i],c=pts[(i+1)%n];
+    if((b[0]-a[0])*(c[1]-b[1])!==(b[1]-a[1])*(c[0]-b[0]))corner.push(b);
+   }
+   if(corner.length<3)continue;
+   result+='M'+corner.map(p=>round(o.x-pad+p[0]/scale)+' '+round(o.y-pad+p[1]/scale)).join('L')+'Z ';
+  }
+ }
+ result=result.trim();
+ if(keychainContourCache.size>=32)keychainContourCache.delete(keychainContourCache.keys().next().value);
+ keychainContourCache.set(key,result);
+ return result;
+}
+// Outline-only layer ordering: the left letter is in front; outlines of letters
+// further right are omitted where they would run underneath a foreground letter.
+// Pixel masks are only a geometry calculation: the exported result is ordinary
+// open SVG vector paths, without browser-dependent clipping or font references.
+const keychainStackedPathCache=new Map();
+function keychainVisibleStackedPaths(o,value,size,tracking,startX,baseline,outlineWidth){
+ const cacheKey=JSON.stringify([value,o.x,o.y,o.w,o.h,size,tracking,startX,baseline,outlineWidth,o.font||'Impact']);
+ if(keychainStackedPathCache.has(cacheKey))return keychainStackedPathCache.get(cacheKey);
+ const pad=Math.max(2,outlineWidth*2),scale=Math.min(10,Math.max(4,Math.sqrt(1400000/Math.max(1,o.w*o.h))));
+ const cw=Math.max(1,Math.ceil((o.w+pad*2)*scale)),ch=Math.max(1,Math.ceil((o.h+pad*2)*scale));
+ const canvas=document.createElement('canvas');canvas.width=cw;canvas.height=ch;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ ctx.scale(scale,scale);ctx.font=`900 ${size}px ${keychainFontFamily(o.font)}`;ctx.textBaseline='alphabetic';ctx.fillStyle='#000';
+ const covered=new Uint8Array(cw*ch);
+ const positions=[];let pos=startX-(o.x-pad);
+ for(const letter of Array.from(value)){positions.push([letter,pos]);pos+=boardInk(letter,size,o.font).width+tracking;}
+ const y=baseline-(o.y-pad);
+ const pieces=[];
+ // The first/leftmost glyph is in front; later glyphs are behind it.
+ for(const [letter,left] of positions){
+  ctx.clearRect(0,0,cw/scale,ch/scale);
+  ctx.fillText(letter,left,y);
+  const pixels=ctx.getImageData(0,0,cw,ch).data;
+  const ink=new Uint8Array(cw*ch);
+  for(let p=0;p<ink.length;p++)ink[p]=pixels[p*4+3]>125?1:0;
+  const bounds=boardInk(letter,size,o.font),margin=Math.ceil(2*scale);
+  const xmin=Math.max(0,Math.floor((left-bounds.left)*scale)-margin),xmax=Math.min(cw,Math.ceil((left+bounds.right)*scale)+margin);
+  const ymin=Math.max(0,Math.floor((y-bounds.up)*scale)-margin),ymax=Math.min(ch,Math.ceil((y+bounds.down)*scale)+margin);
+  const inside=(xx,yy)=>xx>=0&&yy>=0&&xx<cw&&yy<ch&&ink[yy*cw+xx];
+  const edges=new Map();
+  function add(ax,ay,bx,by){const id=ax+','+ay;let paths=edges.get(id);if(!paths){paths=[];edges.set(id,paths);}paths.push([bx,by]);}
+  for(let yy=ymin;yy<ymax;yy++)for(let xx=xmin;xx<xmax;xx++){
+   const k=yy*cw+xx;
+   if(!ink[k])continue;
+   // Hidden pixels do not contribute any outline, but the outline is traced
+   // against THIS glyph's geometry so no artificial 'cut' seam is introduced.
+   if(covered[k])continue;
+   if(!inside(xx,yy-1))add(xx,yy,xx+1,yy);
+   if(!inside(xx+1,yy))add(xx+1,yy,xx+1,yy+1);
+   if(!inside(xx,yy+1))add(xx+1,yy+1,xx,yy+1);
+   if(!inside(xx-1,yy))add(xx,yy+1,xx,yy);
+  }
+  // Follow each edge until it ends or closes. A closed contour is a Z path;
+  // a partially obscured contour is an OPEN path and won't add overlap seams.
+  function appendSegment(points,closed){
+   if(points.length<2)return;
+   const reduced=[];
+   for(let k=0;k<points.length;k++){
+    const a=points[Math.max(0,k-1)],b=points[k],c=points[Math.min(points.length-1,k+1)];
+    if(k>0&&k<points.length-1&&(b[0]-a[0])*(c[1]-b[1])===(b[1]-a[1])*(c[0]-b[0]))continue;
+    reduced.push(b);
+   }
+   if(reduced.length<2)return;
+   let d='M'+round(o.x-pad+reduced[0][0]/scale)+' '+round(o.y-pad+reduced[0][1]/scale);
+   for(const p of reduced.slice(1))d+='L'+round(o.x-pad+p[0]/scale)+' '+round(o.y-pad+p[1]/scale);
+   pieces.push(d+(closed?'Z':''));
+  }
+  const indegree=new Map();
+  for(const targets of edges.values())for(const [bx,by] of targets){const k=bx+','+by;indegree.set(k,(indegree.get(k)||0)+1);}
+  function trace(from){
+   const [sx,sy]=from.split(',').map(Number);
+   let cx=sx,cy=sy,points=[[cx,cy]],guard=0;
+   while(guard++<250000){
+    const next=edges.get(cx+','+cy);
+    if(!next||!next.length)break;
+    const [nx,ny]=next.pop();cx=nx;cy=ny;points.push([cx,cy]);
+    if(cx===sx&&cy===sy)break;
+   }
+   appendSegment(points,cx===sx&&cy===sy);
+  }
+  // First consume edges whose beginning has no incoming edge (clipped paths).
+  for(const [key,targets] of edges)if(!indegree.has(key))while(targets.length)trace(key);
+  for(const [key,targets] of edges)while(targets.length)trace(key);
+  for(let k=0;k<ink.length;k++)if(ink[k])covered[k]=1;
+ }
+ const result=pieces.join(' ');
+ if(keychainStackedPathCache.size>=20)keychainStackedPathCache.delete(keychainStackedPathCache.keys().next().value);
+ keychainStackedPathCache.set(cacheKey,result);
+ return result;
+}
+// Fit the ink of each glyph to the ellipse interior using one common layout frame.
+// The outline and fill MUST use the same frame, or their edges drift apart.
+// The generated output remains ordinary editable/exportable SVG vector geometry.
+const keychainOvalPathCache=new Map();
+function keychainOvalWarpPath(pathData,o,inkFrame){
+ if(!pathData||!o.keychainOvalWarp)return pathData;
+ const key=JSON.stringify([pathData,o.x,o.y,o.w,o.h,o.keychainMargin,o.keychainOutlineWidth,inkFrame]);
+ if(keychainOvalPathCache.has(key))return keychainOvalPathCache.get(key);
+ const margin=Math.max(.8,Number(o.keychainMargin)||2)+(Number(o.keychainOutlineWidth)||.3)/2;
+ const cx=o.x+o.w/2,cy=o.y+o.h/2;
+ const rx=Math.max(1,o.w/2-margin),ry=Math.max(1,o.h/2-margin);
+ const [sourceLeft,sourceRight,sourceTop,sourceBottom]=inkFrame||[o.x,o.x+o.w,o.y,o.y+o.h];
+ const sw=Math.max(.01,sourceRight-sourceLeft),sh=Math.max(.01,sourceBottom-sourceTop);
+ // Outer letters retain nearly 40% of center height; no pinched, illegible
+ // tips. The adaptive height follows the inner ellipse at every horizontal x.
+ const horizontalReach=.91,verticalReach=.97;
+ function bend(xx,yy){
+  const u=Math.max(-1,Math.min(1,((xx-sourceLeft)/sw)*2-1));
+  const ellX=u*horizontalReach;
+  const halfHeight=ry*Math.sqrt(Math.max(.001,1-ellX*ellX))*verticalReach;
+  const v=Math.max(-1.08,Math.min(1.08,((yy-sourceTop)/sh)*2-1));
+  return [round(cx+ellX*rx),round(cy+v*halfHeight)];
+ }
+ const tokens=pathData.match(/[MLZmlz]|-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?/gi)||[];
+ let i=0,command='',first=null,last=null,result=[];
+ while(i<tokens.length){
+  const token=tokens[i];
+  if(/^[MLZ]$/i.test(token)){
+   command=token.toUpperCase();i++;
+   if(command==='Z'){result.push('Z');last=first;continue;}
+  }
+  if(command!=='M'&&command!=='L'){i++;continue;}
+  if(i+1>=tokens.length)break;
+  const xx=Number(tokens[i++]),yy=Number(tokens[i++]);
+  if(!Number.isFinite(xx)||!Number.isFinite(yy))break;
+  if(command==='M'){
+   first=[xx,yy];last=first;
+   const [x,y]=bend(xx,yy);result.push('M'+x+' '+y);
+   command='L';
+  }else{
+   const length=Math.hypot(xx-last[0],yy-last[1]);
+   const steps=Math.max(1,Math.min(160,Math.ceil(length/.30)));
+   for(let j=1;j<=steps;j++){
+    const t=j/steps,[x,y]=bend(last[0]+(xx-last[0])*t,last[1]+(yy-last[1])*t);
+    result.push('L'+x+' '+y);
+   }
+   last=[xx,yy];
+  }
+ }
+ const warped=result.join(' ');
+ if(keychainOvalPathCache.size>=30)keychainOvalPathCache.delete(keychainOvalPathCache.keys().next().value);
+ keychainOvalPathCache.set(key,warped);
+ return warped;
+}
+function keychainPatternFillNode(o,pathData){
+ const pattern=String(o.keychainPattern||'none');
+ if(!pathData||pattern==='none')return null;
+ if(pattern==='dogpaws')return svg('path',{d:pathData,'fill-rule':'evenodd',fill:'url(#keychainDogPawsPattern)',stroke:'none'});
+ if(pattern==='hearts')return svg('path',{d:pathData,'fill-rule':'evenodd',fill:'url(#keychainHeartsPattern)',stroke:'none'});
+ if(pattern==='stars')return svg('path',{d:pathData,'fill-rule':'evenodd',fill:'url(#keychainStarsPattern)',stroke:'none'});
+ if(pattern==='camouflage')return svg('path',{d:pathData,'fill-rule':'evenodd',fill:'url(#keychainCamouflagePattern)',stroke:'none'});
+ return null;
+}
 function keychainDisplayNode(o){
  const value=String(o.uppercase?String(o.text||'').toUpperCase():o.text||'');
  const outlineWidth=Number.isFinite(Number(o.keychainOutlineWidth))?Math.max(.05,Number(o.keychainOutlineWidth)):0.30;
+ const overlapPercent=Number.isFinite(Number(o.keychainOverlapPercent))?Math.max(0,Math.min(100,Number(o.keychainOverlapPercent))):20;
  const px=Math.max(.3,o.keychainMargin??2)+outlineWidth/2;
- const chars=Array.from(value);
- const gaps=Math.max(0,chars.length-1);
  const boxW=Math.max(1,o.w),boxH=Math.max(1,o.h);
  function dimensions(size){
-  const ink=boardInk(value,size);
-  const tracking=gaps?(-size*.065):0;
-  return {...ink,tracking,inkWidth:ink.left+ink.right+gaps*tracking,inkHeight:ink.up+ink.down};
+  const tracking=keychainTrackingForOverlap(value,size,overlapPercent,o.font);
+  return {...keychainLetterMetrics(value,size,tracking,o.font),tracking};
  }
  let low=.2, high=Math.min(350,Math.max(30,boxH*5));
  for(let i=0;i<28;i++){
@@ -697,21 +1036,26 @@ function keychainDisplayNode(o){
  const size=Math.max(.2,low),m=dimensions(size);
  const textX=o.x+(boxW-m.inkWidth)/2+m.left;
  const baseline=o.y+(boxH+m.up-m.down)/2;
- const node=svg('text',{x:round(textX),y:round(baseline),
-  'font-family':boardTextFont,'font-size':round(size),'font-weight':'900',
-  'letter-spacing':round(m.tracking),'font-style':'normal',
-  fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,
-  'stroke-width':o.mode==='fill'?0:round(outlineWidth),
-  'stroke-linejoin':'round','paint-order':'stroke fill'});
- node.textContent=value;
- return node;
+ // Use actual open vector paths for only the visible glyph boundaries.
+ // A character on the left hides the overlapping outline of its neighbor
+ // on the right. Unlike paint/masks, those hidden paths are removed for SVG export.
+ const inkFrame=[textX-m.left,textX-m.left+m.inkWidth,baseline-m.up,baseline+m.down];
+ const path=keychainOvalWarpPath(keychainVisibleStackedPaths(o,value,size,m.tracking,textX,baseline,outlineWidth),o,inkFrame);
+ const fillPath=keychainOvalWarpPath(keychainUnifiedTextPath(o,value,size,m.tracking,textX,baseline),o,inkFrame);
+ const patternFill=keychainPatternFillNode(o,fillPath);
+ const outline=svg('path',{d:path,'fill-rule':'evenodd',fill:'none',stroke:o.color,
+  'stroke-width':round(outlineWidth),'stroke-linejoin':'round','stroke-linecap':'round'});
+ if(!patternFill)return outline;
+ const group=svg('g',{'data-keychain-pattern':String(o.keychainPattern||'none')});
+ group.appendChild(patternFill);group.appendChild(outline);
+ return group;
 }
 function shapeNode(o){let n;if(o.type==='rect')n=svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h});else if(o.type==='ellipse')n=svg('ellipse',{cx:o.x+o.w/2,cy:o.y+o.h/2,rx:o.w/2,ry:o.h/2});else if(o.type==='line')n=svg('line',{x1:o.x,y1:o.y,x2:o.x+o.w,y2:o.y+o.h});else if(o.type==='vectorPath')n=svg('path',{d:vectorPathD(o)});else if(o.type==='polygon'){const p=Array.from({length:6},(_,i)=>{let a=i*Math.PI/3;return `${round(o.x+o.w*(.5+.5*Math.cos(a)))},${round(o.y+o.h*(.5+.5*Math.sin(a)))}`}).join(' ');n=svg('polygon',{points:p})}else if(o.type==='text'&&o.keychainBoldFit){n=keychainDisplayNode(o)}else if(o.type==='text'&&o.weld){
  const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));
  n=svg('path',{d:weldedTextPath(o,fit),'fill-rule':'evenodd',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:'.25','vector-effect':'non-scaling-stroke'});
  }else if(o.type==='text'){const fit=fittedText(o,o.uppercase?(o.text||'').toUpperCase():(o.text||''));n=svg('text',{x:o.x+1.5,y:o.y+1.5+fit.size,'font-size':fit.size,'font-family':o.font||'Arial','font-weight':o.bold?'bold':'normal','font-style':o.italic?'italic':'normal',fill:o.mode==='fill'?o.color:'none',stroke:o.mode==='fill'?'none':o.color,'stroke-width':o.mode==='fill'?0:(o.keychainThinOutline?Math.max(.045,fit.size*.006):Math.max(.15,fit.size*.022)),'paint-order':'stroke fill','letter-spacing':fit.hspace,'data-text-weld-preview':o.weld?'true':'false'});fit.lines.forEach((line,i)=>{let t=svg('tspan',{x:o.x+1.5,y:o.y+1.5+fit.size+i*(fit.size*1.2+fit.vspace)});t.textContent=line||' ';n.appendChild(t)})}else if(o.type==='path')n=svg('path',{d:pathString(o), 'fill-rule':'evenodd'});if(o.type!=='text'){
   const isFill=(o.mode==='fill'&&o.type!=='line'&&(o.type!=='vectorPath'||o.closed));
-  Object.entries({fill:isFill?o.color:'none',stroke:isFill?'none':o.color,'stroke-width':'.25','vector-effect':'non-scaling-stroke'}).forEach(([k,v])=>n.setAttribute(k,v));
+  Object.entries({fill:isFill?o.color:'none',stroke:isFill?'none':o.color,'stroke-width':o.keychainBorderWidth!=null?round(Math.max(.05,Math.min(3,Number(o.keychainBorderWidth)||.25))):'.25','vector-effect':o.keychainBorderWidth!=null?'none':'non-scaling-stroke'}).forEach(([k,v])=>n.setAttribute(k,v));
 }if(o.angle)n.setAttribute('transform',`rotate(${o.angle} ${round(o.x+o.w/2)} ${round(o.y+o.h/2)})`);n.setAttribute('data-id',o.id);n.classList.add('obj');if(o.hidden)n.setAttribute('display','none');return n}
 function pathString(o){return(o.loops||[]).map(loop=>loop.map((p,i)=>`${i?'L':'M'}${round(o.x+p[0]*o.w)} ${round(o.y+p[1]*o.h)}`).join(' ')+' Z').join(' ')}
 function hitNode(o){let n=o.type==='text'?svg('rect',{x:o.x,y:o.y,width:o.w,height:o.h}):shapeNode(o);n.removeAttribute('id');n.removeAttribute('class');n.setAttribute('class','hit-area');n.setAttribute('fill',o.type==='line'?'none':'transparent');n.setAttribute('stroke','transparent');n.setAttribute('stroke-width',String(grabStroke()));n.setAttribute('vector-effect','non-scaling-stroke');n.setAttribute('pointer-events','all');n.setAttribute('data-id',o.id);if(o.hidden)n.setAttribute('pointer-events','none');return n}
@@ -886,7 +1230,38 @@ document.querySelector('.workspace').addEventListener('scroll',()=>{
 },{passive:true});
 function updateZoom(){let a=$('art'),base=fittedCanvasWidth();a.setAttribute('width',Math.round(base*zoom));a.setAttribute('height',Math.round(base*zoom*H/W));if($('tbZoom'))$('tbZoom').textContent=`${Math.round(100*zoom)}%`;updateCanvasRulers()}
 // Update the canvas dimensions when the editor pane or browser window is resized.
-const editorFitObserver=new ResizeObserver(()=>updateZoom());editorFitObserver.observe(document.querySelector('.workspace'));$('plus').onclick=()=>{zoom=Math.min(2.5,zoom+.25);updateZoom()};$('minus').onclick=()=>{zoom=Math.max(.25,zoom-.25);updateZoom()};$('zoomSelection').onclick=()=>{const selected=pick(),b=bounds(selected);if(!b){notice('Select an object first to zoom to it.');return;}const viewport=document.querySelector('.workspace');const pad=35;const fitX=Math.max(.25,(viewport.clientWidth-pad*2)*W/(fittedCanvasWidth()*Math.max(b.w,1)));const fitY=Math.max(.25,(viewport.clientHeight-pad*2)*W/(fittedCanvasWidth()*Math.max(b.h,1)));zoom=Math.max(.25,Math.min(6,fitX,fitY));updateZoom();requestAnimationFrame(()=>{const svg=$('art');const pixelsPerMM=svg.getBoundingClientRect().width/W;const centerX=(b.x+b.w/2)*pixelsPerMM;const centerY=(b.y+b.h/2)*pixelsPerMM;viewport.scrollTo({left:Math.max(0,svg.offsetLeft+centerX-viewport.clientWidth/2),top:Math.max(0,svg.offsetTop+centerY-viewport.clientHeight/2),behavior:'smooth'});notice('Zoomed to '+selected.length+' selected object'+(selected.length===1?'':'s')+'.');});};$('easyGrab').onchange=render;$('grabRange').oninput=()=>{$('grabLabel').textContent=$('grabRange').value+' px';render()};$('grid').onchange=refreshGrid;$('gridSize').onchange=refreshGrid;$('fineGrid').onchange=refreshGrid;$('workAreaCategory').addEventListener('change',()=>{const show=$('workAreaCategory').value==='common';$('commonSizesWrap').hidden=!show;if(!show)$('commonSizes').value='';});$('commonSizes').addEventListener('change',()=>{const value=$('commonSizes').value;if(!/^\d+x\d+$/.test(value))return;const [w,h]=value.split('x').map(Number);$('canvasW').value=w;$('canvasH').value=h;notice('Preset selected. Click Apply canvas size to update the workspace.');});$('canvasApply').onclick=()=>{let w=Number($('canvasW').value),h=Number($('canvasH').value);if(!valid(w)||!valid(h)||w<1||h<1||w>3000||h>3000)return alert('Canvas must be between 1 and 3000 mm.');history();W=w;H=h;syncCanvas();render()};
+const editorFitObserver=new ResizeObserver(()=>updateZoom());editorFitObserver.observe(document.querySelector('.workspace'));$('plus').onclick=()=>{zoom=Math.min(2.5,zoom+.25);updateZoom()};$('minus').onclick=()=>{zoom=Math.max(.25,zoom-.25);updateZoom()};$('zoomToFit').onclick=()=>{
+ // Fit all visible artwork, not only the current selection.  No geometry is changed.
+ const viewport=document.querySelector('.workspace');
+ const page=viewport.querySelector('.ruler-page');
+ const showing=objects.filter(o=>!o.hidden && Number.isFinite(o.x)&&Number.isFinite(o.y)&&Number.isFinite(o.w)&&Number.isFinite(o.h));
+ const b=bounds(showing)||{x:0,y:0,w:W,h:H};
+ const viewW=Math.max(100,viewport.clientWidth),viewH=Math.max(100,viewport.clientHeight);
+ const padding=48,base=fittedCanvasWidth();
+ zoom=Math.max(.06,Math.min(12,(viewW-padding*2)*W/(base*Math.max(1,b.w)),(viewH-padding*2)*W/(base*Math.max(1,b.h))));
+ updateZoom();
+ requestAnimationFrame(()=>{
+  const art=$('art'),scale=art.getBoundingClientRect().width/W;
+  const cx=b.x+b.w/2,cy=b.y+b.h/2;
+  // Create enough pasteboard room to center artwork near the edges of the bed.
+  const left=Math.max(40,viewW/2-34-cx*scale);
+  const right=Math.max(40,viewW/2-(W-cx)*scale);
+  const top=Math.max(46,viewH/2-27-cy*scale);
+  const bottom=Math.max(64,viewH/2-(H-cy)*scale);
+  page.style.setProperty('margin-left',left+'px','important');
+  page.style.setProperty('margin-right',right+'px','important');
+  page.style.setProperty('margin-top',top+'px','important');
+  page.style.setProperty('margin-bottom',bottom+'px','important');
+  requestAnimationFrame(()=>{
+   const a=art.getBoundingClientRect(),v=viewport.getBoundingClientRect();
+   const px=a.left-v.left+viewport.scrollLeft+cx*scale;
+   const py=a.top-v.top+viewport.scrollTop+cy*scale;
+   viewport.scrollTo({left:Math.max(0,px-viewW/2),top:Math.max(0,py-viewH/2),behavior:'instant'});
+   updateCanvasRulers();
+   notice(showing.length?'Zoom to Fit: all visible design objects centered.':'Zoom to Fit: work area centered.');
+  });
+ });
+};$('zoomSelection').onclick=()=>{const selected=pick(),b=bounds(selected);if(!b){notice('Select an object first to zoom to it.');return;}const viewport=document.querySelector('.workspace');const pad=35;const fitX=Math.max(.25,(viewport.clientWidth-pad*2)*W/(fittedCanvasWidth()*Math.max(b.w,1)));const fitY=Math.max(.25,(viewport.clientHeight-pad*2)*W/(fittedCanvasWidth()*Math.max(b.h,1)));zoom=Math.max(.25,Math.min(6,fitX,fitY));updateZoom();requestAnimationFrame(()=>{const svg=$('art');const pixelsPerMM=svg.getBoundingClientRect().width/W;const centerX=(b.x+b.w/2)*pixelsPerMM;const centerY=(b.y+b.h/2)*pixelsPerMM;viewport.scrollTo({left:Math.max(0,svg.offsetLeft+centerX-viewport.clientWidth/2),top:Math.max(0,svg.offsetTop+centerY-viewport.clientHeight/2),behavior:'smooth'});notice('Zoomed to '+selected.length+' selected object'+(selected.length===1?'':'s')+'.');});};$('easyGrab').onchange=render;$('grabRange').oninput=()=>{$('grabLabel').textContent=$('grabRange').value+' px';render()};$('grid').onchange=refreshGrid;$('gridSize').onchange=refreshGrid;$('fineGrid').onchange=refreshGrid;$('workAreaCategory').addEventListener('change',()=>{const show=$('workAreaCategory').value==='common';$('commonSizesWrap').hidden=!show;if(!show)$('commonSizes').value='';});$('commonSizes').addEventListener('change',()=>{const value=$('commonSizes').value;if(!/^\d+x\d+$/.test(value))return;const [w,h]=value.split('x').map(Number);$('canvasW').value=w;$('canvasH').value=h;notice('Preset selected. Click Apply canvas size to update the workspace.');});$('canvasApply').onclick=()=>{let w=Number($('canvasW').value),h=Number($('canvasH').value);if(!valid(w)||!valid(h)||w<1||h<1||w>3000||h>3000)return alert('Canvas must be between 1 and 3000 mm.');history();W=w;H=h;syncCanvas();render()};
 $('apply').onclick=()=>{let a=pick(),b=bounds(a);if(!b)return;let x=Number($('x').value),y=Number($('y').value),w=Number($('w').value),h=Number($('h').value);if(![x,y,w,h].every(valid)||w<=0||h<=0)return alert('Enter valid positions and positive dimensions.');history();for(let o of a)rescale(o,b,{x,y,w,h});if(a.length===1){a[0].angle=Number($('angle').value)||0;if(a[0].type==='text'){a[0].text=$('textValue').value.slice(0,200)||'Text';a[0].size=Math.max(1,Number($('fontSize').value)||10);/* preserve text box dimensions; text automatically fits */}}render()};
 function del(){if(!pick().length)return;history();objects=objects.filter(o=>!ids.includes(o.id));ids=[];render()}$('remove').onclick=del;function copy(){clipboard=clone(pick());notice(`${clipboard.length} object(s) copied.`)}function paste(){if(!clipboard.length)return;history();let groupMap=new Map();ids=[];for(let src of clipboard){let o=clone(src);o.id=nextId++;o.x+=5;o.y+=5;if(o.group){if(!groupMap.has(o.group))groupMap.set(o.group,nextGroup++);o.group=groupMap.get(o.group)}o.locked=false;o.hidden=false;objects.push(o);ids.push(o.id)}render()}$('copy').onclick=copy;$('paste').onclick=paste;$('duplicate').onclick=()=>{
  const selected=pick();if(!selected.length)return;
@@ -1319,7 +1694,7 @@ function setupBox3D(){
 function setupBoxGenerator(){
  setupBox3D();
  const overlay=$('boxGenOverlay'),open=()=>{overlay.hidden=false;$('boxGenMake').textContent=generatedBoxGroup!==null?'Update Box on Canvas':'Generate on Canvas';$('boxGenW').focus()},close=()=>overlay.hidden=true;
- $('boxGenOpen').addEventListener('click',open);$('boxEditSettings').addEventListener('click',open);$('boxGenClose').addEventListener('click',close);$('boxGenCancel').addEventListener('click',close);
+ $('boxEditSettings').addEventListener('click',open);$('boxGenClose').addEventListener('click',close);$('boxGenCancel').addEventListener('click',close);
  overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden){e.stopPropagation();close()}});
  $('boxGenMake').addEventListener('click',()=>{
@@ -1646,26 +2021,50 @@ window.LaserWizardEditor={
  const closeBtn=$('keychainGenClose');
  const options=[...overlay.querySelectorAll('[data-board-shape]')];
  const textInput=$('boardKeychainText');
+ const overlapInput=$('keychainLetterOverlap');
+ const overlapUp=$('keychainOverlapUp'),overlapDown=$('keychainOverlapDown');
  const outlineInput=$('keychainOutlineWidth');
+ const cornerRadiusInput=$('keychainCornerRadius');
+ const cornerRadiusUp=$('keychainRadiusUp'),cornerRadiusDown=$('keychainRadiusDown');
+ const borderWidthInput=$('keychainBorderWidth');
+ const borderWidthUp=$('keychainBorderUp'),borderWidthDown=$('keychainBorderDown');
+ const ringDiameterInput=$('keychainRingDiameter');
+ const ringDiameterUp=$('keychainRingUp'),ringDiameterDown=$('keychainRingDown');
+ const holeDiameterInput=$('keychainHoleDiameter');
+ const holeDiameterUp=$('keychainHoleUp'),holeDiameterDown=$('keychainHoleDown');
+ const patternSelect=$('keychainPattern');
+ const styleButtons=[...overlay.querySelectorAll('[data-keychain-style]')];
+ const toolbarFont=$('tbFont');
+ let keychainFont='Impact',previousToolbarFont=null;
+ let keychainStyle='one';
+ let keychainPattern='none';
+ let letterOverlapPercent=20;
  let outlineWidth=0.30;
  let chosen='roundrect',priorFocus=null,preview=null,holeDrag=null;
- const x=20,y=20,h=30,r=7; // board height and corner radius in mm
+ const x=20,y=20,h=30; // board height in mm
+ let cornerRadius=7; // adjustable rounded-rectangle radius in mm
+ let borderWidth=0.25; // actual board path outline stroke width in mm
  const boardTextMargin=2; // equal optical margin at left, right, top and bottom
- const holeDiameter=4.5, holeOuterDiameter=10, tabOverlap=3;
+ let holeDiameter=4.5; // adjustable inner ring hole diameter in mm
+ const tabOverlap=3;
+ let ringDiameter=10; // outside diameter of welded attachment tab
  let holePreference={x:x-6,y:y+h/2};
  function boardWidth(){
   if(chosen!=='roundrect')return 55;
   const value=textInput.value.trim().toUpperCase();
   if(!value)return 55;
-  const reference=boardInk(value,40);
+  const reference=boardInk(value,40,keychainFont);
   const heightScale=(h-2*boardTextMargin)/Math.max(1,reference.up+reference.down);
   const size=40*heightScale;
-  const letters=boardInk(value,size);
-  const natural=letters.left+letters.right-Math.max(0,Array.from(value).length-1)*size*.065;
+  const tracking=keychainTrackingForOverlap(value,size,letterOverlapPercent,keychainFont);
+  const letters=keychainLetterMetrics(value,size,tracking,keychainFont);
+  const natural=letters.inkWidth;
   return Math.min(250,Math.max(55,natural+boardTextMargin*2));
  }
  function roundedPoints(){
   const w=boardWidth();
+  const r=Math.max(0,Math.min(cornerRadius,w/2,h/2));
+  if(r<1e-6)return [[0,0],[w,0],[w,h],[0,h]];
   const pts=[];
   for(const [cx,cy,start] of [[w-r,r,-Math.PI/2],[w-r,h-r,0],[r,h-r,Math.PI/2],[r,r,Math.PI]]){
    for(let j=0;j<=64;j++){
@@ -1709,7 +2108,7 @@ window.LaserWizardEditor={
    }
    best={edgeX,edgeY,nx,ny};bestDistance=d2;
   }
-  const offset=holeOuterDiameter/2-tabOverlap;
+  const offset=ringDiameter/2-tabOverlap;
   return {...best,cx:best.edgeX+best.nx*offset,cy:best.edgeY+best.ny*offset};
  }
  function currentHoleAnchor(){
@@ -1737,7 +2136,7 @@ window.LaserWizardEditor={
  }
  function keychainWeldGeometry(preference=holePreference){
   const outline=boardOutline(),anchor=projectHoleAnchor(preference);
-  const cx=anchor.cx,cy=anchor.cy,rad=holeOuterDiameter/2;
+  const cx=anchor.cx,cy=anchor.cy,rad=ringDiameter/2;
   const lengths=[],starts=[];
   let perimeter=0;
   for(let i=0;i<outline.length;i++){
@@ -1864,19 +2263,31 @@ window.LaserWizardEditor={
   const normalized=ring=>ring.map(([px,py])=>[round((px-minx)/w),round((py-miny)/hgt)]);
   return {type:'path',name:'Keychain — welded outline and hole',
    x:round(minx),y:round(miny),w:round(w),h:round(hgt),angle:0,
-   color:'#000000',mode:'line',group:null,hidden:false,locked:false,
+   color:'#000000',mode:'line',group:null,hidden:false,locked:false,keychainBorderWidth:borderWidth,
    loops:[normalized(outer),normalized(hole)]};
  }
  function textObject(){
   const value=textInput.value.trim().toUpperCase();
   if(!value)return null;
   const w=boardWidth();
+  // In Two Layers mode place ONLY the lettering beside the independent
+  // welded keychain body. 16 mm clearance accommodates the outside tab.
+  const textX=keychainStyle==='two'?x+w+16:x;
   return {type:'text',name:'Keychain Text',text:value,
-   x,y,w,h,size:26,font:'Impact',hspace:0,vspace:0,
+   x:textX,y,w,h,size:26,font:keychainFont,hspace:0,vspace:0,
    bold:true,italic:false,uppercase:true,weld:false,
    angle:0,color:'#0000ff',mode:'line',
-   keychainBoldFit:true,keychainMargin:boardTextMargin,keychainOutlineWidth:outlineWidth,
+   keychainBoldFit:true,keychainMargin:boardTextMargin,keychainOutlineWidth:outlineWidth,keychainOverlapPercent:letterOverlapPercent,keychainPattern:keychainPattern,
+   keychainOvalWarp:chosen==='oval',
    group:null,hidden:false,locked:false};
+ }
+ // Two Layers keeps a matching letter-outline guide on the keychain board,
+ // while the independent lettering is laid out to the right for cutting.
+ function boardLetterOutlineObject(){
+  if(keychainStyle!=='two')return null;
+  const separateLettering=textObject();
+  if(!separateLettering)return null;
+  return {...separateLettering,x,name:'Keychain — board lettering outline',keychainPattern:'none'};
  }
 
  // Fit the full current design (existing objects + temporary keychain) to the
@@ -1890,7 +2301,8 @@ window.LaserWizardEditor={
   if(overlay.hidden)return;
   const board=shapeObject();
   const text=textObject();
-  const content=[...objects.filter(o=>!o.hidden),board,...(text?[text]:[])];
+  const boardLetters=boardLetterOutlineObject();
+  const content=[...objects.filter(o=>!o.hidden),board,...(text?[text]:[]),...(boardLetters?[boardLetters]:[])];
   if(!content.length)return;
   const minx=Math.min(...content.map(o=>o.x));
   const miny=Math.min(...content.map(o=>o.y));
@@ -1956,27 +2368,71 @@ window.LaserWizardEditor={
   const board=shapeNode(shapeObject(geometry));
   board.removeAttribute('data-id');board.classList.remove('obj');
   // Warm wood-tone preview only: the stored board remains a black Line cut.
-  // evenodd keeps the 4.5 mm hole clear instead of painting over it.
+  // evenodd keeps the adjustable inner hole clear instead of painting over it.
   board.setAttribute('fill','#D9B784');
   board.setAttribute('fill-rule','evenodd');
   board.setAttribute('stroke','#17120D');
-  board.setAttribute('stroke-width','0.24');
-  board.setAttribute('vector-effect','non-scaling-stroke');
+  board.setAttribute('stroke-width',String(borderWidth));
+  board.removeAttribute('vector-effect');
   board.setAttribute('pointer-events','none');
   group.appendChild(board);
   // Dark high-contrast draggable highlight for the attachment hole, preview-only. It is never exported.
   const handle=svg('circle',{cx:round(geometry.anchor.cx),cy:round(geometry.anchor.cy),
-   r:round(holeOuterDiameter/2+1.3),fill:'#142536','fill-opacity':'.72',
+   r:round(ringDiameter/2+1.3),fill:'#142536','fill-opacity':'.72',
    stroke:'#08121e','stroke-width':'.9','stroke-dasharray':'1.5 1',
    'vector-effect':'non-scaling-stroke','data-keychain-hole-handle':'true'});
   handle.style.cursor=holeDrag?'grabbing':'grab';
   handle.style.touchAction='none';
   handle.addEventListener('pointerdown',startHoleDrag);
   group.insertBefore(handle,board); // keep the black cutting contours crisp above the dark highlight
+  const boardLetters=boardLetterOutlineObject();
+  if(boardLetters){
+   const outline=shapeNode(boardLetters);
+   outline.removeAttribute('data-id');outline.classList.remove('obj');
+   outline.setAttribute('pointer-events','none');
+   group.appendChild(outline);
+  }
   const text=textObject();
   if(text){
-   const lettering=shapeNode(text);
-   lettering.removeAttribute('data-id');lettering.classList.remove('obj');
+   let lettering;
+   if(keychainStyle==='two'){
+    // Preview only: fill the separate blue lettering using closed glyph-union
+    // geometry. Keep the board lettering as outlines and preserve the actual
+    // exported blue Line paths for laser-safe LightBurn workflow.
+    const value=String(text.text||'');
+    const ow=Number(text.keychainOutlineWidth)||0.30;
+    const margin=Math.max(.3,text.keychainMargin??2)+ow/2;
+    const overlap=Number(text.keychainOverlapPercent)||0;
+    function metrics(size){
+     const tracking=keychainTrackingForOverlap(value,size,overlap,text.font);
+     return {...keychainLetterMetrics(value,size,tracking,text.font),tracking};
+    }
+    let lo=.2,hi=Math.min(350,Math.max(30,text.h*5));
+    for(let i=0;i<28;i++){
+     const mid=(lo+hi)/2,m=metrics(mid);
+     if(m.inkWidth<=text.w-2*margin&&m.inkHeight<=text.h-2*margin)lo=mid;
+     else hi=mid;
+    }
+    const size=Math.max(.2,lo),m=metrics(size);
+    const tx=text.x+(text.w-m.inkWidth)/2+m.left;
+    const baseline=text.y+(text.h+m.up-m.down)/2;
+    const inkFrame=[tx-m.left,tx-m.left+m.inkWidth,baseline-m.up,baseline+m.down];
+    const fillPath=keychainOvalWarpPath(keychainUnifiedTextPath(text,value,size,m.tracking,tx,baseline),text,inkFrame);
+    const fillNode=keychainPatternFillNode(text,fillPath);
+    if(fillNode){
+     lettering=svg('g',{'data-preview-filled-letters':'true','data-keychain-pattern':String(text.keychainPattern||'none')});
+     lettering.appendChild(fillNode);
+    }else{
+     lettering=svg('path',{
+      d:fillPath,
+      fill:'#0000ff','fill-rule':'evenodd',stroke:'none',
+      'data-preview-filled-letters':'true'
+     });
+    }
+   }else{
+    lettering=shapeNode(text);
+    lettering.removeAttribute('data-id');lettering.classList.remove('obj');
+   }
    lettering.setAttribute('pointer-events','none');
    group.appendChild(lettering);
   }
@@ -1986,6 +2442,9 @@ window.LaserWizardEditor={
  }
  function selectShape(shape){
   chosen=shape;
+  cornerRadiusInput.disabled=shape!=='roundrect';
+  cornerRadiusUp.disabled=cornerRadiusDown.disabled=shape!=='roundrect';
+  cornerRadiusInput.title=shape==='roundrect'?'Rounded rectangle corner radius (0 to 15 mm)':'Corner radius applies to Rounded Rectangle only';
   for(const button of options){
    const on=button.dataset.boardShape===shape;
    button.classList.toggle('selected',on);
@@ -2007,19 +2466,108 @@ window.LaserWizardEditor={
    savedMargins=null;
   }
   openBtn.setAttribute('aria-expanded','false');
+  if(previousToolbarFont!==null){toolbarFont.value=previousToolbarFont;previousToolbarFont=null;}
   if(priorFocus&&typeof priorFocus.focus==='function')priorFocus.focus();
  }
  function open(){
   priorFocus=document.activeElement;
   if(!savedMargins)savedMargins=[keychainPage.style.marginLeft,keychainPage.style.marginRight,keychainPage.style.marginTop,keychainPage.style.marginBottom];
+  previousToolbarFont=toolbarFont.value;
+  toolbarFont.value=keychainFont;
+  patternSelect.value=keychainPattern;
   overlay.hidden=false;
   openBtn.setAttribute('aria-expanded','true');
   setBoxView('flat');
   previewShape();
   options.find(button=>button.dataset.boardShape===chosen)?.focus();
  }
+ // The shared toolbar font changes the keychain while its generator is open.
+ // Prevent the normal toolbar handler from editing unrelated selected artwork.
+ toolbarFont.addEventListener('change',event=>{
+  if(overlay.hidden)return;
+  event.stopImmediatePropagation();
+  keychainFont=toolbarFont.value||'Impact';
+  previewShape();
+ },true);
  window.addEventListener('resize',scheduleAutoFitWorkspace);
+ styleButtons.forEach(button=>button.addEventListener('click',()=>{
+  keychainStyle=button.dataset.keychainStyle;
+  for(const candidate of styleButtons){
+   const selected=candidate===button;
+   candidate.classList.toggle('selected',selected);
+   candidate.setAttribute('aria-pressed',String(selected));
+  }
+  previewShape();
+ }));
  options.forEach(button=>button.addEventListener('click',()=>selectShape(button.dataset.boardShape)));
+ function setCornerRadius(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  cornerRadius=Math.min(h/2,Math.max(0,n));
+  cornerRadiusInput.value=String(Number(cornerRadius.toFixed(2)));
+  previewShape();
+ }
+ cornerRadiusInput.addEventListener('input',()=>{
+  const n=Number(cornerRadiusInput.value);
+  if(cornerRadiusInput.value.trim()!==''&&Number.isFinite(n)&&n>=0&&n<=h/2){cornerRadius=n;previewShape();}
+ });
+ cornerRadiusInput.addEventListener('change',()=>setCornerRadius(cornerRadiusInput.value.trim()===''?cornerRadius:cornerRadiusInput.value));
+ cornerRadiusUp.addEventListener('click',()=>setCornerRadius(Math.min(15,Math.round(cornerRadius*2)/2+0.5)));
+ cornerRadiusDown.addEventListener('click',()=>setCornerRadius(Math.max(0,Math.round(cornerRadius*2)/2-0.5)));
+ function setBorderWidth(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  borderWidth=Math.max(.05,Math.min(3,Math.round(n*100)/100));
+  borderWidthInput.value=borderWidth.toFixed(2);
+  previewShape();
+ }
+ borderWidthInput.addEventListener('input',()=>{
+  const n=Number(borderWidthInput.value);
+  if(borderWidthInput.value.trim()!==''&&Number.isFinite(n)&&n>=.05&&n<=3){borderWidth=n;previewShape();}
+ });
+ borderWidthInput.addEventListener('change',()=>setBorderWidth(borderWidthInput.value.trim()===''?borderWidth:borderWidthInput.value));
+ borderWidthUp.addEventListener('click',()=>setBorderWidth(Math.min(3,Math.round(borderWidth*20)/20+0.05)));
+ borderWidthDown.addEventListener('click',()=>setBorderWidth(Math.max(.05,Math.round(borderWidth*20)/20-0.05)));
+ function setRingDiameter(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  ringDiameter=Math.max(8,Math.min(20,Math.round(n*2)/2));
+  ringDiameterInput.value=String(Number(ringDiameter.toFixed(1)));
+  // Keep at least 1 mm material between the inner hole and outer ring.
+  holeDiameterInput.max=String(Number((ringDiameter-2).toFixed(2)));
+  if(holeDiameter>ringDiameter-2){
+   holeDiameter=ringDiameter-2;
+   holeDiameterInput.value=String(Number(holeDiameter.toFixed(2)));
+  }
+  previewShape();
+ }
+ ringDiameterInput.addEventListener('input',()=>{
+  const n=Number(ringDiameterInput.value);
+  if(ringDiameterInput.value.trim()!==''&&Number.isFinite(n)&&n>=8&&n<=20){
+   ringDiameter=n;
+   holeDiameterInput.max=String(Number((ringDiameter-2).toFixed(2)));
+   if(holeDiameter>ringDiameter-2){holeDiameter=ringDiameter-2;holeDiameterInput.value=String(Number(holeDiameter.toFixed(2)));}
+   previewShape();
+  }
+ });
+ ringDiameterInput.addEventListener('change',()=>setRingDiameter(ringDiameterInput.value.trim()===''?ringDiameter:ringDiameterInput.value));
+ ringDiameterUp.addEventListener('click',()=>setRingDiameter(ringDiameter+0.5));
+ ringDiameterDown.addEventListener('click',()=>setRingDiameter(ringDiameter-0.5));
+ function setHoleDiameter(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  holeDiameter=Math.max(2,Math.min(ringDiameter-2,Math.round(n*2)/2));
+  holeDiameterInput.value=String(Number(holeDiameter.toFixed(2)));
+  previewShape();
+ }
+ holeDiameterInput.addEventListener('input',()=>{
+  const n=Number(holeDiameterInput.value);
+  if(holeDiameterInput.value.trim()!==''&&Number.isFinite(n)&&n>=2&&n<=ringDiameter-2){holeDiameter=n;previewShape();}
+ });
+ holeDiameterInput.addEventListener('change',()=>setHoleDiameter(holeDiameterInput.value.trim()===''?holeDiameter:holeDiameterInput.value));
+ holeDiameterUp.addEventListener('click',()=>setHoleDiameter(holeDiameter+0.5));
+ holeDiameterDown.addEventListener('click',()=>setHoleDiameter(holeDiameter-0.5));
+ patternSelect.addEventListener('change',()=>{keychainPattern=patternSelect.value||'none';previewShape();});
  function setOutlineWidth(value){
   const n=Number(value);
   if(!Number.isFinite(n))return;
@@ -2027,21 +2575,22 @@ window.LaserWizardEditor={
   outlineInput.value=outlineWidth.toFixed(2);
   previewShape();
  }
+ function setLetterOverlap(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return;
+  letterOverlapPercent=Math.min(100,Math.max(0,Math.round(n)));
+  overlapInput.value=String(letterOverlapPercent);
+  previewShape();
+ }
  outlineInput.addEventListener('input',()=>{const v=Number(outlineInput.value);if(outlineInput.value.trim()!==''&&Number.isFinite(v)&&v>=.05&&v<=2){outlineWidth=v;previewShape();}});
  outlineInput.addEventListener('change',()=>setOutlineWidth(outlineInput.value||outlineWidth));
+ $('keychainOutlineUp').addEventListener('click',()=>setOutlineWidth(outlineWidth+0.05));
+ $('keychainOutlineDown').addEventListener('click',()=>setOutlineWidth(outlineWidth-0.05));
+ overlapInput.addEventListener('input',()=>{const v=Number(overlapInput.value);if(overlapInput.value.trim()!==''&&Number.isFinite(v)&&v>=0&&v<=100){letterOverlapPercent=Math.round(v);previewShape();}});
+ overlapInput.addEventListener('change',()=>setLetterOverlap(overlapInput.value.trim()===''?letterOverlapPercent:overlapInput.value));
+ overlapUp.addEventListener('click',()=>setLetterOverlap(letterOverlapPercent+1));
+ overlapDown.addEventListener('click',()=>setLetterOverlap(letterOverlapPercent-1));
  textInput.addEventListener('input',previewShape);
- $('boardShapeAdd').addEventListener('click',()=>{
-  let board;
-  try{board=shapeObject();}catch(e){notice(e.message);return;}
-  const text=textObject();
-  const items=[board,...(text?[text]:[])];
-  history();
-  for(const item of items)item.id=nextId++;
-  clearPreview();
-  objects.push(...items);ids=items.map(item=>item.id);
-  close();render();
-  notice(text?'Created one welded outer cut path with a 4.5 mm hole, plus editable blue Line text. Verify in LightBurn.':'Created one welded outer cut path with a separate 4.5 mm inner hole. Verify in LightBurn.');
- });
  openBtn.addEventListener('click',open);
  closeBtn.addEventListener('click',close);
 
